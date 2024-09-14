@@ -87,5 +87,4 @@ button {
     flex: 1 1 200px;  /* Define que cada gráfico tenha ao menos 200px e ocupe o espaço disponível */
     max-width: 300px;  /* Limite máximo da largura de cada gráfico */
 }
-
 /*------------------------------------------------------------------------------------------*/

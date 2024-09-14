@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #cc2900;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+main {
+    padding: 2em;
+}
+
+.fase {
+    margin-bottom: 2em;
+}
+
+.hidden {
+    display: none;
+}
+
+#projecaoText {
+    min-width: 300px;  /* Tamanho mínimo da largura */
+    min-height: 150px; /* Tamanho mínimo da altura */
+    max-width: 800px;  /* Tamanho mínimo da largura */
+    max-height:  400px; /* Tamanho mínimo da altura */
+    resize: both;      /* Permite redimensionar apenas para aumentar */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+}
+
+#titulo {
+    min-width: 300px;  /* Tamanho mínimo da largura */
+    min-height: 20px; /* Tamanho mínimo da altura */
+    max-width: 500px;  /* Tamanho mínimo da largura */
+    max-height:  20px; /* Tamanho mínimo da altura */
+    resize: both;      /* Permite redimensionar apenas para aumentar */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+}
+
+button {
+    background-color: #5285ec;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    cursor: pointer;
+}

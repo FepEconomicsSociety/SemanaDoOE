@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semana do Orçamento de Estado</title>
+    <link rel="stylesheet" href="site.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+    <div id="senhaPage">
+        <h2>Por favor, insira a senha para acessar o site:</h2>
+        <input type="password" id="senhaInput" placeholder="Digite a senha">
+        <button onclick="verificarSenha()">Entrar</button>
+        <p id="mensagemErro" style="color: red;"></p>
+    </div>
+
+    <!-- Conteúdo principal do site, ocultado até que a senha seja validada -->
+<main id="conteudoSite" style="display: none;">
+    <header>
+        <h1>Semana do Orçamento de Estado - FEP Economics Society</h1>
+    </header>
+        <section id="fase0">
+            <h2>Fase 0 - Explicação das Fases</h2>
+            <p>Bem-vindo ao programa! Aqui, você aprenderá a criar um mini orçamento de estado...</p>
+
+            <!-- Campos de entrada para o nome e e-mail -->
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" placeholder="Digite seu nome" required><br><br>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" placeholder="Digite seu e-mail" required><br><br>
+            
+            <!-- Botão para prosseguir para a próxima fase -->
+            <button onclick="verificarCampos()">Começar</button>
+        </section>
+
+        <section id="fase1" class="fase hidden">
+            <h2>Fase 1 - Estatísticas 2024</h2>
+            <div id="estatisticas">
+                <!-- Exibir estatísticas aqui -->
+                <ul>
+                    <li>PIB: 200 mil milhões € (crescimento de 2%)</li>
+                    <li>Inflação: 3%</li>
+                    <li>Dívida Pública: 120% do PIB</li>
+                    <li>Saldo Orçamental: -2%</li>
+                    <li>Taxa de Desemprego: 7%</li>
+                    <li>Salário Mínimo: 800€</li>
+                </ul>
+            </div>
+            <button onclick="navigateTo('fase2')">Próxima Fase</button>
+        </section>
+
+        <section id="fase2" class="fase hidden">
+            <h2>Fase 2 - Projeção Macroeconômica 2025</h2>
+            <p>Insira suas projeções para a economia portuguesa no ano de 2025:</p>
+            
+
+            <!-- Caixa de texto para o usuário inserir o titulo -->
+            <textarea id="titulo" rows="1" cols="50" placeholder="Escreva o titulo da sua  projeção aqui..."></textarea> <br></br>
+
+            <!-- Caixa de texto para o usuário inserir suas projeções -->
+            <textarea id="projecaoText" rows="10" cols="50" placeholder="Escreva suas projeções macroeconômicas aqui..."></textarea>
+            
+            <!-- Botão para voltar à fase anterior -->
+            <button onclick="navigateTo('fase1')">Voltar</button>
+            
+            <!-- Botão para a próxima fase -->
+            <button onclick="navigateTo('fase3')">Próxima Fase</button>
+        </section>
+
+        <section id="fase3" class="fase hidden">
+            <h2>Fase 3 - Valor Inicial: <span id="numeroInicial">100</span></h2>
+            <p>Insira numeros:</p>
+            
+            <!-- Caixa de entrada para números -->
+            <input type="number" id="numeroInput" placeholder="Digite um número" oninput="atualizarTitulo()">
+            
+            <!-- Botão para voltar à fase anterior -->
+            <button onclick="navigateTo('fase2')">Voltar</button>
+            
+            <!-- Botão para a próxima fase -->
+            <button onclick="navigateTo('fase4')">Próxima Fase</button>
+        </section>
+
+        <section id="fase4" class="fase hidden">
+            <h2>Fase 4 - Outra coisa</h2>
+            <p>bla bla bla:</p>
+            
+            <!-- Caixa de texto para o usuário inserir suas projeções -->
+            <textarea id="projecaoText" rows="10" cols="50" placeholder="Escreva suas projeções macroeconômicas aqui..."></textarea>
+            
+            <!-- Botão para voltar à fase anterior -->
+            <button onclick="navigateTo('fase3')">Voltar</button>
+            
+            <!-- Botão para a próxima fase -->
+            <button onclick="navigateTo('fase5')">Próxima Fase</button>  
+        </section>
+
+        <section id="fase5" class="fase hidden">
+            <h2>Fase 5 - Ta feito</h2>
+            <p> pronto:</p>
+            
+            <!-- Botão para voltar à fase anterior -->
+            <button onclick="navigateTo('fase4')">Voltar</button>
+            
+            <!-- Botão para gerar o PDF -->
+            <button onclick="gerarPDF()">Gerar PDF com Projeção</button>
+        
+            <!-- Botão para a próxima fase -->
+            <!--<button onclick="navigateTo('fase')">Próxima Fase</button>-->
+
+        <!-- Formulário para enviar o PDF por e-mail -->
+    <!--<form id="emailForm" action="https://formsubmit.co/tiago310703@gmail.com" method="POST">
+        <input type="text" name="name" required>
+        <input type="email" name="email" required>-->
+        <!-- Campo oculto para o PDF em Base64 -->
+       <!-- <input type="hidden" name="attachment" id="pdfBase64">
+        <button onclick="gerarPDF()">Gerar PDF com Projeção</button>
+
+        <button type="submit">Send</button>
+    </form>-->
+        </section>
+        <!-- Mais seções para as fases subsequentes -->
+
+</main>
+
+    <script src="site.js"></script>
+</body>
+</html>

@@ -49,3 +49,43 @@ button {
     border: none;
     cursor: pointer;
 }
+
+
+
+/* Fase 1, graficos e estatisticas*/
+.container {
+    display: flex;
+    justify-content: space-between;  /* Espaço entre estatísticas e gráficos */
+    align-items: flex-start;  /* Alinha os itens ao topo */
+    flex-wrap: wrap;  /* Permite quebrar os gráficos em nova linha se necessário */
+}
+
+#estatisticas {
+    /*width: 50%;*/  /* Ocupa 50% da largura da tela */
+    flex: 0 1 auto;  /* Ocupa o espaço mínimo necessário para o conteúdo */
+    margin-right: 20px;  /* Espaço à direita das estatísticas */
+    background-color: antiquewhite;
+}
+
+#graficos {
+    /*width: 50%;*/  /* Ocupa 50% da largura da tela */
+    /*height: 50%;*/
+    /*text-align: center;*/  /* Centraliza as imagens dentro da div */
+    
+    flex: 1;  /* Ocupa o espaço restante da tela */
+    display: flex;
+    flex-wrap: wrap;  /* Faz com que os gráficos quebrem em linha */
+    gap: 20px;  /* Espaçamento entre os gráficos */
+    background-color: antiquewhite;
+
+}
+
+.grafico {
+    /*width: 50%; */ /* Define o tamanho das imagens */
+    /*height: 50%;
+    margin-bottom: 20px;*/  /* Espaçamento entre os gráficos */
+    flex: 1 1 200px;  /* Define que cada gráfico tenha ao menos 200px e ocupe o espaço disponível */
+    max-width: 300px;  /* Limite máximo da largura de cada gráfico */
+}
+
+/*------------------------------------------------------------------------------------------*/

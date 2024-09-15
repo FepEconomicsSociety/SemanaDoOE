@@ -5,26 +5,31 @@ body {
     background-color: #f4f4f4;
 }
 
-header {
+header 
+{
     background-color: #cc2900;
     color: white;
     text-align: center;
     padding: 1em 0;
 }
 
-main {
+main 
+{
     padding: 2em;
 }
 
-.fase {
+.fase 
+{
     margin-bottom: 2em;
 }
 
-.hidden {
+.hidden 
+{
     display: none;
 }
 
-#projecaoText {
+#projecaoText 
+{
     min-width: 300px;  /* Tamanho mínimo da largura */
     min-height: 150px; /* Tamanho mínimo da altura */
     max-width: 800px;  /* Tamanho mínimo da largura */
@@ -33,7 +38,8 @@ main {
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
 }
 
-#titulo {
+#titulo 
+{
     min-width: 300px;  /* Tamanho mínimo da largura */
     min-height: 20px; /* Tamanho mínimo da altura */
     max-width: 500px;  /* Tamanho mínimo da largura */
@@ -42,12 +48,18 @@ main {
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
 }
 
-button {
+button 
+{
     background-color: #5285ec;
     color: white;
     padding: 0.5em 1em;
     border: none;
     cursor: pointer;
+}
+
+.valorprever
+{
+   margin: 5px; 
 }
 
 
@@ -75,16 +87,36 @@ button {
     flex: 1;  /* Ocupa o espaço restante da tela */
     display: flex;
     flex-wrap: wrap;  /* Faz com que os gráficos quebrem em linha */
-    gap: 20px;  /* Espaçamento entre os gráficos */
+    justify-content: space-evenly;  /* Espaçamento uniforme ao redor dos gráficos */
     background-color: antiquewhite;
 
 }
 
 .grafico {
     /*width: 50%; */ /* Define o tamanho das imagens */
-    /*height: 50%;
-    margin-bottom: 20px;*/  /* Espaçamento entre os gráficos */
+    /*height: 50%;*/
     flex: 1 1 200px;  /* Define que cada gráfico tenha ao menos 200px e ocupe o espaço disponível */
-    max-width: 300px;  /* Limite máximo da largura de cada gráfico */
+    max-width: 450px;  /* Limite máximo da largura de cada gráfico */
 }
+.grafico_inf 
+{
+    /*width: 50%; */ /* Define o tamanho das imagens */
+    /*height: 50%;*/
+    flex: 1 1 200px;  /* Define que cada gráfico tenha ao menos 200px e ocupe o espaço disponível */
+    max-width: 700px;  /* Limite máximo da largura de cada gráfico */
+}
+
 /*------------------------------------------------------------------------------------------*/
+
+#medidaTabs button 
+{
+    margin-right: 10px;
+    margin-bottom: 10px;  /* Opcional: se quiser espaço também abaixo dos botões */
+}
+
+
+/* CSS para adicionar espaço acima do botão */
+#btnApagar 
+{
+    margin-top: 20px; /* Ajuste o valor conforme necessário para o espaçamento desejado */
+}

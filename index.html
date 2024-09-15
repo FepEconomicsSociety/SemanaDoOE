@@ -38,27 +38,42 @@
         </section>
 
         <section id="fase1" class="fase hidden">
-            <h2>Fase 1 - Estatísticas 2024</h2>
+            <h2>Fase 1 - Estatísticas 2023</h2>
             <div class="container">
                 <!-- Estatísticas -->
                 <div id="estatisticas">
                     <ul>
-                        <li>PIB: 200 mil milhões € (crescimento de 2%)</li>
-                        <li>Inflação: 3%</li>
-                        <li>Dívida Pública: 120% do PIB</li>
+                        <li>PIB: 265.525,1  milhões de € (variação de 9,6% face a 2022)</li>
+                        <li>Dívida Pública: 263.085 milhões de € (variação de -3% face a 2022)</li>
                         <li>Saldo Orçamental: -2%</li>
-                        <li>Taxa de Desemprego: 7%</li>
-                        <li>Salário Mínimo: 800€</li>
+                        <li>Exportação: 125.974,7 milhões de € (variação de 4,8% face a 2022)</li>
+                        <li>Importação: 123.674,6 milhões de € (variação de -1,9% face a 2022)</li>
+                        <li>Inflação: 4,31%</li>
+
                     </ul>
                 </div>
         
                 <!-- Gráficos (imagens) -->
                 <div id="graficos">
-                    <img src="images/PIB.jpg" alt="Gráfico de PIB" class="grafico">
-                    <img src="images/inflação.jpg" alt="Gráfico de Inflação" class="grafico">
-                    <img src="images/dívida pública.jpg" alt="Gráfico de dívida pública" class="grafico">
-                    <img src="images/importações.jpg" alt="Gráfico de importações" class="grafico">
-                    <img src="images/exportações.jpg" alt="Gráfico de exportações" class="grafico">
+                    <p> Gráfico do PIB <br>
+                    <img src="images/GraficoPIB.png" alt="Gráfico de PIB" class="grafico">
+                    </p>
+
+                    <p> Gráfico da Divida Pública <br>
+                    <img src="images/GraficoDividaPublica.png" alt="Gráfico de dívida pública" class="grafico">
+                    </p>
+                    
+                    <p> Gráfico da Exportação <br>
+                    <img src="images/GraficoExportaçoes.png" alt="Gráfico de exportações" class="grafico">
+                    </p>
+
+                    <p> Gráfico da Importação <br>
+                    <img src="images/GraficoImportaçoes.png" alt="Gráfico de importações" class="grafico">
+                    </p>
+
+                    <p> Gráfico da Inflação <br>
+                        <img src="images/GraficoInflaçao.png" alt="Gráfico de Inflação" class="grafico_inf">
+                    </p>
 
                 </div>
             </div>
@@ -69,13 +84,11 @@
             <h2>Fase 2 - Projeção Macroeconômica 2025</h2>
             <p>Insira suas projeções para a economia portuguesa no ano de 2025:</p>
             
-
-            <!-- Caixa de texto para o usuário inserir o titulo -->
-            <textarea id="titulo" rows="1" cols="50" placeholder="Escreva o titulo da sua  projeção aqui..."></textarea> <br></br>
-
             <!-- Caixa de texto para o usuário inserir suas projeções -->
             <textarea id="projecaoText" rows="10" cols="50" placeholder="Escreva suas projeções macroeconômicas aqui..."></textarea>
             
+            <br>PIB geral: <input type="number" class="valorprever"><br>
+
             <!-- Botão para voltar à fase anterior -->
             <button onclick="navigateTo('fase1')">Voltar</button>
             
@@ -84,11 +97,8 @@
         </section>
 
         <section id="fase3" class="fase hidden">
-            <h2>Fase 3 - Valor Inicial: <span id="numeroInicial">100</span></h2>
-            <p>Insira numeros:</p>
-            
-            <!-- Caixa de entrada para números -->
-            <input type="number" id="numeroInput" placeholder="Digite um número" oninput="atualizarTitulo()">
+            <h2>Fase 3 - Gestão de orçamento</h2>
+            <p>Algumas informaçoes sobre os ministérios:</p>
             
             <!-- Botão para voltar à fase anterior -->
             <button onclick="navigateTo('fase2')">Voltar</button>
@@ -98,18 +108,27 @@
         </section>
 
         <section id="fase4" class="fase hidden">
-            <h2>Fase 4 - Outra coisa</h2>
-            <p>bla bla bla:</p>
-            
-            <!-- Caixa de texto para o usuário inserir suas projeções -->
-            <textarea id="projecaoText" rows="10" cols="50" placeholder="Escreva suas projeções macroeconômicas aqui..."></textarea>
+            <h2>Fase 4 - Valor Inicial: <span id="numeroInicial"></span></h2>
+            <p>Crie as suas medidas:</p>
+        
+            <!-- Container onde as abas serão adicionadas -->
+            <div id="abasContainer"></div>
+        
+            <!-- Container onde as medidas serão exibidas -->
+            <div id="medidasContainer"></div>
+        
+            <!-- Botão para adicionar uma nova medida -->
+            <br>
+            <button onclick="adicionarMedida()">Adicionar Nova Medida</button>
             
             <!-- Botão para voltar à fase anterior -->
             <button onclick="navigateTo('fase3')">Voltar</button>
             
             <!-- Botão para a próxima fase -->
-            <button onclick="navigateTo('fase5')">Próxima Fase</button>  
+            <button onclick="navigateTo('fase5')">Próxima Fase</button>
         </section>
+        
+        
 
         <section id="fase5" class="fase hidden">
             <h2>Fase 5 - Ta feito</h2>
@@ -119,7 +138,7 @@
             <button onclick="navigateTo('fase4')">Voltar</button>
             
             <!-- Botão para gerar o PDF -->
-            <button onclick="gerarPDF()">Gerar PDF com Projeção</button>
+            <button onclick="formulario()">Gerar PDF com Projeção</button>
         
             <!-- Botão para a próxima fase -->
             <!--<button onclick="navigateTo('fase')">Próxima Fase</button>-->
@@ -140,5 +159,7 @@
 </main>
 
     <script src="site.js"></script>
+    <script src="medidas.js"></script>
+
 </body>
 </html>

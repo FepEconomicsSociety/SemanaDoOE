@@ -1,6 +1,6 @@
 // Função para verificar a senha
-function verificarSenha() {
-    //const senhaCorreta = "34567";  // Defina sua senha aqui
+function verificarSenha() 
+{
     const senhaDigitada = document.getElementById('senhaInput').value;
     const mensagemErro = document.getElementById('mensagemErro');
 
@@ -9,16 +9,29 @@ function verificarSenha() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ senha: senhaDigitada })
     })
-
     .then(response => {
-        if (response.ok) {
+        if (response.ok) 
+        {
             return response.json();
-        } else {
+        } 
+        else 
+        {
             throw new Error('Senha incorreta');
         }
     })
     .then(data => {
-        localStorage.setItem('token', data.token); // Armazena o token JWT
+        sessionStorage .setItem('token', data.token); // Armazena o token JWT
+
+        // Salva o token no sessionStorage  para manter a autenticação
+        sessionStorage .setItem('token2', data.token2);
+
+        // Armazena a hora de autenticação quando o login é bem-sucedido
+        sessionStorage.setItem('horaInicio', Date.now());  // Define o timestamp no momento da autenticação
+
+        // Salva o estado de login para evitar novo pedido de senha após refresh
+        sessionStorage .setItem('autenticado', 'true');
+        sessionStorage .setItem('horaAutenticacao', Date.now());  // Salva o timestamp da autenticação
+        
         document.getElementById('senhaPage').style.display = 'none';
         document.getElementById('conteudoSite').style.display = 'block';
     })
@@ -26,17 +39,7 @@ function verificarSenha() {
         mensagemErro.textContent = error.message;
     });
     
-    /*if (senhaDigitada === senhaCorreta) {
-        // Se a senha estiver correta, mostrar o conteúdo do site
-        document.getElementById('senhaPage').style.display = 'none';
-
-        document.getElementById('conteudoSite').style.display = 'block';
-    } else {
-        // Se a senha estiver errada, exibir mensagem de erro
-        mensagemErro.textContent = 'Senha incorreta. Tente novamente.';
-    }*/
 }
-
 
 // Função para verificar se os campos de nome e e-mail estão preenchidos
 function verificarCampos() 
@@ -82,17 +85,147 @@ function navigateTo(faseId)
 // Inicializa o estado da navegação
 function init() 
 {
-    // Mostra a primeira fase ao carregar a página
-    navigateTo('fase0');
+    verificarExpiracao();  // Verifica se os dados devem ser expirados
+    restaurarDadosInput();
+    salvarDadosInput();
+
+    // Verifica se o usuário já está autenticado
+    const autenticado = sessionStorage .getItem('autenticado');
+    
+    if (autenticado === 'true') {
+        // Se já estiver autenticado, mostra o conteúdo do site
+        document.getElementById('senhaPage').style.display = 'none';
+        document.getElementById('conteudoSite').style.display = 'block';
+    } else {
+        // Caso contrário, exibe a página de senha
+        document.getElementById('senhaPage').style.display = 'block';
+        document.getElementById('conteudoSite').style.display = 'none';
+    }
+    restaurarValores();
+}
+
+// Função para atualizar o título ao subtrair o número inserido do número inicial
+function atualizarTitulo() {
+    const numeroInicialElemento = document.getElementById('numeroInicial');
+    const numeroInput = document.getElementById('numeroInput').value;
+
+    //const numeroInicial = 100; // Valor inicial definido no título
+    const numeroInicial = parseFloat(sessionStorage .getItem('valorInicial')) || 100;
+    const numeroSubtrair = parseFloat(numeroInput) || 0; // Converte o input para número ou 0 se vazio
+
+    // Subtrai o número inserido do número inicial
+    const resultado = numeroInicial + numeroSubtrair;
+
+    // Atualiza o valor no título
+    numeroInicialElemento.textContent = resultado;
+
+
+    // Salva o novo valor e o valor inserido no sessionStorage 
+    sessionStorage .setItem('valorInicial', novoValor);
+    sessionStorage .setItem('numeroInput', numeroInput);
+}
+
+// Função para salvar o valor de qualquer campo de input no sessionStorage 
+function salvarDadosInput() {
+    // Seleciona todos os campos de input e textarea
+    const inputs = document.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            // Salva cada campo no sessionStorage  com a chave sendo o seu id
+            sessionStorage .setItem(input.id, input.value);
+        });
+    });
+    
+}
+
+// Função para restaurar o valor dos inputs ao carregar a página
+function restaurarDadosInput() {
+    const inputs = document.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+        const valorSalvo = sessionStorage .getItem(input.id);
+        if (valorSalvo) {
+            input.value = valorSalvo;  // Restaura o valor salvo
+        }
+    });
+}
+
+// Função para restaurar os valores do sessionStorage  ao carregar a página
+function restaurarValores() {
+    const numeroInicialElemento = document.getElementById('numeroInicial');
+    const numeroInputElemento = document.getElementById('numeroInput');
+
+    // Restaura o valor inicial e o número inserido do sessionStorage 
+    const valorInicialSalvo = sessionStorage .getItem('valorInicial') || 100;
+    const numeroInputSalvo = sessionStorage .getItem('numeroInput') || 0;
+
+    const resultado =  parseFloat(numeroInputSalvo) +  parseFloat(valorInicialSalvo);
+
+    // Atualiza o valor inicial e o campo de entrada
+    numeroInicialElemento.textContent = parseFloat(resultado);
+    numeroInputElemento.value = numeroInputSalvo;
+}
+
+function verificarExpiracao() 
+{
+    const horaInicio = sessionStorage .getItem('horaInicio');
+    const tresHoras = 3 * 60 * 60 * 1000; // 3 horas em milissegundos 
+
+    // Se a hora de início não existir, significa que é a primeira visita, então definimos a hora de início
+    if (!horaInicio) 
+    {
+        sessionStorage.setItem('horaInicio', Date.now());
+    } 
+    else 
+    {
+        // Se já passaram 3 horas, limpar os dados e mostrar o alerta
+        if (Date.now() - parseInt(horaInicio) > tresHoras) 
+        {
+            sessionStorage.clear();
+            alert("Os dados expiraram.");
+        }
+    }
+}
+
+
+
+function formulario()
+{
+   // Tenta gerar o PDF e guarda o resultado
+   let pdfGerado = gerarPDF();
+
+
+    // Se o PDF foi gerado com sucesso
+    if (pdfGerado) 
+    {
+        // Apaga o sessionStorage e exibe o alerta somente após o PDF ser gerado e salvo
+        setTimeout(function() 
+        {
+            // Limpa todos os dados do sessionStorage
+            sessionStorage.clear();
+
+            // Exibe a mensagem de confirmação após a geração do PDF
+            alert("Dados enviados com sucesso. Os dados foram limpos.");
+
+            // Opcional: redireciona ou recarrega a página após o envio
+            location.reload(); // Recarrega a página para voltar ao início
+        }, 1000); // Timeout para garantir que o PDF seja gerado primeiro
+    } 
+    else 
+    {
+        // Se o PDF não foi gerado, exibe um alerta informando o erro
+        alert("Erro: Por favor, preencha todas as informações antes de gerar o PDF.");
+    }
 }
 
 function gerarPDF() 
 {
     const textoProjecao = document.getElementById('projecaoText'); // Seleciona o textarea pelo ID correto
 
-    if (!textoProjecao.value.trim()) {  // Verifica se há algum texto inserido
-        alert('Por favor, insira suas projeções macroeconômicas.');
-        return;
+    if (!textoProjecao.value.trim()) 
+    {  
+        return false;
     }
 
     // Cria um elemento temporário para o conteúdo do PDF
@@ -100,9 +233,10 @@ function gerarPDF()
     elementoTemporario.innerHTML = `<h2>Projeção Macroeconômica 2025</h2><p>${textoProjecao.value}</p>`;
 
     // Configurações para o html2pdf
-    const opt = {
+    const opt = 
+    {
         margin: 1,
-        filename: 'ProjecaoMacroeconomica2025.pdf',
+        filename: 'SOE_2025_nomedogrupo.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -110,6 +244,7 @@ function gerarPDF()
 
     // Gera o PDF a partir do elemento temporário
     html2pdf().from(elementoTemporario).set(opt).save();
+    return true;
 
   /*  // Gera o PDF e converte para Base64
     html2pdf().from(elementoTemporario).set(opt).outputPdf('datauristring').then(function(pdfBase64) {
@@ -166,20 +301,5 @@ function enviarPDFParaServidor(pdfBlob) {
 */
 
 
-
-// Função para atualizar o título ao subtrair o número inserido do número inicial
-function atualizarTitulo() {
-    const numeroInicialElemento = document.getElementById('numeroInicial');
-    const numeroInput = document.getElementById('numeroInput').value;
-
-    const numeroInicial = 100; // Valor inicial definido no título
-    const numeroSubtrair = parseFloat(numeroInput) || 0; // Converte o input para número ou 0 se vazio
-
-    // Subtrai o número inserido do número inicial
-    const resultado = numeroInicial - numeroSubtrair;
-
-    // Atualiza o valor no título
-    numeroInicialElemento.textContent = resultado;
-}
 
 window.onload = init;

@@ -9,14 +9,15 @@ header
 {
     background-color: #cc2900;
     color: white;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
     text-align: center;
     padding: 1em 0;
 }
 
-main 
-{
-    padding: 2em;
-}
+
 
 .fase 
 {
@@ -119,4 +120,23 @@ button
 #btnApagar 
 {
     margin-top: 20px; /* Ajuste o valor conforme necessário para o espaçamento desejado */
+}
+
+
+#fase0{
+    padding: 2vw;
+}
+
+.caixaexpfase{
+    border: 2px #338dff solid;
+    border-radius: 10%;
+    margin: 0.5vw;
+    padding: 2vw 1vw 1vw 1vw;
+    box-shadow: 2px 2px #5285ec;
+}
+
+#banner{
+    height: 5vw;
+    position: relative;
+    top: 1vw;
 }

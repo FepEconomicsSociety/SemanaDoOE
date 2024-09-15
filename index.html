@@ -7,6 +7,13 @@
     <title>Semana do Orçamento de Estado</title>
     <link rel="stylesheet" href="site.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <!--Links do Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -20,21 +27,67 @@
     <!-- Conteúdo principal do site, ocultado até que a senha seja validada -->
 <main id="conteudoSite" style="display: none;">
     <header>
-        <h1>Semana do Orçamento de Estado - FEP Economics Society</h1>
+        <h1 id="banner">Semana do Orçamento de Estado - FEP Economics Society</h1>
     </header>
-        <section id="fase0">
-            <h2>Fase 0 - Explicação das Fases</h2>
-            <p>Bem-vindo ao programa! Aqui, você aprenderá a criar um mini orçamento de estado...</p>
+        <section id="fase0" class="fase">
+            <div class="container" id="fasesdoprograma">
+                <div class="row" style="width: 100%;">
+                    <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
+                </div>
+                <div class="row" style="margin-top: 1vw;">
+                        <div class="col caixaexpfase">
+                            <h6 style="font-weight: bold; text-align: center;">Fase 1</h6>
+                            <p style="text-align: center;">
+                                Terás acesso a uma série de estatísticas relativas ao ano de 2023, e algumas projeções de 2024.
+                                Recorda os anos anteriores, tira notas e projeta como será o futuro.
+                            </p>
+                        </div>
+                        <div class="col caixaexpfase">
+                            <h6 style="font-weight: bold; text-align: center;">Fase 2</h6>
+                            <p style="text-align: center;">
+                                O primeiro passo para construir um orçamento do estado, é criar um cenário macroeconómico.
+                                Quais as questões a que devemos ter mais atenção? O que vai mudar?
+                            </p>
+                        </div>
+                        <div class="col caixaexpfase">
+                            <h6 style="font-weight: bold; text-align: center;">Fase 3</h6>
+                            <p style="text-align: center;">
+                                Já temos um cenário macroeconómico. Agora temos de definir qual o orçamento que devemos atribuir a cada área da economia.
+                                Vamos dividr os nossos gastos por ministério?
+                            </p>
+                        </div>
+                        <div class="col caixaexpfase">
+                            <h6 style="font-weight: bold; text-align: center;">Fase 4</h6>
+                            <p style="text-align: center;">
+                                Depois de definires qual o valor que cada ministério deve obter, ser-te-à entregue uma pasta.
+                                O teu objetivo é gerir o orçamento da melhora forma, e fazer propostas que façam a diferença na nossa economia.
+                            </p>
+                        </div>
+                   
+                </div>
+                <div class="row" style="width: 100%; margin-top: 3vw;">
+                    <h5>Para avançar, temos de saber que grupo está a participar.</h5>
+                </div>
+                <div class="row mt-3" style="width: 100%;">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            
+                            <!-- Campo de entrada para o nome -->
+                            <input type="text" id="nome" class="form-control" placeholder="Nome do grupo" required>
+                            
+                        </div>
 
-            <!-- Campos de entrada para o nome e e-mail -->
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" placeholder="Digite seu nome" required><br><br>
+                        <!-- Botão para prosseguir para a próxima fase -->
+                        <button class="btn btn-primary ml-3" onclick="verificarCampos()">Começar</button>
+                        
+                    </form>
+                    
+                </div>
+            </div>
 
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" placeholder="Digite seu e-mail" required><br><br>
             
-            <!-- Botão para prosseguir para a próxima fase -->
-            <button onclick="verificarCampos()">Começar</button>
+
+            
         </section>
 
         <section id="fase1" class="fase hidden">

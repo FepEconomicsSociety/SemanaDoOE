@@ -45,18 +45,10 @@ function verificarSenha()
 function verificarCampos() 
 {
     const nome = document.getElementById('nome').value.trim();
-    const email = document.getElementById('email').value.trim();
 
-    if (nome === '' || email === '') 
+    if (nome === '') 
     {
         alert('Por favor, preencha todos os campos.');
-        return;
-    }
-
-    // Verifica se o formato de e-mail é válido
-    if (!validarEmail(email)) 
-    {
-        alert('Por favor, insira um e-mail válido.');
         return;
     }
 
@@ -64,7 +56,7 @@ function verificarCampos()
     navigateTo('fase1');
 }
 
-// Função para validar o formato do e-mail
+// Função para validar o formato do e-mail - Sem uso, mas pode ser útil no futuro
 function validarEmail(email) 
 {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

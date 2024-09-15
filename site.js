@@ -105,7 +105,8 @@ function init()
 }
 
 // Função para atualizar o título ao subtrair o número inserido do número inicial
-function atualizarTitulo() {
+function atualizarTitulo() 
+{
     const numeroInicialElemento = document.getElementById('numeroInicial');
     const numeroInput = document.getElementById('numeroInput').value;
 

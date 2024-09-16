@@ -42,8 +42,10 @@ function verificarSenha()
 }
 
 // Função para verificar se os campos de nome e e-mail estão preenchidos
-function verificarCampos() 
+function verificarCampos(event) 
 {
+    event.preventDefault(); // Evita o refresh da página
+
     const nome = document.getElementById('nome').value.trim();
 
     if (nome === '') 

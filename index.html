@@ -69,7 +69,7 @@
                     <h5>Para avançar, temos de saber que grupo está a participar.</h5>
                 </div>
                 <div class="row mt-3" style="width: 100%;">
-                    <form class="form-inline">
+                    <form class="form-inline" onsubmit="verificarCampos(event)">
                         <div class="form-group">
                             
                             <!-- Campo de entrada para o nome -->
@@ -78,7 +78,7 @@
                         </div>
 
                         <!-- Botão para prosseguir para a próxima fase -->
-                        <button class="btn btn-primary ml-3" onclick="verificarCampos()">Começar</button>
+                        <button type="submit" class="btn btn-primary ml-3">Começar</button>
                         
                     </form>
                     

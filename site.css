@@ -75,11 +75,12 @@ button
 
 #estatisticas {
     /*width: 50%;*/  /* Ocupa 50% da largura da tela */
-    flex: 0 1 auto;  /* Ocupa o espaço mínimo necessário para o conteúdo */
+    /*flex: 0 1 auto;   Ocupa o espaço mínimo necessário para o conteúdo */
     margin-right: 20px;  /* Espaço à direita das estatísticas */
     background-color: antiquewhite;
 }
 
+/* não usado */
 #graficos {
     /*width: 50%;*/  /* Ocupa 50% da largura da tela */
     /*height: 50%;*/
@@ -139,4 +140,8 @@ button
     height: 5vw;
     position: relative;
     top: 1vw;
+}
+
+.row{
+    width: 100%;
 }

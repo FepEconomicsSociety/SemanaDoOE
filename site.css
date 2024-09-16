@@ -31,20 +31,30 @@ header
 
 #projecaoText 
 {
-    min-width: 300px;  /* Tamanho mínimo da largura */
+    min-width: 400px;  /* Tamanho mínimo da largura */
     min-height: 150px; /* Tamanho mínimo da altura */
-    max-width: 800px;  /* Tamanho mínimo da largura */
-    max-height:  400px; /* Tamanho mínimo da altura */
+    max-width: 400px;  /* Tamanho mínimo da largura */
+    max-height:  600px; /* Tamanho mínimo da altura */
     resize: both;      /* Permite redimensionar apenas para aumentar */
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
 }
 
-#titulo 
+.titulo 
 {
     min-width: 300px;  /* Tamanho mínimo da largura */
-    min-height: 20px; /* Tamanho mínimo da altura */
+    min-height: 30px; /* Tamanho mínimo da altura */
     max-width: 500px;  /* Tamanho mínimo da largura */
-    max-height:  20px; /* Tamanho mínimo da altura */
+    max-height:  30px; /* Tamanho mínimo da altura */
+    resize: both;      /* Permite redimensionar apenas para aumentar */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+}
+
+.explicacao 
+{
+    min-width: 300px;  /* Tamanho mínimo da largura */
+    min-height: 150px; /* Tamanho mínimo da altura */
+    max-width: 800px;  /* Tamanho mínimo da largura */
+    max-height:  400px; /* Tamanho mínimo da altura */
     resize: both;      /* Permite redimensionar apenas para aumentar */
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
 }
@@ -113,9 +123,16 @@ button
 #medidaTabs button 
 {
     margin-right: 10px;
-    margin-bottom: 10px;  /* Opcional: se quiser espaço também abaixo dos botões */
+    margin-bottom: 10px; 
 }
 
+
+#confirmarBtn
+{
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
 
 /* CSS para adicionar espaço acima do botão */
 #btnApagar 

@@ -32,7 +32,7 @@
     <header>
         <h1 id="banner">Semana do Orçamento de Estado - FEP Economics Society</h1>
     </header>
-        <section id="fase0" class="fase hidden">
+        <section id="fase0" class="fase">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -87,13 +87,9 @@
                     
                 </div>
             </div>
-
-            
-
-            
         </section>
 
-        <section id="fase1" class="fase">
+        <section id="fase1" class="fase hidden">
             <h2>Fase 1 - Estatísticas 2023</h2>
             <div class="container">
                 <!-- Estatísticas -->
@@ -227,8 +223,11 @@
             <!-- Botão para voltar à fase anterior -->
             <button onclick="navigateTo('fase4')">Voltar</button>
             
-            <!-- Botão para gerar o PDF -->
-            <button onclick="formulario()">Gerar PDF com Projeção</button>
+            <!-- O botão para gerar o PDF -->
+<button id="gerarPdfBtn" onclick="formulario()">Gerar PDF</button>
+
+<!-- Botão para confirmar que o PDF foi salvo -->
+<button id="confirmarBtn" style="display:none;" onclick="confirmarEnvio()">Finalizar</button>
         
             <!-- Botão para a próxima fase -->
             <!--<button onclick="navigateTo('fase')">Próxima Fase</button>-->

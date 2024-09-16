@@ -102,6 +102,27 @@ function init()
 function atualizarTitulo() 
 {
     const numeroInicialElemento = document.getElementById('numeroInicial');
+
+    // Define o valor inicial (100) ou o valor armazenado no sessionStorage
+    const valorInicial = parseFloat(sessionStorage.getItem('valorInicial')) || 100;
+    let totalOrcamentos = 0;
+
+    // Recalcula o total dos orçamentos, somando os valores mais recentes de cada medida
+    medidas.forEach(medida => {
+        totalOrcamentos += parseFloat(medida.orcamento) || 0;
+    });
+
+    // Subtrai o total dos orçamentos do valor inicial
+    const resultado = valorInicial - totalOrcamentos;
+
+    // Atualiza o valor no título
+    numeroInicialElemento.textContent = resultado;
+
+    // Salva o novo valor no sessionStorage
+    sessionStorage.setItem('valorInicial', valorInicial);  // Mantém o valor inicial intacto
+
+
+   /* const numeroInicialElemento = document.getElementById('numeroInicial');
     const numeroInput = document.getElementById('numeroInput').value;
 
     //const numeroInicial = 100; // Valor inicial definido no título
@@ -117,7 +138,7 @@ function atualizarTitulo()
 
     // Salva o novo valor e o valor inserido no sessionStorage 
     sessionStorage .setItem('valorInicial', novoValor);
-    sessionStorage .setItem('numeroInput', numeroInput);
+    sessionStorage .setItem('numeroInput', numeroInput);*/
 }
 
 // Função para salvar o valor de qualquer campo de input no sessionStorage 
@@ -185,61 +206,65 @@ function verificarExpiracao()
 
 
 
-function formulario()
+function formulario() 
 {
-   // Tenta gerar o PDF e guarda o resultado
-   let pdfGerado = gerarPDF();
-
-
-    // Se o PDF foi gerado com sucesso
-    if (pdfGerado) 
-    {
-        // Apaga o sessionStorage e exibe o alerta somente após o PDF ser gerado e salvo
-        setTimeout(function() 
-        {
-            // Limpa todos os dados do sessionStorage
-            sessionStorage.clear();
-
-            // Exibe a mensagem de confirmação após a geração do PDF
-            alert("Dados enviados com sucesso. Os dados foram limpos.");
-
-            // Opcional: redireciona ou recarrega a página após o envio
-            location.reload(); // Recarrega a página para voltar ao início
-        }, 1000); // Timeout para garantir que o PDF seja gerado primeiro
-    } 
-    else 
-    {
-        // Se o PDF não foi gerado, exibe um alerta informando o erro
-        alert("Erro: Por favor, preencha todas as informações antes de gerar o PDF.");
-    }
+    gerarPDF()
+        .then((pdfGerado) => {
+            if (pdfGerado) 
+            {
+                // Mostra o botão de confirmação para o usuário
+                document.getElementById('confirmarBtn').style.display = 'block';
+            } 
+            else 
+            {
+                alert("Erro: O PDF não foi gerado. Por favor, tente novamente.");
+            }
+        })
+        .catch((error) => {
+            console.error("Erro ao gerar o PDF:", error);
+            alert("Ocorreu um erro ao gerar o PDF. Tente novamente.");
+        });
 }
 
-function gerarPDF() 
-{
-    const textoProjecao = document.getElementById('projecaoText'); // Seleciona o textarea pelo ID correto
+function gerarPDF() {
+    return new Promise((resolve, reject) => {
+        const textoProjecao = document.getElementById('projecaoText');  // Seleciona o textarea correto
+        const nomeGrupo = document.getElementById('nome').value;  // Captura o nome do grupo
 
-    if (!textoProjecao.value.trim()) 
-    {  
-        return false;
-    }
+        if (!textoProjecao.value.trim() || !nomeGrupo.trim()) {
+            resolve(false);  // Retorna false se o campo de projeção ou o nome do grupo estiver vazio
+            return;
+        }
 
-    // Cria um elemento temporário para o conteúdo do PDF
-    const elementoTemporario = document.createElement('div');
-    elementoTemporario.innerHTML = `<h2>Projeção Macroeconômica 2025</h2><p>${textoProjecao.value}</p>`;
+        // Cria um elemento temporário para o conteúdo do PDF
+        const elementoTemporario = document.createElement('div');
+        elementoTemporario.innerHTML = `<h2>Projeção Macroeconômica 2025</h2><p>${textoProjecao.value}</p>`;
 
-    // Configurações para o html2pdf
-    const opt = 
-    {
-        margin: 1,
-        filename: 'SOE_2025_nomedogrupo.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
+        // Configurações para o html2pdf
+        const opt = {
+            margin: 1,
+            filename: `SOE_2025_${nomeGrupo}.pdf`,  // Substitui "nomedogrupo" pelo valor inserido
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
 
-    // Gera o PDF a partir do elemento temporário
-    html2pdf().from(elementoTemporario).set(opt).save();
-    return true;
+        // Gera o PDF e retorna uma Promise
+        html2pdf().from(elementoTemporario).set(opt).save()
+            .then(() => {
+                resolve(true);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+}
+// Função para confirmar o envio e limpar os dados após a confirmação do usuário
+function confirmarEnvio() {
+    sessionStorage.clear();
+    alert("Dados enviados com sucesso. Os dados foram limpos.");
+    location.reload();  // Recarrega a página
+
 
   /*  // Gera o PDF e converte para Base64
     html2pdf().from(elementoTemporario).set(opt).outputPdf('datauristring').then(function(pdfBase64) {

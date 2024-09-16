@@ -13,6 +13,8 @@ function criarMedida()
     medidaAtiva = medidas.length - 1;  // Define a nova medida como a ativa
     atualizarInterfaceMedidas();  // Exibe a nova medida
     atualizarAbas();  // Atualiza as abas
+    atualizarTitulo();  // Atualiza o valor inicial
+
 }
 
 // Função para salvar automaticamente os dados da medida ativa
@@ -21,6 +23,8 @@ function salvarMedidaAtual()
     medidas[medidaAtiva].titulo = document.getElementById(`titulo`).value;
     medidas[medidaAtiva].explicacao = document.getElementById(`explicacao`).value;
     medidas[medidaAtiva].orcamento = document.getElementById(`numeroInput`).value;
+    atualizarTitulo();  // Atualiza o valor inicial
+
 }
 
 // Função para atualizar a interface e mostrar a medida ativa
@@ -40,6 +44,8 @@ function atualizarInterfaceMedidas()
     titulo.cols = 50;
     titulo.placeholder = "Escreva o título da sua medida aqui...";
     titulo.value = medidas[medidaAtiva].titulo;
+    titulo.style.minHeight = "30px";
+    titulo.style.maxHeight = "30px";
     titulo.oninput = salvarMedidaAtual;  // Salva automaticamente ao digitar
     medidasContainer.appendChild(titulo);
 
@@ -54,6 +60,8 @@ function atualizarInterfaceMedidas()
     explicacao.cols = 50;
     explicacao.placeholder = "Escreva a explicação da medida aqui...";
     explicacao.value = medidas[medidaAtiva].explicacao;
+    explicacao.style.minHeight = "100px";
+    explicacao.style.maxHeight = "600px";
     explicacao.oninput = salvarMedidaAtual;  // Salva automaticamente ao digitar
     medidasContainer.appendChild(explicacao);
 
@@ -106,7 +114,6 @@ function atualizarAbas() {
 // Função para adicionar uma nova medida
 function adicionarMedida() {
     criarMedida();  // Cria a nova medida
-
     salvarMedidaAtual();  // Salva a medida atual antes de criar uma nova
 }
 
@@ -117,7 +124,10 @@ function apagarMedida(index) {
         medidaAtiva = medidas.length - 1;  // Define a última medida como ativa
         atualizarInterfaceMedidas();  // Atualiza a interface
         atualizarAbas();  // Atualiza as abas para refletir as mudanças
-    } else {
+        atualizarTitulo();  // Atualiza o valor inicial
+    } 
+    else 
+    {
         alert("Não é possível apagar todas as medidas. Deve haver pelo menos uma.");
     }
 }
@@ -129,4 +139,6 @@ function inicializarFase4() {
         atualizarAbas();  // Atualiza a aba para refletir a primeira medida
     }
     atualizarInterfaceMedidas();  // Exibe a primeira medida na interface
+    atualizarTitulo();  // Atualiza o valor inicial
 }
+

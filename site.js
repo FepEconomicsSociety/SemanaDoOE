@@ -81,7 +81,10 @@ function init()
 {
     verificarExpiracao();  // Verifica se os dados devem ser expirados
     restaurarDadosInput();
+    inicializarFase4();
+
     salvarDadosInput();
+
 
     // Verifica se o usuário já está autenticado
     const autenticado = sessionStorage .getItem('autenticado');
@@ -95,7 +98,9 @@ function init()
         document.getElementById('senhaPage').style.display = 'block';
         document.getElementById('conteudoSite').style.display = 'none';
     }
-    restaurarValores();
+    
+    //restaurarValores();
+
 }
 
 // Função para atualizar o título ao subtrair o número inserido do número inicial
@@ -142,7 +147,8 @@ function atualizarTitulo()
 }
 
 // Função para salvar o valor de qualquer campo de input no sessionStorage 
-function salvarDadosInput() {
+function salvarDadosInput() 
+{
     // Seleciona todos os campos de input e textarea
     const inputs = document.querySelectorAll('input, textarea');
     
@@ -156,19 +162,22 @@ function salvarDadosInput() {
 }
 
 // Função para restaurar o valor dos inputs ao carregar a página
-function restaurarDadosInput() {
+function restaurarDadosInput() 
+{
     const inputs = document.querySelectorAll('input, textarea');
     
     inputs.forEach(input => {
         const valorSalvo = sessionStorage .getItem(input.id);
-        if (valorSalvo) {
+        if (valorSalvo) 
+        {
             input.value = valorSalvo;  // Restaura o valor salvo
         }
     });
 }
 
 // Função para restaurar os valores do sessionStorage  ao carregar a página
-function restaurarValores() {
+function restaurarValores() 
+{
     const numeroInicialElemento = document.getElementById('numeroInicial');
     const numeroInputElemento = document.getElementById('numeroInput');
 

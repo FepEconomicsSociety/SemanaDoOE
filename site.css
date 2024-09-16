@@ -162,3 +162,10 @@ button
 .row{
     width: 100%;
 }
+
+#myChart{
+    height: 250px !important;
+    width: 500px !important;
+    zoom: 200%;
+    font-size: large;
+}

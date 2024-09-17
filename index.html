@@ -29,10 +29,15 @@
 
     <!-- Conteúdo principal do site, ocultado até que a senha seja validada -->
 <main id="conteudoSite" style="display: none;">
+    <div class="wrapper">
     <header>
         <h1 id="banner">Semana do Orçamento de Estado - FEP Economics Society</h1>
     </header>
-        <section id="fase0" class="fase hidden">
+    <div class="caixa-valor-inicial" id="caixaValorInicial" style="display: none;">
+        Valor Inicial: <span id="numeroInicial"></span>
+    </div>
+    <div class="main-content">
+        <section id="fase0" class="fase ">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -337,7 +342,7 @@
             </div>            
         </section>
 
-        <section id="fase3" class="fase">
+        <section id="fase3" class="fase hidden">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
                 <h2>Fase 3 - Orçamentação dos ministérios</h2>
                 <p>
@@ -528,7 +533,7 @@
         </section>
 
         <section id="fase4" class="fase hidden">
-            <h2>Fase 4 - Valor Inicial: <span id="numeroInicial"></span></h2>
+            <h2>Fase 4 </h2>
             <p>Crie as suas medidas:</p>
         
             <!-- Container onde as abas serão adicionadas -->
@@ -552,6 +557,9 @@
 
         <section id="fase5" class="fase hidden">
             <h2>Fase 5 - Ta feito</h2>
+
+            <textarea id="projecaoText" rows="10" cols="50" placeholder="Adicione algum comentario extra ..."></textarea>
+
             <p> pronto:</p>
             
             <!-- Botão para voltar à fase anterior -->
@@ -585,4 +593,19 @@
     <script src="medidas.js"></script>
 
 </body>
+</div>
+<div id="footer" style="display: none;">
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 FEP Economics Society. Todos os direitos reservados.</p>
+            <p>Dados retirados de fontes externas: 
+                <a href="https://www.pordata.pt/pt/estatisticas7" target="_blank">pordata</a>, 
+                <a href="https://bpstat.bportugal.pt/" target="_blank">bpstat</a>
+                <a href="https://www.dgo.gov.pt/Paginas/default.aspx" target="_blank">DGO</a>
+            </p>
+        </div>
+    </footer>
+</div>
+
+</div>
 </html>

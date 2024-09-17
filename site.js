@@ -20,10 +20,9 @@ function verificarSenha()
         }
     })
     .then(data => {
+        // Salva o token no sessionStorage  para manter a autenticação
         sessionStorage .setItem('token', data.token); // Armazena o token JWT
 
-        // Salva o token no sessionStorage  para manter a autenticação
-        sessionStorage .setItem('token2', data.token2);
 
         // Armazena a hora de autenticação quando o login é bem-sucedido
         sessionStorage.setItem('horaInicio', Date.now());  // Define o timestamp no momento da autenticação
@@ -34,6 +33,9 @@ function verificarSenha()
         
         document.getElementById('senhaPage').style.display = 'none';
         document.getElementById('conteudoSite').style.display = 'block';
+    
+        // Exibir o footer após o login
+        document.getElementById('footer').style.display = 'block';
     })
     .catch(error => {
         mensagemErro.textContent = error.message;
@@ -74,6 +76,16 @@ function navigateTo(faseId)
 
     // Mostrar a fase selecionada
     document.getElementById(faseId).classList.remove('hidden');
+
+    // Exibir a caixa de valor inicial apenas nas fases 3, 4 e 5
+    const caixaValorInicial = document.getElementById('caixaValorInicial');
+    if (faseId === 'fase3' || faseId === 'fase4' || faseId === 'fase5') {
+        caixaValorInicial.style.display = 'block'; // Exibe a caixa
+    } 
+    else 
+    {
+        caixaValorInicial.style.display = 'none'; // Oculta a caixa
+    }
 }
 
 // Inicializa o estado da navegação
@@ -93,6 +105,8 @@ function init()
         // Se já estiver autenticado, mostra o conteúdo do site
         document.getElementById('senhaPage').style.display = 'none';
         document.getElementById('conteudoSite').style.display = 'block';
+        // Exibir o footer após o login
+        document.getElementById('footer').style.display = 'block';
     } else {
         // Caso contrário, exibe a página de senha
         document.getElementById('senhaPage').style.display = 'block';

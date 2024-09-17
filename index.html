@@ -32,7 +32,7 @@
     <header>
         <h1 id="banner">Semana do Orçamento de Estado - FEP Economics Society</h1>
     </header>
-        <section id="fase0" class="fase hidden">
+        <section id="fase0" class="fase">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -89,83 +89,207 @@
             </div>
         </section>
 
-        <section id="fase1" class="fase">
-            <h2>Fase 1 - Estatísticas 2023</h2>
+        <section id="fase1" class="fase hidden">
+            <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
+                <h2>Fase 1 - Estatísticas 2023</h2>
+                <p>Aqui terás acesso a algumas estatísticas macroeconómicos e os seus valores em anos anteriores. Podes tirar notas, mas deves consultar muitas outras estatísticas em sites de confiança.</p>
+            </div>
+            
             <div class="container">
-                <!-- Estatísticas -->
-                <div class="row">
-                    <div class="col">
-                        <ul>
-                            <li>PIB: 265.525,1  milhões de € (variação de 9,6% face a 2022)</li>
-                            <li>Dívida Pública: 263.085 milhões de € (variação de -3% face a 2022)</li>
-                            <li>Saldo Orçamental: -2%</li>
-                            <li>Exportação: 125.974,7 milhões de € (variação de 4,8% face a 2022)</li>
-                            <li>Importação: 123.674,6 milhões de € (variação de -1,9% face a 2022)</li>
-                            <li>Inflação: 4,31%</li>
-    
-                        </ul>
-                    </div>
-                    
-                </div>
         
                 <!-- Gráficos (imagens) -->
-                    <div class="row">
+                    <div class="row" style="margin-top: 3vw;">
                         <div class="col">
-                            <h5>Crescimento do PIB</h5>
-                            <canvas id="myChart"></canvas>
-
+                            <h5>Crescimento do PIB (%)</h5>
+                            <canvas id="myChartPIB"></canvas>
+                            <!-- https://www.pordata.pt/pt/estatisticas/economia/crescimento-e-produtividade/taxa-de-crescimento-real-do-pib -->
                             <script>
-                            const xValues = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,];
-                            const yValues = [0.8,1.8,2,3.5,2.8,2.7,-8.3,5.7,6.8,2.3];
-
-                            new Chart("myChart", {
+                            const xPIB = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+                            const yPIB = [0.8,1.8,2,3.5,2.8,2.7,-8.3,5.7,6.8,2.3];
+                            
+                            new Chart("myChartPIB", {
                                 type: "line",
                                 data: {
-                                    labels: xValues,
+                                    labels: xPIB,
                                     datasets: [
                                         {
                                             fill: false,
                                             lineTension: 0,
                                             backgroundColor: "rgba(0,0,255,1.0)",
                                             borderColor: "rgba(0,0,255,0.1)",
-                                            data: yValues
+                                            data: yPIB
                                         }]
                                     },
                                 options: {
-                                    legend: {display: false},
+                                    legend: {
+                                        display: false
+                                    },
                                     scales: {
-                                    yAxes: [{ticks: {min: -10, max:10}}],
+                                        yAxes: [{ ticks: {min: -10, max:10} }],
                                         }
                                     }
                             });
                             </script>
                         </div>
-                        
                     </div>
-<!--
-                    <p> Gráfico da Divida Pública <br>
-                    <img src="images/GraficoDividaPublica.png" alt="Gráfico de dívida pública" class="grafico">
-                    </p>
-                    
-                    <p> Gráfico da Exportação <br>
-                    <img src="images/GraficoExportaçoes.png" alt="Gráfico de exportações" class="grafico">
-                    </p>
 
-                    <p> Gráfico da Importação <br>
-                    <img src="images/GraficoImportaçoes.png" alt="Gráfico de importações" class="grafico">
-                    </p>
+                    <div class="row" style="margin-top: 3vw;">
+                        <div class="col">
+                            <h5>Dívida pública (% do PIB)</h5>
+                            <canvas id="myChartDivida"></canvas>
+                            <!-- https://www.pordata.pt/pt/estatisticas/contas-publicas/divida-e-defice/divida-publica-em-do-pib -->
+                            <script>
+                            const xDivida = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+                            const yDivida = [132.9,131.2,131.5,126.1,121.5,116.6,134.9,124.5,112.4,99.1];
+                            
+                            new Chart("myChartDivida", {
+                                type: "line",
+                                data: {
+                                    labels: xDivida,
+                                    datasets: [
+                                        {
+                                            fill: false,
+                                            lineTension: 0,
+                                            backgroundColor: "rgba(0,0,255,1.0)",
+                                            borderColor: "rgba(0,0,255,0.1)",
+                                            data: yDivida
+                                        }]
+                                    },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{ ticks: {min: 80, max:150} }],
+                                        }
+                                    }
+                            });
+                            </script>
+                        </div>
+                    </div>
 
-                    <p> Gráfico da Inflação <br>
-                        <img src="images/GraficoInflaçao.png" alt="Gráfico de Inflação" class="grafico_inf">
-                    </p>
-                -->
+                    <div class="row" style="margin-top: 3vw;">
+                        <div class="col">
+                            <h5>Taxa de desemprego (%)</h5>
+                            <canvas id="myChartDesemprego"></canvas>
+                            <!-- https://bpstat.bportugal.pt/dados/series?mode=graphic&svid=bpNXAAAAAAA.!l!B!C!10!!!False!12!:1htU5U:uXqymudu6qRPf7U5wshT2GiSXP0&series=5739374 -->
+                            <script>
+                            const xDesemprego = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+                            const yDesemprego = [14,12.7,10.8,8.3,6.8,6.9,7.3,6.4,6.6,6.6];
+                            
+                            new Chart("myChartDesemprego", {
+                                type: "line",
+                                data: {
+                                    labels: xDesemprego,
+                                    datasets: [
+                                        {
+                                            fill: false,
+                                            lineTension: 0,
+                                            backgroundColor: "rgba(0,0,255,1.0)",
+                                            borderColor: "rgba(0,0,255,0.1)",
+                                            data: yDesemprego
+                                        }]
+                                    },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{ ticks: {min: 0, max: 15} }],
+                                        }
+                                    }
+                            });
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 3vw;">
+                        <div class="col">
+                            <h5>Exportações - Importações (€)</h5>
+                            <canvas id="myChartExpImp"></canvas>
+
+                            <script>
+                            const xExpImp = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+                            const yExportacao = [69595.2,72990.7,74989.1,83717,89143.7,93271,74285.8,89449.7,120198.5,125958.4];
+                            const yImportacao = [69336.3,71662,72849.3,81739.1,88194.4,92301.8,78584.8,95547.8,126032.2,123748.5];
+                            <!-- https://www.pordata.pt/pt/estatisticas/economia/crescimento-e-produtividade/exportacoes-e-importacoes -->
+                            new Chart("myChartExpImp", {
+                                type: "line",
+                                data: {
+                                    labels: xExpImp,
+                                    datasets: [
+                                        {
+                                            fill: false,
+                                            lineTension: 0,
+                                            backgroundColor: "rgba(0,0,255,1.0)",
+                                            borderColor: "rgba(0,0,255,0.1)",
+                                            data: yExportacao
+                                        },
+                                        {
+                                            fill: false,
+                                            lineTension: 0,
+                                            backgroundColor: "rgba(0,255,0,1.0)",
+                                            borderColor: "rgba(0,255,0,0.1)",
+                                            data: yImportacao
+                                        }]
+                                    },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{ ticks: {min: 60000, max: 150000} }],
+                                        }
+                                    }
+                            });
+                            </script>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 3vw;">
+                        <div class="col">
+                            <h5>Inflação (%)</h5>
+                            <canvas id="myChartInflacao"></canvas>
+                            <!-- https://www.pordata.pt/pt/estatisticas/inflacao/taxa-de-inflacao/taxa-de-inflacao-por-bens-e-servicos-indice-harmonizado-de -->
+                            <script>
+                            const xInflacao = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023];
+                            const yInflacao = [-0.2,0.5,0.6,1.6,1.2,0.3,-0.1,0.9,8.1,5.3];
+                            
+                            new Chart("myChartInflacao", {
+                                type: "line",
+                                data: {
+                                    labels: xInflacao,
+                                    datasets: [
+                                        {
+                                            fill: false,
+                                            lineTension: 0,
+                                            backgroundColor: "rgba(0,0,255,1.0)",
+                                            borderColor: "rgba(0,0,255,0.1)",
+                                            data: yInflacao
+                                        }]
+                                    },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{ ticks: {min: -1, max: 10} }],
+                                        }
+                                    }
+                            });
+                            </script>
+                        </div>
+                    </div>
+
                 </div>
-            <button onclick="navigateTo('fase2')">Próxima Fase</button>
+            <button class="btn btn-primary" style="width: 70%; margin-top: 2vw; position: relative; left: 50%; transform: translate(-50%, 0%);" onclick="navigateTo('fase2')">Próxima Fase</button>
         </section>
 
         <section id="fase2" class="fase hidden">
-            <h2>Fase 2 - Projeção Macroeconômica 2025</h2>
-            <p>Insira suas projeções para a economia portuguesa no ano de 2025:</p>
+            <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
+                <h2>Fase 2 - Projeções macroeconómicas para 2025</h2>
+                <p></p>
+            </div>
             
             <!-- Caixa de texto para o usuário inserir suas projeções -->
             <textarea id="projecaoText" rows="10" cols="50" placeholder="Escreva suas projeções macroeconômicas aqui..."></textarea>

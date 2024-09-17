@@ -32,7 +32,7 @@
     <header>
         <h1 id="banner">Semana do Orçamento de Estado - FEP Economics Society</h1>
     </header>
-        <section id="fase0" class="fase">
+        <section id="fase0" class="fase hidden">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -337,9 +337,188 @@
             </div>            
         </section>
 
-        <section id="fase3" class="fase hidden">
-            <h2>Fase 3 - Gestão de orçamento</h2>
-            <p>Algumas informaçoes sobre os ministérios:</p>
+        <section id="fase3" class="fase">
+            <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
+                <h2>Fase 3 - Orçamentação dos ministérios</h2>
+                <p>
+                    Agora terás de fazer uma distribuição orçamental pelos ministérios que existem, atualmente, em Portugal. 
+                   Terás acesso aos valores do ano anterior, e deves fazer as tuas projeções de acordo com as necessidades que acreditas que cada ministério tem.
+                </p>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <!-- https://online.dgo.gov.pt/DadosCidadao/Orcamento_CG.Entrada.aspx -->
+                        <table id="tabela" class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Ministério</th>
+                                    <th style="text-align: center;">Orçamento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ministerio">Administração Interna</td>
+                                    <td class="valor">2.584,5€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Agricultura e Alimentação</td>
+                                    <td class="valor">1.507,5€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Ambiente e Ação Climática</td>
+                                    <td class="valor">3.551,6€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Ciência Tecnologia e Ensino Superior</td>
+                                    <td class="valor">3.589,2€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Coesão Territorial</td>
+                                    <td class="valor">237,5€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Cultura</td>
+                                    <td class="valor">763,2€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Defesa Nacional</td>
+                                    <td class="valor">2.849,7€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Economia e Mar</td>
+                                    <td class="valor">2.056,3€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Educação</td>
+                                    <td class="valor">7.255,2€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Encargos Gerais do Estado</td>
+                                    <td class="valor">6.506,9€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Finanças</td>
+                                    <td class="valor">12.871,9€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Habitação</td>
+                                    <td class="valor">975,8€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Infraestruturas</td>
+                                    <td class="valor">4.397,7€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Justiça</td>
+                                    <td class="valor">1.961,4€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Negócios Estrangeiros</td>
+                                    <td class="valor">484,8€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Presidência do Conselho de Ministros</td>
+                                    <td class="valor">1.684,3€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Saúde</td>
+                                    <td class="valor">15.656,3€</td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Trabalho, Solidariedade e Segurança Social</td>
+                                    <td class="valor">24.713,1€</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Ministério</th>
+                                    <th style="text-align: center;">Orçamento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ministerio">Administração Interna</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Agricultura e Alimentação</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Ambiente e Ação Climática</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Ciência Tecnologia e Ensino Superior</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Coesão Territorial</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Cultura</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Defesa Nacional</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Economia e Mar</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Educação</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Encargos Gerais do Estado</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Finanças</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Habitação</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Infraestruturas</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Justiça</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Negócios Estrangeiros</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Presidência do Conselho de Ministros</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Saúde</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                                <tr>
+                                    <td class="ministerio">Trabalho, Solidariedade e Segurança Social</td>
+                                    <td class="valor"><input class="form-control" type="number" placeholder="Valor em €"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             
             <!-- Botão para voltar à fase anterior -->
             <button onclick="navigateTo('fase2')">Voltar</button>

@@ -227,8 +227,6 @@ function verificarExpiracao()
     }
 }
 
-
-
 function formulario() 
 {
     gerarPDF()
@@ -342,7 +340,5 @@ function enviarPDFParaServidor(pdfBlob) {
     });
 }
 */
-
-
 
 window.onload = init;

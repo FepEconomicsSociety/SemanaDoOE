@@ -32,7 +32,7 @@
     <header>
         <h1 id="banner">Semana do Orçamento de Estado - FEP Economics Society</h1>
     </header>
-        <section id="fase0" class="fase">
+        <section id="fase0" class="fase hidden">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -285,22 +285,56 @@
             <button class="btn btn-primary" style="width: 70%; margin-top: 2vw; position: relative; left: 50%; transform: translate(-50%, 0%);" onclick="navigateTo('fase2')">Próxima Fase</button>
         </section>
 
-        <section id="fase2" class="fase hidden">
+        <section id="fase2" class="fase">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
                 <h2>Fase 2 - Projeções macroeconómicas para 2025</h2>
-                <p></p>
+                <p>Nesta fase, queremos que faças uma pequena previsão macroeconómica para o ano de 2025, tendo em conta a conjuntura atual, e os valores que têm definido a realidade nos últimos anos.</p>
             </div>
             
-            <!-- Caixa de texto para o usuário inserir suas projeções -->
-            <textarea id="projecaoText" rows="10" cols="50" placeholder="Escreva suas projeções macroeconômicas aqui..."></textarea>
+            <!-- Existia uma textarea chamada projecaoText -->
             
-            <br>PIB geral: <input type="number" class="valorprever"><br>
+            <!-- Enviar estes valores para o pdf -->
+            <div class="container">
+                <div class="row">
+                    <div class="col" style="margin: 0.5vw;">
+                        Crescimento do PIB real: <input type="number" style="margin: 0.5vw;" class="form-control" placeholder="Valor em %">
+                    </div>
+                    <div class="col"  style="margin: 0.5vw;">
+                        Variação do consumo privado: <input type="number" class="form-control" placeholder="Valor em %">
+                    </div>
+                    <div class="col" style="margin: 0.5vw;">
+                        Variação do consumo público: <input type="number" class="form-control" placeholder="Valor em %">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="margin: 0.5vw;">
+                        Variação do investimento (FBCF): <input type="number" class="form-control" placeholder="Valor em %">
+                    </div>
+                    <div class="col" style="margin: 0.5vw;">
+                        Variação das exportações: <input type="number" class="form-control" placeholder="Valor em %">
+                    </div>
+                    <div class="col" style="margin: 0.5vw;">
+                        Variação das importações: <input type="number" class="form-control" placeholder="Valor em %"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="margin: 0.5vw;">
+                        Inflação: <input type="number" class="form-control" placeholder="Valor em %">
+                    </div>
+                    <div class="col" style="margin: 0.5vw;">
+                        Taxa de desemprego: <input type="number" class="form-control" placeholder="Valor em %">
+                    </div>
+                    <div class="col" style="margin: 0.5vw; padding: 1vw;">
+                        
+                        <!-- Botão para voltar à fase anterior -->
+                        <button style="width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase1')">Voltar</button>
+                                    
+                        <!-- Botão para a próxima fase -->
+                        <button style="width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase3')">Próxima Fase</button>
 
-            <!-- Botão para voltar à fase anterior -->
-            <button onclick="navigateTo('fase1')">Voltar</button>
-            
-            <!-- Botão para a próxima fase -->
-            <button onclick="navigateTo('fase3')">Próxima Fase</button>
+                    </div>
+                </div>
+            </div>            
         </section>
 
         <section id="fase3" class="fase hidden">

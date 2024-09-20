@@ -120,7 +120,7 @@ function init()
         inicializarFase(5);
         
         // Verifica se há uma fase armazenada no sessionStorage
-        const faseAtual = sessionStorage.getItem('faseAtual') || 'fase1';  // Se não houver fase armazenada, comece na fase1
+        const faseAtual = sessionStorage.getItem('faseAtual') || 'fase0';  // Se não houver fase armazenada, comece na fase1
         navigateTo(faseAtual);// Navega para a fase armazenada
 
         diferenca_anual();        // Chama a função para calcular a diferença dos orçamentos depois de inicializar as fases

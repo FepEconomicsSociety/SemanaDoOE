@@ -70,18 +70,22 @@ function validarEmail(email)
 // Função para navegação entre as fases
 function navigateTo(faseId) 
 {
+    
     // Esconder todas as fases
     const fases = document.querySelectorAll('.fase');
     fases.forEach(fase => fase.classList.add('hidden'));
 
     // Mostrar a fase selecionada
     document.getElementById(faseId).classList.remove('hidden');
+    
+    // Armazena a fase atual no sessionStorage
+    sessionStorage.setItem('faseAtual', faseId);    
 
     const caixaValorInicial = document.getElementById('caixaValorInicial');
 
     if (faseId === 'fase3' ) {
         caixaValorInicial.style.display = 'block'; // Exibe a caixa
-        diferença_anual();
+        diferenca_anual();
     }
     else if (faseId === 'fase4') {
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
@@ -92,6 +96,7 @@ function navigateTo(faseId)
         document.getElementById('caixaValorInicial5').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
         atualizarTitulo(5);  // Atualiza o valor inicial da fase 4
     }
+
 }
 
 // Inicializa o estado da navegação
@@ -113,7 +118,14 @@ function init()
         document.getElementById('footer').style.display = 'block';        // Exibir o footer após o login
         inicializarFase(4);  // Inicializa a fase 4 e garante que o valor inicial será exibido corretamente
         inicializarFase(5);
-        diferença_anual()
+        
+        // Verifica se há uma fase armazenada no sessionStorage
+        const faseAtual = sessionStorage.getItem('faseAtual') || 'fase1';  // Se não houver fase armazenada, comece na fase1
+        navigateTo(faseAtual);// Navega para a fase armazenada
+
+        diferenca_anual();        // Chama a função para calcular a diferença dos orçamentos depois de inicializar as fases
+        
+         
     } else {
         // Caso contrário, exibe a página de senha
         document.getElementById('senhaPage').style.display = 'block';
@@ -124,7 +136,7 @@ function init()
 
 }
 
-function diferença_anual()
+/*function diferença_anual()
 {
     const numeroInicialElemento = document.getElementById('numeroInicial');
 
@@ -132,10 +144,7 @@ function diferença_anual()
     const valorInicial = 93646.9;
     let totalOrcamentos = 0;
 
-    // Recalcula o total dos orçamentos, somando os valores mais recentes de cada medida
-   /* medidas.forEach(medida => {
-        totalOrcamentos += parseFloat(medida.orcamento) || 0;
-    });*/
+
 
     // Subtrai o total dos orçamentos do valor inicial
     const resultado = totalOrcamentos - valorInicial;
@@ -146,6 +155,41 @@ function diferença_anual()
     // Salva o novo valor no sessionStorage
     sessionStorage.setItem('valorInicial', valorInicial);  // Mantém o valor inicial intacto
 
+}*/
+
+function diferenca_anual() {
+    const numeroInicialElemento = document.getElementById('numeroInicial');
+
+    // Variável para armazenar a soma dos valores já fornecidos (da primeira tabela)
+   /* let totalOrcamentosExistentes = 0;*/
+
+    // Variável para armazenar a soma dos valores inseridos nos inputs (da segunda tabela)
+    let totalOrcamentosFornecidos = 0;
+
+    // Obter todos os valores da primeira tabela (já fornecidos)
+   /* const valoresExistentes = document.querySelectorAll('.valor');  // Pega todas as células com a classe "valor"
+    valoresExistentes.forEach(valor => {
+        // Remove caracteres não numéricos (exceto ponto e vírgula) e converte para float
+        const valorNumerico = parseFloat(valor.textContent.replace(/[^\d,.-]/g, '').replace(',', '.')) || 0;
+        totalOrcamentosExistentes += valorNumerico;  // Soma o valor existente
+    });
+*/
+    // IDs dos inputs que possuem os novos valores fornecidos
+    const inputIds = ['admint', 'agral', 'ambal', 'tecs', 'cterr', 'cult', 'dn', 'ecm', 'educ', 'encge', 
+                      'fin', 'hab', 'infa', 'just', 'negest', 'precom', 'saude', 'tsss'];
+
+    // Somar os valores dos inputs fornecidos
+    inputIds.forEach(id => {
+        const inputElement = document.getElementById(id);
+        const valorInput = parseFloat(inputElement.value) || 0;  // Se o valor não for inserido, assume 0
+        totalOrcamentosFornecidos += valorInput;  // Soma o valor fornecido
+    });
+
+    // Calcula a diferença entre a soma dos orçamentos fornecidos e os orçamentos existentes
+    const diferenca = totalOrcamentosFornecidos - 93646.9;
+
+    // Atualiza o valor da diferença na interface (elemento 'numeroInicial')
+    numeroInicialElemento.textContent = diferenca.toFixed(2);
 }
 
 // Função para atualizar o título ao subtrair o número inserido do número inicial

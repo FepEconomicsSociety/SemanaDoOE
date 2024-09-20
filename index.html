@@ -34,10 +34,10 @@
         <h1 id="banner">Semana do Orçamento de Estado - FEP Economics Society</h1>
     </header>
     <div class="caixa-valor-inicial" id="caixaValorInicial" style="display: none;">
-        Valor Inicial: <span id="numeroInicial"></span>
+        Diferença anual: <span id="numeroInicial"></span>
     </div>
     <div class="main-content">
-        <section id="fase0" class="fase ">
+        <section id="fase0" class="fase hidden">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -94,7 +94,7 @@
             </div>
         </section>
 
-        <section id="fase1" class="fase hidden">
+        <section id="fase1" class="fase">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
                 <h2>Fase 1 - Estatísticas 2023</h2>
                 <p>Aqui terás acesso a algumas estatísticas macroeconómicos e os seus valores em anos anteriores. Podes tirar notas, mas deves consultar muitas outras estatísticas em sites de confiança.</p>
@@ -104,7 +104,7 @@
         
                 <!-- Gráficos (imagens) -->
                     <div class="row" style="margin-top: 3vw;">
-                        <div class="col">
+                        <div class="col-6">
                             <h5>Crescimento do PIB (%)</h5>
                             <canvas id="myChartPIB"></canvas>
                             <!-- https://www.pordata.pt/pt/estatisticas/economia/crescimento-e-produtividade/taxa-de-crescimento-real-do-pib -->
@@ -136,10 +136,8 @@
                             });
                             </script>
                         </div>
-                    </div>
 
-                    <div class="row" style="margin-top: 3vw;">
-                        <div class="col">
+                        <div class="col-6">
                             <h5>Dívida pública (% do PIB)</h5>
                             <canvas id="myChartDivida"></canvas>
                             <!-- https://www.pordata.pt/pt/estatisticas/contas-publicas/divida-e-defice/divida-publica-em-do-pib -->
@@ -174,7 +172,7 @@
                     </div>
 
                     <div class="row" style="margin-top: 3vw;">
-                        <div class="col">
+                        <div class="col-6">
                             <h5>Taxa de desemprego (%)</h5>
                             <canvas id="myChartDesemprego"></canvas>
                             <!-- https://bpstat.bportugal.pt/dados/series?mode=graphic&svid=bpNXAAAAAAA.!l!B!C!10!!!False!12!:1htU5U:uXqymudu6qRPf7U5wshT2GiSXP0&series=5739374 -->
@@ -206,10 +204,9 @@
                             });
                             </script>
                         </div>
-                    </div>
+                    
 
-                    <div class="row" style="margin-top: 3vw;">
-                        <div class="col">
+                        <div class="col-6">
                             <h5>Exportações - Importações (€)</h5>
                             <canvas id="myChartExpImp"></canvas>
 
@@ -249,6 +246,14 @@
                             });
                             </script>
                         </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 3vw;">
+                        
+                    </div>
+
+                    <div class="row" style="margin-top: 3vw;">
+                        
                     </div>
 
                     <div class="row" style="margin-top: 3vw;">
@@ -359,7 +364,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Ministério</th>
-                                    <th style="text-align: center;">Orçamento</th>
+                                    <th style="text-align: center;">Orçamento (M€)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -443,7 +448,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Ministério</th>
-                                    <th style="text-align: center;">Orçamento</th>
+                                    <th style="text-align: center;">Orçamento (M€)</th>
                                 </tr>
                             </thead>
                             <tbody>

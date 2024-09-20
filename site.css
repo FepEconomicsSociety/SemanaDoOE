@@ -234,6 +234,16 @@ input[type="number"] {
     text-align: center;
 }
 
+tr{
+    height: 64.8px;
+}
+
+.table td{
+    vertical-align: middle !important;
+}
+.table th{
+    vertical-align: middle !important;
+}
 
 /*Caixa +ara exibir o valor inicial nas fases 3, 4 e 5*/
 .caixa-valor-inicial {
@@ -250,3 +260,4 @@ input[type="number"] {
     font-size: 1.2em;
     width: fit-content;
 }
+

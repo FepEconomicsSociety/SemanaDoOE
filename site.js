@@ -123,7 +123,7 @@ function atualizarTitulo()
     const numeroInicialElemento = document.getElementById('numeroInicial');
 
     // Define o valor inicial (100) ou o valor armazenado no sessionStorage
-    const valorInicial = parseFloat(sessionStorage.getItem('valorInicial')) || 100;
+    const valorInicial = 93646.9;
     let totalOrcamentos = 0;
 
     // Recalcula o total dos orçamentos, somando os valores mais recentes de cada medida
@@ -132,7 +132,7 @@ function atualizarTitulo()
     });
 
     // Subtrai o total dos orçamentos do valor inicial
-    const resultado = valorInicial - totalOrcamentos;
+    const resultado = totalOrcamentos - valorInicial;
 
     // Atualiza o valor no título
     numeroInicialElemento.textContent = resultado;

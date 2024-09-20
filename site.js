@@ -77,14 +77,20 @@ function navigateTo(faseId)
     // Mostrar a fase selecionada
     document.getElementById(faseId).classList.remove('hidden');
 
-    // Exibir a caixa de valor inicial apenas nas fases 3, 4 e 5
     const caixaValorInicial = document.getElementById('caixaValorInicial');
-    if (faseId === 'fase3' || faseId === 'fase4' || faseId === 'fase5') {
+
+    if (faseId === 'fase3' ) {
         caixaValorInicial.style.display = 'block'; // Exibe a caixa
-    } 
-    else 
+        diferença_anual();
+    }
+    else if (faseId === 'fase4') {
+        document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
+        atualizarTitulo(4);  // Atualiza o valor inicial da fase 4
+    }
+    else if (faseId === 'fase5')
     {
-        caixaValorInicial.style.display = 'none'; // Oculta a caixa
+        document.getElementById('caixaValorInicial5').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
+        atualizarTitulo(5);  // Atualiza o valor inicial da fase 4
     }
 }
 
@@ -93,8 +99,7 @@ function init()
 {
     verificarExpiracao();  // Verifica se os dados devem ser expirados
     restaurarDadosInput();
-    inicializarFase4();
-
+    //inicializarFase4();
     salvarDadosInput();
 
 
@@ -105,8 +110,10 @@ function init()
         // Se já estiver autenticado, mostra o conteúdo do site
         document.getElementById('senhaPage').style.display = 'none';
         document.getElementById('conteudoSite').style.display = 'block';
-        // Exibir o footer após o login
-        document.getElementById('footer').style.display = 'block';
+        document.getElementById('footer').style.display = 'block';        // Exibir o footer após o login
+        inicializarFase(4);  // Inicializa a fase 4 e garante que o valor inicial será exibido corretamente
+        inicializarFase(5);
+        diferença_anual()
     } else {
         // Caso contrário, exibe a página de senha
         document.getElementById('senhaPage').style.display = 'block';
@@ -117,8 +124,7 @@ function init()
 
 }
 
-// Função para atualizar o título ao subtrair o número inserido do número inicial
-function atualizarTitulo() 
+function diferença_anual()
 {
     const numeroInicialElemento = document.getElementById('numeroInicial');
 
@@ -127,37 +133,58 @@ function atualizarTitulo()
     let totalOrcamentos = 0;
 
     // Recalcula o total dos orçamentos, somando os valores mais recentes de cada medida
-    medidas.forEach(medida => {
+   /* medidas.forEach(medida => {
         totalOrcamentos += parseFloat(medida.orcamento) || 0;
-    });
+    });*/
 
     // Subtrai o total dos orçamentos do valor inicial
     const resultado = totalOrcamentos - valorInicial;
 
     // Atualiza o valor no título
-    numeroInicialElemento.textContent = resultado;
+    numeroInicialElemento.textContent = resultado.toFixed(2);
 
     // Salva o novo valor no sessionStorage
     sessionStorage.setItem('valorInicial', valorInicial);  // Mantém o valor inicial intacto
 
+}
 
-   /* const numeroInicialElemento = document.getElementById('numeroInicial');
-    const numeroInput = document.getElementById('numeroInput').value;
+// Função para atualizar o título ao subtrair o número inserido do número inicial
+function atualizarTitulo(fase) 
+{
+    let orçamento = 0;
+    
+    if(fase == 4)
+    {
+        orçamento = 100;
 
-    //const numeroInicial = 100; // Valor inicial definido no título
-    const numeroInicial = parseFloat(sessionStorage .getItem('valorInicial')) || 100;
-    const numeroSubtrair = parseFloat(numeroInput) || 0; // Converte o input para número ou 0 se vazio
+    }else if(fase == 5)
+    {
+        orçamento = 500;
 
-    // Subtrai o número inserido do número inicial
-    const resultado = numeroInicial + numeroSubtrair;
+    }
+
+    const numeroInicialElemento = document.getElementById(`numeroInicial_${fase}`);
+
+    // Define o valor inicial (100) ou o valor armazenado no sessionStorage
+    const valorInicial = parseFloat(sessionStorage.getItem(`valorInicial_${fase}`)) || orçamento;
+    let totalOrcamentos = 0;
+
+    // Recalcula o total dos orçamentos, somando os valores mais recentes de cada medida
+    fases[fase].medidas.forEach(medida => {
+        totalOrcamentos += parseFloat(medida.orcamento) || 0;
+    });
+
+    // Subtrai o total dos orçamentos do valor inicial
+    const resultado = valorInicial - totalOrcamentos;
 
     // Atualiza o valor no título
-    numeroInicialElemento.textContent = resultado;
+    numeroInicialElemento.textContent = resultado.toFixed(2);
+
+    // Salva o novo valor no sessionStorage
+    sessionStorage.setItem(`valorInicial_${fase}`, valorInicial);  // Mantém o valor inicial intacto
 
 
-    // Salva o novo valor e o valor inserido no sessionStorage 
-    sessionStorage .setItem('valorInicial', novoValor);
-    sessionStorage .setItem('numeroInput', numeroInput);*/
+
 }
 
 // Função para salvar o valor de qualquer campo de input no sessionStorage 

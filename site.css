@@ -34,9 +34,7 @@ header {
 }
 
 #banner {
-    height: 5vw;  /* Ajusta a altura para ser responsiva com a tela */
-    position: relative;
-    top: 1vw;
+    height: 5vw;  /* Ajusta a altura para ser responsiva com a tela */  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -261,3 +259,11 @@ tr{
     width: fit-content;
 }
 
+.caixagp{
+    border: 2px #338dff solid;
+    border-radius: 15px;
+    padding: 1vw 1vw 1vw 1vw;
+    box-shadow: 2px 2px #5285ec;
+    text-align: center;
+    margin: 1vw;
+}

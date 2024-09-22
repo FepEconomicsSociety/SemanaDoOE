@@ -136,6 +136,12 @@ function init()
 
 }
 
+function novamedida(){
+    document.getElementById("medidanova").style.display = "block";
+    document.getElementById("medidasA").style.display = "none";
+
+}
+
 /*function diferença_anual()
 {
     const numeroInicialElemento = document.getElementById('numeroInicial');

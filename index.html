@@ -35,7 +35,7 @@
     </header>
  
     <div class="main-content">
-        <section id="fase0" class="fase ">
+        <section id="fase0" class="fase hidden">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -707,26 +707,81 @@
             <button onclick="navigateTo('fase4')">Próxima Fase</button>
         </section>
 
-        <section id="fase4" class="fase hidden">
+        <section id="fase4" class="fase">
             <h2>Fase 4 - Ministério da saúde</h2>
         
             <div class="caixa-valor-inicial" id="caixaValorInicial4" style="display: none;">
                 Valor Inicial: <span id="numeroInicial_4"></span>
             </div>
 
-        
-            <p>Crie as suas medidas:</p>
-        
-            <!-- Container onde as abas serão adicionadas -->
-            <div id="abasContainer4"></div>
-        
-            <!-- Container onde as medidas serão exibidas -->
-            <div id="medidasContainer4"></div>
-        
-            <!-- Botão para adicionar uma nova medida -->
-            <br>
-            <button onclick="criarMedida(4)">Adicionar Nova Medida</button>
+        <!--
             
+        -->
+
+
+            <div class="container" id="medidasA">
+                <div class="row" style="margin-top: 3vw;">
+                
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="border: none;"><h4>Medidas atuais</h4></th>
+                                <th style="border: none;"></th>
+                                <th style="border: none; text-align: right;"><button type="button" onclick="novamedida()" class="btn btn-success">Nova medida</button></th>
+                            </tr>
+                            <tr>
+                                <th>Título</th>
+                                <th style="text-align: center;">Orçamento</th>
+                                <th style="text-align: center;">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Contratação de novos médicos</td>
+                                <td style="text-align: center;">400M €</td>
+                                <td style="text-align: center;"><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-outline-primary">Detalhes</button></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Esta parte deve aparecer quando se clicar no botão de nova medida -->
+            <!-- Dá para estilizar estas coisas out em mesmo de ser feito por js? -->
+
+            <div id="medidanova" class="container" style="margin-top: 3vw; display: none;">
+                    <!-- Container onde as abas serão adicionadas -->
+                    <div id="abasContainer4"></div>
+                
+                    <!-- Container onde as medidas serão exibidas -->
+                    <div id="medidasContainer4"></div>
+                
+                    <!-- Botão para adicionar uma nova medida -->
+                    <br>
+                    <button onclick="criarMedida(4)">Adicionar Nova Medida</button>
+                
+            </div>
+
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Modal</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Aqui devem aparecer os detalhes de cada medida.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+
             <!-- Botão para voltar à fase anterior -->
             <button onclick="navigateTo('fase3')">Voltar</button>
             

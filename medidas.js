@@ -74,28 +74,28 @@ function atualizarInterfaceMedidas(fase) {
 
     // Rótulo e campo de título
     const labelTitulo = document.createElement("p");
-    labelTitulo.textContent = "Insira o título:";
+    labelTitulo.textContent = "Diga-nos o título da sua medida";
     medidasContainer.appendChild(labelTitulo);
 
     const titulo = document.createElement("textarea");
     titulo.id = `titulo_${fase}`;
     titulo.rows = 1;
     titulo.cols = 50;
-    titulo.placeholder = "Escreva o título da sua medida aqui...";
+    titulo.placeholder = "Insira o título";
     titulo.value = medida.titulo;
     titulo.oninput = () => salvarMedidaAtual(fase);  // Associa a função oninput para salvar automaticamente
     medidasContainer.appendChild(titulo);
 
     // Rótulo e campo de explicação
     const labelExplicacao = document.createElement("p");
-    labelExplicacao.textContent = "Insira a explicação:";
+    labelExplicacao.textContent = "Deverá explicar-nos o objetivo da medida e como chegou ao valor orçado";
     medidasContainer.appendChild(labelExplicacao);
 
     const explicacao = document.createElement("textarea");
     explicacao.id = `explicacao_${fase}`;
     explicacao.rows = 10;
     explicacao.cols = 50;
-    explicacao.placeholder = "Escreva a explicação da medida aqui...";
+    explicacao.placeholder = "Escreva a explicação aqui";
     explicacao.value = medida.explicacao;
     explicacao.oninput = () => salvarMedidaAtual(fase);  // Associa a função oninput para salvar automaticamente
     medidasContainer.appendChild(explicacao);

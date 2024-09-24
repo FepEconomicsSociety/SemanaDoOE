@@ -303,9 +303,18 @@ function gerarPDF() {
     return new Promise((resolve, reject) => {
         const textoProjecao = document.getElementById('projecaoText');  // Seleciona o textarea correto
         const nomeGrupo = document.getElementById('nome').value;  // Captura o nome do grupo
+        // Verifica se o nome do grupo está vazio
+        if (!nomeGrupo.trim()) {
+            alert("Por favor, insira o nome do grupo.");
+            resolve(false);  // Retorna false se o nome do grupo estiver vazio
+            navigateTo("fase0");
+            return;
+        }
 
-        if (!textoProjecao.value.trim() || !nomeGrupo.trim()) {
-            resolve(false);  // Retorna false se o campo de projeção ou o nome do grupo estiver vazio
+        // Verifica se o campo de projeção está vazio
+        if (!textoProjecao.value.trim()) {
+            alert("Por favor, insira a projeção macroeconômica.");
+            resolve(false);  // Retorna false se o campo de projeção estiver vazio
             return;
         }
 

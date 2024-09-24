@@ -81,11 +81,13 @@ function criarMedida(fase) {
 
 
 function adicionarMedidaATabela(fase) {
-    fases[fase].medidas.forEach(medida => {
-    
-    // Identifica o tbody onde as novas medidas serão inseridas
-    const tabela = document.getElementById("medidasTabela");
+    // Identifica o tbody onde as medidas serão inseridas
+    const tabela = document.getElementById("medidasTabela").querySelector("tbody");
 
+    // Limpa apenas o corpo da tabela (as medidas), mantendo o cabeçalho intacto
+    tabela.innerHTML = "";  // Limpa apenas o tbody onde as medidas estão
+
+    fases[fase].medidas.forEach(medida => {
     // Cria uma nova linha (tr)
     const novaLinha = document.createElement("tr");
     

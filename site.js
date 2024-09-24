@@ -91,6 +91,7 @@ function navigateTo(faseId)
     }
     else if (faseId === 'fase4') {
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
+        inicializarFase(4);
         atualizarTitulo(4);  // Atualiza o valor inicial da fase 4
     }
     else if (faseId === 'fase5')
@@ -313,7 +314,7 @@ function gerarPDF() {
 
         // Verifica se o campo de projeção está vazio
         if (!textoProjecao.value.trim()) {
-            alert("Por favor, insira a projeção macroeconômica.");
+            alert("Por favor, insira a um comentário extra.");
             resolve(false);  // Retorna false se o campo de projeção estiver vazio
             return;
         }

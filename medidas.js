@@ -79,7 +79,7 @@ function criarMedida(fase) {
        adicionarMedidaATabela(fase);
 }
 
-
+// A diciona as medidas a tabela
 function adicionarMedidaATabela(fase) {
     // Identifica o tbody onde as medidas serão inseridas
     const tabela = document.getElementById("medidasTabela").querySelector("tbody");
@@ -135,10 +135,32 @@ function adicionarMedidaATabela(fase) {
     });
 }
 
+function carregarMedidasPredefinidas(fase) {
+    // Identifica o tbody onde as medidas predefinidas estão
+    const tabela = document.getElementById("medidasTabela").querySelector("tbody");
+
+    // Itera pelas linhas da tabela e adiciona as medidas à estrutura de medidas
+    Array.from(tabela.querySelectorAll("tr")).forEach(linha => {
+        const titulo = linha.querySelector("td:nth-child(1)").textContent.trim();
+        const orcamento = linha.querySelector("td:nth-child(2)").textContent.replace('M €', '').trim();
+        console.log(titulo);
+        console.log(orcamento);
+
+        // Adiciona a medida predefinida à estrutura de medidas
+        fases[fase].medidas.push({
+            titulo: titulo,
+            explicacao: "Medida já existente",  // Pode adicionar mais informações se necessário
+            orcamento: parseFloat(orcamento)
+        });
+    });
+    salvarMedidas(fase);
+
+}
 
 // Função para salvar as medidas no sessionStorage
 function salvarMedidas(fase) {
     sessionStorage.setItem(`fases_${fase}`, JSON.stringify(fases[fase]));  // Salva o estado da fase
+    console.log(fases[fase]);
 }
 
 // Função para atualizar a interface e mostrar a medida ativa (NAO ESTA A SER USADA)
@@ -217,6 +239,8 @@ function atualizarAbas(fase) {
 // Função para restaurar as medidas do sessionStorage
 function restaurarMedidas(fase) {
     const faseSalva  = sessionStorage.getItem(`fases_${fase}`);
+    console.log(faseSalva);  // Debug: Verifica se as medidas estão sendo salvas corretamente
+
     if (faseSalva) {
         fases[fase] = JSON.parse(faseSalva);  // Restaura as medidas e medida ativa
     } else {
@@ -263,21 +287,18 @@ function apagarMedida(fase, index) {
 // Função para inicializar a fase 4 com a primeira medida
 function inicializarFase(fase) {
     // Exibe a caixa de valor inicial da fase 4
-    if (fase === 4) {
+    if (fase === 4) 
+    {
+        restaurarMedidas(fase);  // Restaura as medidas ao carregar a página
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial
+        if(fases[fase].medidas.length === 0)
+        {
+            carregarMedidasPredefinidas(4);
+        }
     }else if(fase === 5)
     {
         document.getElementById('caixaValorInicial5').style.display = 'block';  // Exibe a caixa de valor inicial
     }
-
-    restaurarMedidas(fase);  // Restaura as medidas ao carregar a página
     adicionarMedidaATabela(fase);
-
-    /*if (fases[fase].medidas.length === 0) {
-        criarMedida(fase);  // Cria a primeira medida automaticamente se não houver nenhuma
-    }*/
-
-    //atualizarAbas(fase);  // Atualiza as abas com base nas medidas restauradas
-    //atualizarInterfaceMedidas(fase);  // Exibe a medida ativa
     atualizarTitulo(fase);  // Atualiza o valor inicial
 }

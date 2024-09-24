@@ -195,6 +195,44 @@ function diferenca_anual() {
     numeroInicialElemento.textContent = diferenca.toFixed(2);
 }
 
+function finalizarFase3() {
+    // Seleciona todos os inputs dentro da seção "fase3"
+    const inputs = document.querySelectorAll('#fase3 input[type="number"]');
+    
+    // Verifica se todos os inputs têm um valor
+    let todosPreenchidos = true; // Inicializa como verdadeiro
+
+    for (let input of inputs) {
+        if (input.value === '' || input.value === null) {
+            todosPreenchidos = false; // Define como falso se algum campo estiver vazio
+            break; // Sai do loop se encontrar um campo vazio
+        }
+    }
+
+    if (todosPreenchidos) {
+        // Se todos os dados estiverem inseridos, permite a navegação
+        navigateTo('fase4'); // Altere para a próxima fase que deseja
+    } else {
+        // Se não, exibe uma mensagem de aviso
+        alert("Por favor, preencha todos os campos antes de prosseguir.");
+    }
+}
+
+/*function finalizarFase3() {
+    
+    const orcamentoFase3 = parseFloat(document.getElementById('saude').value);
+    if(orcamentoFase3 === 0)
+    {
+        alert("insira o valor para a saude");
+        return;
+    }
+    else
+    {
+        sessionStorage.setItem('orcamentoFase3', orcamentoFase3); // Armazena o valor no sessionStorage
+        navigateTo('fase4');
+    }
+    
+}*/
 // Função para atualizar o título ao subtrair o número inserido do número inicial
 function atualizarTitulo(fase, previsualizar = false) 
 {
@@ -202,7 +240,7 @@ function atualizarTitulo(fase, previsualizar = false)
     
     if(fase == 4)
     {
-        orçamento = 100;
+        orçamento = parseFloat(document.getElementById("saude").value) || 0;
 
     }else if(fase == 5)
     {

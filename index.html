@@ -503,10 +503,10 @@
                     <div class="col" style="margin: 0.5vw; padding: 1vw;">
                         
                         <!-- Botão para voltar à fase anterior -->
-                        <button style="width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase1')">Voltar</button>
+                        <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase1')">Voltar</button>
                                     
                         <!-- Botão para a próxima fase -->
-                        <button style="width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase3')">Próxima Fase</button>
+                        <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase3')">Próxima Fase</button>
 
                     </div>
                 </div>
@@ -701,10 +701,10 @@
             </div>
             
             <!-- Botão para voltar à fase anterior -->
-            <button onclick="navigateTo('fase2')">Voltar</button>
+            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase2')">Voltar</button>
             
             <!-- Botão para a próxima fase -->
-            <button onclick="navigateTo('fase4')">Próxima Fase</button>
+            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="finalizarFase3()">Próxima Fase</button>
         </section>
 
         <section id="fase4" class="fase hidden">
@@ -799,11 +799,11 @@
                 </div>
               </div>
 
-            <!-- Botão para voltar à fase anterior -->
-            <button onclick="navigateTo('fase3')">Voltar</button>
+            <!-- Botão para voltar à fase anterior TEMPORARIO, COMENTAR ESTE BOTAO PARA NAA PERMITIR VOLTAR A FASE 3! -->
+            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase3')">Voltar</button>
             
             <!-- Botão para a próxima fase -->
-            <button onclick="navigateTo('fase5')">Próxima Fase</button>
+            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase5')">Próxima Fase</button>
         </section>
         
         <section id="fase5" class="fase hidden">
@@ -833,13 +833,13 @@
             <p> pronto:</p>
             
             <!-- Botão para voltar à fase anterior -->
-            <button onclick="navigateTo('fase4')">Voltar</button>
+            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase4')">Voltar</button>
             
             <!-- O botão para gerar o PDF -->
-<button id="gerarPdfBtn" onclick="formulario()">Gerar PDF</button>
+<button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" id="gerarPdfBtn" onclick="formulario()">Gerar PDF</button>
 
 <!-- Botão para confirmar que o PDF foi salvo -->
-<button id="confirmarBtn" style="display:none;" onclick="confirmarEnvio()">Finalizar</button>
+<button  id="confirmarBtn" style="display:none;" onclick="confirmarEnvio()">Finalizar</button >
         
             <!-- Botão para a próxima fase -->
             <!--<button onclick="navigateTo('fase')">Próxima Fase</button>-->

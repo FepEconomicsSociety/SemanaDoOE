@@ -53,7 +53,7 @@ function criarMedida(fase) {
     
         if(fase == 4)
         {
-            orçamento = 100;
+            orçamento = parseFloat(document.getElementById("saude").value) || 0;
     
         }else if(fase == 5)
         {

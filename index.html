@@ -35,7 +35,7 @@
     </header>
  
     <div class="main-content">
-        <section id="fase0" class="fase hidden">
+        <section id="fase0" class="fase">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -707,17 +707,14 @@
             <button onclick="navigateTo('fase4')">Próxima Fase</button>
         </section>
 
-        <section id="fase4" class="fase">
+        <section id="fase4" class="fase hidden">
             <h2>Fase 4 - Ministério da saúde</h2>
         
             <div class="caixa-valor-inicial" id="caixaValorInicial4" style="display: none;">
                 Valor Inicial: <span id="numeroInicial_4"></span>
             </div>
 
-        <!--
             
-        -->
-
 
             <div class="container" id="medidasA">
                 <div class="row" style="margin-top: 3vw;">
@@ -727,7 +724,7 @@
                             <tr>
                                 <th style="border: none;"><h4>Medidas atuais</h4></th>
                                 <th style="border: none;"></th>
-                                <th style="border: none; text-align: right;"><button type="button" onclick="novamedida()" class="btn btn-success">Nova medida</button></th>
+                                <th style="border: none; text-align: right;"><button type="button" onclick="novamedida(4)" class="btn btn-success">Nova medida</button></th>
                             </tr>
                             <tr>
                                 <th>Título</th>
@@ -751,16 +748,30 @@
             <!-- Dá para estilizar estas coisas out em mesmo de ser feito por js? -->
 
             <div id="medidanova" class="container" style="margin-top: 3vw; display: none;">
-                    <!-- Container onde as abas serão adicionadas -->
-                    <div id="abasContainer4"></div>
-                
                     <!-- Container onde as medidas serão exibidas -->
                     <div id="medidasContainer4"></div>
-                
-                    <!-- Botão para adicionar uma nova medida -->
                     <br>
+
+                    <p>Diga-nos o título da sua medida:</p>
+                    <textarea class="titulo" id="titulo_4" rows="1" cols="50" placeholder="Insira o título aqui ..."></textarea>
+
+                    <br>
+
+                    <p>Deverá explicar-nos o objetivo da medida e como chegou ao valor orçado:</p>
+                    <textarea class="explicacao" id="explicacao_4" rows="10" cols="50" placeholder="Escreva a explicação aqui ..."></textarea>
+            
+                    <br>
+
+                    <p>Insira o orçamento:</p>
+                    <input type="number" class= "orcamento" id="orcamento_4" rows="1" cols="50" placeholder="Digite o orçamento qui..." oninput="atualizarTitulo(4,true)"></input>
+
+                    <br>
+                    <br>
+                    <!-- Botão para adicionar uma nova medida -->
                     <button onclick="criarMedida(4)">Adicionar Nova Medida</button>
-                
+    
+                    <button onclick="cancelar(4)">Cancelar</button>
+
             </div>
 
             <div class="modal fade" id="myModal" role="dialog">

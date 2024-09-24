@@ -1,3 +1,5 @@
+let valorInicialTemporario = {}; // Para armazenar o valor inicial temporário para cada fase
+
 // Função para verificar a senha
 function verificarSenha() 
 {
@@ -117,7 +119,7 @@ function init()
         document.getElementById('conteudoSite').style.display = 'block';
         document.getElementById('footer').style.display = 'block';        // Exibir o footer após o login
         inicializarFase(4);  // Inicializa a fase 4 e garante que o valor inicial será exibido corretamente
-        inicializarFase(5);
+        //inicializarFase(5);
         
         // Verifica se há uma fase armazenada no sessionStorage
         const faseAtual = sessionStorage.getItem('faseAtual') || 'fase0';  // Se não houver fase armazenada, comece na fase1
@@ -133,12 +135,6 @@ function init()
     }
     
     //restaurarValores();
-
-}
-
-function novamedida(){
-    document.getElementById("medidanova").style.display = "block";
-    document.getElementById("medidasA").style.display = "none";
 
 }
 
@@ -199,7 +195,7 @@ function diferenca_anual() {
 }
 
 // Função para atualizar o título ao subtrair o número inserido do número inicial
-function atualizarTitulo(fase) 
+function atualizarTitulo(fase, previsualizar = false) 
 {
     let orçamento = 0;
     
@@ -214,27 +210,23 @@ function atualizarTitulo(fase)
     }
 
     const numeroInicialElemento = document.getElementById(`numeroInicial_${fase}`);
+    const orcamentoInput = parseFloat(document.getElementById(`orcamento_${fase}`).value) || 0;
 
-    // Define o valor inicial (100) ou o valor armazenado no sessionStorage
-    const valorInicial = parseFloat(sessionStorage.getItem(`valorInicial_${fase}`)) || orçamento;
-    let totalOrcamentos = 0;
+    // Recupera o valor inicial base (armazenado ou default 100)
+    let valorInicial = document.getElementById(`numeroInicial_${fase}`).value || orçamento;
 
-    // Recalcula o total dos orçamentos, somando os valores mais recentes de cada medida
+    // Recupera todas as medidas já adicionadas e subtrai seus orçamentos do valor inicial
     fases[fase].medidas.forEach(medida => {
-        totalOrcamentos += parseFloat(medida.orcamento) || 0;
+        valorInicial -= parseFloat(medida.orcamento) || 0;
     });
 
-    // Subtrai o total dos orçamentos do valor inicial
-    const resultado = valorInicial - totalOrcamentos;
+    // Se for pré-visualização, subtrai o valor do orçamento que está sendo digitado
+    if (previsualizar) {
+        valorInicial -= orcamentoInput;
+    }
 
-    // Atualiza o valor no título
-    numeroInicialElemento.textContent = resultado.toFixed(2);
-
-    // Salva o novo valor no sessionStorage
-    sessionStorage.setItem(`valorInicial_${fase}`, valorInicial);  // Mantém o valor inicial intacto
-
-
-
+    // Atualiza o valor exibido na interface
+    numeroInicialElemento.textContent = valorInicial.toFixed(2);
 }
 
 // Função para salvar o valor de qualquer campo de input no sessionStorage 
@@ -264,23 +256,6 @@ function restaurarDadosInput()
             input.value = valorSalvo;  // Restaura o valor salvo
         }
     });
-}
-
-// Função para restaurar os valores do sessionStorage  ao carregar a página
-function restaurarValores() 
-{
-    const numeroInicialElemento = document.getElementById('numeroInicial');
-    const numeroInputElemento = document.getElementById('numeroInput');
-
-    // Restaura o valor inicial e o número inserido do sessionStorage 
-    const valorInicialSalvo = sessionStorage .getItem('valorInicial') || 100;
-    const numeroInputSalvo = sessionStorage .getItem('numeroInput') || 0;
-
-    const resultado =  parseFloat(numeroInputSalvo) +  parseFloat(valorInicialSalvo);
-
-    // Atualiza o valor inicial e o campo de entrada
-    numeroInicialElemento.textContent = parseFloat(resultado);
-    numeroInputElemento.value = numeroInputSalvo;
 }
 
 function verificarExpiracao() 

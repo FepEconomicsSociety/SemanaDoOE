@@ -103,9 +103,10 @@ footer a:hover {
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
 }
 
+/* MEDIDAS */
 .titulo 
 {
-    min-width: 300px;  /* Tamanho mínimo da largura */
+    min-width: 500px;  /* Tamanho mínimo da largura */
     min-height: 30px; /* Tamanho mínimo da altura */
     max-width: 500px;  /* Tamanho mínimo da largura */
     max-height:  30px; /* Tamanho mínimo da altura */
@@ -115,13 +116,20 @@ footer a:hover {
 
 .explicacao 
 {
-    min-width: 300px;  /* Tamanho mínimo da largura */
+    min-width: 500px;  /* Tamanho mínimo da largura */
     min-height: 150px; /* Tamanho mínimo da altura */
-    max-width: 800px;  /* Tamanho mínimo da largura */
+    max-width: 500px;  /* Tamanho mínimo da largura */
     max-height:  400px; /* Tamanho mínimo da altura */
     resize: both;      /* Permite redimensionar apenas para aumentar */
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
 }
+
+.orcamento
+{
+
+}
+
+/*------------------------------------------------------------------------------------------*/
 
 button 
 {
@@ -176,7 +184,6 @@ button
     flex: 1 1 200px;  /* Define que cada gráfico tenha ao menos 200px e ocupe o espaço disponível */
     max-width: 700px;  /* Limite máximo da largura de cada gráfico */
 }
-
 /*------------------------------------------------------------------------------------------*/
 
 #medidaTabs button 
@@ -184,7 +191,6 @@ button
     margin-right: 10px;
     margin-bottom: 10px; 
 }
-
 
 #confirmarBtn
 {
@@ -198,7 +204,6 @@ button
 {
     margin-top: 20px; /* Ajuste o valor conforme necessário para o espaçamento desejado */
 }
-
 
 #fase0{
     padding: 2vw;
@@ -239,11 +244,12 @@ tr{
 .table td{
     vertical-align: middle !important;
 }
+
 .table th{
     vertical-align: middle !important;
 }
 
-/*Caixa +ara exibir o valor inicial nas fases 3, 4 e 5*/
+/*Caixa para exibir o valor inicial nas fases 3, 4 e 5*/
 .caixa-valor-inicial {
     position: absolute;
     top: 100px; /* Ajusta para logo abaixo do banner */
@@ -273,3 +279,6 @@ tr{
     text-align: justify;
     font-weight: normal;
 }
+
+
+

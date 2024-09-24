@@ -75,15 +75,71 @@ function criarMedida(fase) {
        // Esconde o formulário de nova medida e volta para a lista de medidas
        document.getElementById("medidanova").style.display = "none";
        document.getElementById("medidasA").style.display = "block";
-   
+       
+       adicionarMedidaATabela(fase);
 }
+
+
+function adicionarMedidaATabela(fase) {
+    fases[fase].medidas.forEach(medida => {
+    
+    // Identifica o tbody onde as novas medidas serão inseridas
+    const tabela = document.getElementById("medidasTabela");
+
+    // Cria uma nova linha (tr)
+    const novaLinha = document.createElement("tr");
+    
+    // Cria as células (td) para o título, orçamento e botão de detalhes
+    const tituloTd = document.createElement("td");
+    tituloTd.textContent = medida.titulo;
+
+    const orcamentoTd = document.createElement("td");
+    orcamentoTd.style.textAlign = "center";
+    orcamentoTd.textContent = `${medida.orcamento}M €`;
+    
+    const detalhesTd = document.createElement("td");
+    detalhesTd.style.textAlign = "center";
+    const detalhesBtn = document.createElement("button");
+    detalhesBtn.textContent = "Detalhes";
+    detalhesBtn.classList.add("btn", "btn-outline-primary");
+    detalhesBtn.setAttribute("data-toggle", "modal");
+    detalhesBtn.setAttribute("data-target", "#myModal");
+    detalhesTd.appendChild(detalhesBtn);
+
+    const editarTd = document.createElement("td");
+    editarTd.style.textAlign = "center";
+    const editarBtn = document.createElement("button");
+    editarBtn.textContent = "Editar";
+    editarBtn.classList.add("btn", "btn-outline-primary");
+    editarTd.appendChild(editarBtn);
+    
+    const apagarTd = document.createElement("td");
+    apagarTd.style.textAlign = "center";
+    const apagarBtn = document.createElement("button");
+    apagarBtn.textContent = "Apagar";
+    apagarBtn.classList.add("btn", "btn-outline-primary");
+    apagarTd.appendChild(apagarBtn);
+
+    // Adiciona as células à nova linha
+    novaLinha.appendChild(tituloTd);
+    novaLinha.appendChild(orcamentoTd);
+    novaLinha.appendChild(detalhesTd);  
+    novaLinha.appendChild(editarTd);  
+    novaLinha.appendChild(apagarTd);  
+
+
+    // Adiciona a nova linha à tabela
+    tabela.appendChild(novaLinha);
+    });
+}
+
 
 // Função para salvar as medidas no sessionStorage
 function salvarMedidas(fase) {
     sessionStorage.setItem(`fases_${fase}`, JSON.stringify(fases[fase]));  // Salva o estado da fase
 }
 
-// Função para atualizar a interface e mostrar a medida ativa
+// Função para atualizar a interface e mostrar a medida ativa (NAO ESTA A SER USADA)
 function atualizarInterfaceMedidas(fase) {
 /*    const medidasContainer = document.getElementById(`medidasContainer${fase}`);
     medidasContainer.innerHTML = "";  // Limpa o container
@@ -139,7 +195,7 @@ function atualizarInterfaceMedidas(fase) {
     medidasContainer.appendChild(btnApagar);*/
 }
 
-// Função para criar as abas para todas as medidas
+// Função para criar as abas para todas as medidas (NAO ESTA A SER USADA)
 function atualizarAbas(fase) {
     const abasContainer = document.getElementById(`abasContainer${fase}`);
     abasContainer.innerHTML = "";  // Limpa todas as abas existentes
@@ -168,7 +224,7 @@ function restaurarMedidas(fase) {
     }
 }
 
-// Função para salvar automaticamente os dados da medida ativa
+// Função para salvar automaticamente os dados da medida ativa (NAO ESTA A SER USADA)
 function salvarMedidaAtual(fase) {
     const medidaAtiva = fases[fase].medidaAtiva;
 
@@ -213,6 +269,7 @@ function inicializarFase(fase) {
     }
 
     restaurarMedidas(fase);  // Restaura as medidas ao carregar a página
+    adicionarMedidaATabela(fase);
 
     /*if (fases[fase].medidas.length === 0) {
         criarMedida(fase);  // Cria a primeira medida automaticamente se não houver nenhuma

@@ -16,10 +16,10 @@ function novamedida(fase)
     document.getElementById(`explicacao_${fase}`).value = "";
     document.getElementById(`orcamento_${fase}`).value = "";
     
-    document.getElementById("medidanova").style.display = "block";
-    document.getElementById("medidasA").style.display = "none";
-    document.getElementById("criarmedidabtn").style.display = "inline-block";
-    document.getElementById("atualizarmedidabtn").style.display = "none";
+    document.getElementById(`medidanova_${fase}`).style.display = "block";
+    document.getElementById(`medidasA_${fase}`).style.display = "none";
+    document.getElementById(`criarmedidabtn_${fase}`).style.display = "inline-block";
+    document.getElementById(`atualizarmedidabtn_${fase}`).style.display = "none";
 
 }
 
@@ -30,22 +30,22 @@ function cancelar(fase)
     atualizarTitulo(fase, false);
 
     // Esconde o formulário de nova medida e exibe a lista de medidas
-    document.getElementById("medidanova").style.display = "none";
-    document.getElementById("medidasA").style.display = "block";
+    document.getElementById(`medidanova_${fase}`).style.display = "none";
+    document.getElementById(`medidasA_${fase}`).style.display = "block";
        
 }
 
 function editarmedida(fase, index)
 {
-    document.getElementById("medidanova").style.display = "block";
-    document.getElementById("medidasA").style.display = "none";
-    document.getElementById("criarmedidabtn").style.display = "none";
-    document.getElementById("atualizarmedidabtn").style.display = "inline-block";
+    document.getElementById(`medidanova_${fase}`).style.display = "block";
+    document.getElementById(`medidasA_${fase}`).style.display = "none";
+    document.getElementById(`criarmedidabtn_${fase}`).style.display = "none";
+    document.getElementById(`atualizarmedidabtn_${fase}`).style.display = "inline-block";
 
     document.getElementById(`titulo_${fase}`).value = fases[fase].medidas[index].titulo;
     document.getElementById(`explicacao_${fase}`).value = fases[fase].medidas[index].explicacao;
     document.getElementById(`orcamento_${fase}`).value = fases[fase].medidas[index].orcamento;
-    document.getElementById("atualizarmedidabtn").value = index;
+    document.getElementById(`atualizarmedidabtn_${fase}`).value = index;
 }
 
 // Função para apagar uma medida
@@ -55,7 +55,7 @@ function apagarMedida(fase, index)
         fases[fase].medidas.splice(index, 1);  // Remove a medida da lista
         salvarMedidas(fase);  // Salva as medidas após a remoção
         adicionarMedidaATabela(fase);
-        atualizarTitulo(fase);  // Atualiza o valor inicial
+        atualizarTitulo(fase, false);  // Atualiza o valor inicial
     } else {
         alert("Não é possível apagar todas as medidas. Deve haver pelo menos uma.");
     }
@@ -65,12 +65,13 @@ function apagarMedida(fase, index)
 function atualizarmedida(fase)
 {
     // Identifica a medida sendo editada
-    const index = document.getElementById("atualizarmedidabtn").value;
+    let index = document.getElementById(`atualizarmedidabtn_${fase}`).value;
 
     // Obtém os novos valores do formulário
     const titulo = document.getElementById(`titulo_${fase}`).value;
     const explicacao = document.getElementById(`explicacao_${fase}`).value;
     const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value) || 0;
+    //console.log(orcamento);
 
     // Verifica se todos os campos estão preenchidos corretamente
     if (!titulo || !explicacao || !orcamento) {
@@ -78,6 +79,7 @@ function atualizarmedida(fase)
         return;
     }
 
+    
     // Atualiza a medida no array com os novos valores
     fases[fase].medidas[index] = {
         titulo,
@@ -92,18 +94,24 @@ function atualizarmedida(fase)
     fases[fase].medidas.forEach(medida => {
         valorInicialAtual -= parseFloat(medida.orcamento) || 0;
     });
+    //console.log(valorInicialAtual);
+
 
     // Atualiza o valor no sessionStorage
     sessionStorage.setItem(`valorInicial_${fase}`, valorInicialAtual);
+
+    // Atualiza o valor inicial na interface
+    atualizarTitulo(fase, false);
 
     // Salva as medidas após a atualização
     salvarMedidas(fase);
 
     // Atualiza a tabela de medidas e esconde o formulário de edição
     adicionarMedidaATabela(fase);
-    document.getElementById("medidanova").style.display = "none";
-    document.getElementById("medidasA").style.display = "block";
+    document.getElementById(`medidanova_${fase}`).style.display = "none";
+    document.getElementById(`medidasA_${fase}`).style.display = "block";
 }
+
 // Função para criar as medidas
 function criarMedida(fase) 
 {
@@ -130,8 +138,19 @@ function criarMedida(fase)
     
         }else if(fase == 5)
         {
-            orçamento = 500;
-    
+            // Seleciona todos os inputs dentro da seção "fase3"
+        const inputs = document.querySelectorAll('#fase3 input[type="number"]');
+        let temp = Infinity;    // Inicia com o maior valor possível
+
+        for (let input of inputs) 
+        {
+            const valor = parseFloat(input.value);
+            if (valor < temp) 
+            {
+                temp = valor;     // Atualiza o menor valor encontrado
+            }
+        }
+        orçamento = temp;
         }
        // Recalcula o valor inicial subtraindo o orçamento da nova medida
        let valorInicialAtual = parseFloat(sessionStorage.getItem(`valorInicial_${fase}`)) || orçamento;
@@ -143,11 +162,12 @@ function criarMedida(fase)
    
        // Atualiza o valor no sessionStorage com o valor final
        sessionStorage.setItem(`valorInicial_${fase}`, valorInicialAtual);
+       atualizarTitulo(fase, false);
        salvarMedidas(fase);
    
        // Esconde o formulário de nova medida e volta para a lista de medidas
-       document.getElementById("medidanova").style.display = "none";
-       document.getElementById("medidasA").style.display = "block";
+       document.getElementById(`medidanova_${fase}`).style.display = "none";
+       document.getElementById(`medidasA_${fase}`).style.display = "block";
        
        adicionarMedidaATabela(fase);
 }
@@ -155,7 +175,7 @@ function criarMedida(fase)
 // A diciona as medidas a tabela
 function adicionarMedidaATabela(fase) {
     // Identifica o tbody onde as medidas serão inseridas
-    const tabela = document.getElementById("medidasTabela").querySelector("tbody");
+    const tabela = document.getElementById(`medidasTabela_${fase}`).querySelector("tbody");
 
     // Limpa apenas o corpo da tabela (as medidas), mantendo o cabeçalho intacto
     tabela.innerHTML = "";  // Limpa apenas o tbody onde as medidas estão
@@ -214,7 +234,7 @@ function adicionarMedidaATabela(fase) {
 function carregarMedidasPredefinidas(fase) 
 {
     // Identifica o tbody onde as medidas predefinidas estão
-    const tabela = document.getElementById("medidasTabela").querySelector("tbody");
+    const tabela = document.getElementById(`medidasTabela_${fase}`).querySelector("tbody");
 
     // Itera pelas linhas da tabela e adiciona as medidas à estrutura de medidas
     Array.from(tabela.querySelectorAll("tr")).forEach(linha => {
@@ -341,7 +361,7 @@ function salvarMedidaAtual(fase) {
         fases[fase].medidas[medidaAtiva].explicacao = explicacaoElement.value;
         fases[fase].medidas[medidaAtiva].orcamento = orcamentoElement.value;
         salvarMedidas(fase);  // Salva as medidas após qualquer alteração
-        atualizarTitulo(fase);  // Atualiza o valor inicial
+        atualizarTitulo(fase, false);  // Atualiza o valor inicial
     } else {
         console.error(`Erro: Elementos de entrada não encontrados para a fase ${fase}`);
     }
@@ -359,10 +379,14 @@ function inicializarFase(fase) {
             carregarMedidasPredefinidas(4);
             first = true;
         }
+        adicionarMedidaATabela(fase);
+        atualizarTitulo(fase, false);  // Atualiza o valor inicial
     }else if(fase === 5)
     {
+        restaurarMedidas(fase);  // Restaura as medidas ao carregar a página
         document.getElementById('caixaValorInicial5').style.display = 'block';  // Exibe a caixa de valor inicial
+        adicionarMedidaATabela(fase);
+        atualizarTitulo(fase, false);  // Atualiza o valor inicial
     }
-    adicionarMedidaATabela(fase);
-    atualizarTitulo(fase);  // Atualiza o valor inicial
+
 }

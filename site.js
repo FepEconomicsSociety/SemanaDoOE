@@ -94,12 +94,13 @@ function navigateTo(faseId)
     else if (faseId === 'fase4') {
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
         inicializarFase(4);
-        atualizarTitulo(4);  // Atualiza o valor inicial da fase 4
+        atualizarTitulo(4,false);  // Atualiza o valor inicial da fase 4
     }
     else if (faseId === 'fase5')
     {
         document.getElementById('caixaValorInicial5').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
-        atualizarTitulo(5);  // Atualiza o valor inicial da fase 4
+        inicializarFase(5);
+        atualizarTitulo(5,false);  // Atualiza o valor inicial da fase 4
     }
 
 }
@@ -122,7 +123,7 @@ function init()
         document.getElementById('conteudoSite').style.display = 'block';
         document.getElementById('footer').style.display = 'block';        // Exibir o footer após o login
         inicializarFase(4);  // Inicializa a fase 4 e garante que o valor inicial será exibido corretamente
-        //inicializarFase(5);
+        inicializarFase(5);
         
         // Verifica se há uma fase armazenada no sessionStorage
         const faseAtual = sessionStorage.getItem('faseAtual') || 'fase0';  // Se não houver fase armazenada, comece na fase1
@@ -197,6 +198,7 @@ function diferenca_anual() {
     numeroInicialElemento.textContent = diferenca.toFixed(2);
 }
 
+/*Verifica se todos os dados na fase 3 foram preenchidos antes de continuar*/ 
 function finalizarFase3() {
     // Seleciona todos os inputs dentro da seção "fase3"
     const inputs = document.querySelectorAll('#fase3 input[type="number"]');
@@ -247,21 +249,56 @@ function atualizarTitulo(fase, previsualizar = false)
 
     }else if(fase == 5)
     {
-        orçamento = 500;
+        // Seleciona todos os inputs dentro da seção "fase3"
+        const inputs = document.querySelectorAll('#fase3 input[type="number"]');
+        let temp = Infinity;    // Inicia com o maior valor possível
+        let idMenorValor = "";  // Armazena o id do input com menor valor
+        let Nomeministerio = "";  // Para armazenar o nome do ministério com o menor valor
 
+        for (let input of inputs) 
+        {
+            const valor = parseFloat(input.value);
+            if (valor < temp) 
+            {
+                temp = valor;     // Atualiza o menor valor encontrado
+                idMenorValor = input.id;    // Armazena o id do input com o menor valor
+            }
+        }
+
+        // Se encontrou um id de menor valor, busca o ministério correspondente
+        if (idMenorValor) 
+        {
+            // Substitui o prefixo do input por "min_" para pegar o ID do ministério
+            const ministerioId = `min_${idMenorValor}`;
+            Nomeministerio = document.getElementById(ministerioId).textContent;
+
+            // Atualiza o nome da fase 5 com o ministério de menor valor
+            document.querySelector('#fase5 h2').textContent = `Fase 5 - Ministério de ${Nomeministerio}`;
+        }
+        orçamento = temp;
     }
 
     const numeroInicialElemento = document.getElementById(`numeroInicial_${fase}`);
     const orcamentoInput = parseFloat(document.getElementById(`orcamento_${fase}`).value) || 0;
 
-    // Recupera o valor inicial base (armazenado ou default 100)
-    let valorInicial = document.getElementById(`numeroInicial_${fase}`).value || orçamento;
 
-    // Recupera todas as medidas já adicionadas e subtrai seus orçamentos do valor inicial
+    // Recupera o valor inicial base (armazenado ou default 100)
+    let valorInicial = parseFloat(document.getElementById(`numeroInicial_${fase}`).value) || orçamento;
+  
+    // Subtrai o orçamento de todas as medidas já adicionadas
     fases[fase].medidas.forEach(medida => {
         valorInicial -= parseFloat(medida.orcamento) || 0;
     });
 
+ // Durante a pré-visualização, adiciona de volta o valor antigo da medida antes de subtrair o novo
+ if (previsualizar && document.getElementById(`atualizarmedidabtn_${fase}`).value) 
+    {
+        let index = document.getElementById(`atualizarmedidabtn_${fase}`).value;
+        const medidaAtual = fases[fase].medidas[index];
+        if (medidaAtual && medidaAtual.orcamento) {  // Verifica se a medida existe
+            valorInicial += parseFloat(medidaAtual.orcamento) || 0;  // Adiciona de volta o orçamento antigo
+        }
+    }
     // Se for pré-visualização, subtrai o valor do orçamento que está sendo digitado
     if (previsualizar) {
         valorInicial -= orcamentoInput;
@@ -269,6 +306,7 @@ function atualizarTitulo(fase, previsualizar = false)
 
     // Atualiza o valor exibido na interface
     numeroInicialElemento.textContent = valorInicial.toFixed(2);
+    
 }
 
 // Função para salvar o valor de qualquer campo de input no sessionStorage 

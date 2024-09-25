@@ -8,6 +8,7 @@ let fases = {
         //medidaAtiva: 0
     }
 };
+
 // Mostrar zona para definir medida
 function novamedida(fase)
 {
@@ -17,6 +18,8 @@ function novamedida(fase)
     
     document.getElementById("medidanova").style.display = "block";
     document.getElementById("medidasA").style.display = "none";
+    document.getElementById("criarmedidabtn").style.display = "inline-block";
+    document.getElementById("atualizarmedidabtn").style.display = "none";
 
 }
 
@@ -32,8 +35,78 @@ function cancelar(fase)
        
 }
 
+function editarmedida(fase, index)
+{
+    document.getElementById("medidanova").style.display = "block";
+    document.getElementById("medidasA").style.display = "none";
+    document.getElementById("criarmedidabtn").style.display = "none";
+    document.getElementById("atualizarmedidabtn").style.display = "inline-block";
+
+    document.getElementById(`titulo_${fase}`).value = fases[fase].medidas[index].titulo;
+    document.getElementById(`explicacao_${fase}`).value = fases[fase].medidas[index].explicacao;
+    document.getElementById(`orcamento_${fase}`).value = fases[fase].medidas[index].orcamento;
+    document.getElementById("atualizarmedidabtn").value = index;
+}
+
+// Função para apagar uma medida
+function apagarMedida(fase, index) 
+{
+    if (fases[fase].medidas.length > 0) {
+        fases[fase].medidas.splice(index, 1);  // Remove a medida da lista
+        salvarMedidas(fase);  // Salva as medidas após a remoção
+        adicionarMedidaATabela(fase);
+        atualizarTitulo(fase);  // Atualiza o valor inicial
+    } else {
+        alert("Não é possível apagar todas as medidas. Deve haver pelo menos uma.");
+    }
+}
+
+//Atualiza a medida que esta a ser editada
+function atualizarmedida(fase)
+{
+    // Identifica a medida sendo editada
+    const index = document.getElementById("atualizarmedidabtn").value;
+
+    // Obtém os novos valores do formulário
+    const titulo = document.getElementById(`titulo_${fase}`).value;
+    const explicacao = document.getElementById(`explicacao_${fase}`).value;
+    const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value) || 0;
+
+    // Verifica se todos os campos estão preenchidos corretamente
+    if (!titulo || !explicacao || !orcamento) {
+        alert("Insira todos os parâmetros corretamente.");
+        return;
+    }
+
+    // Atualiza a medida no array com os novos valores
+    fases[fase].medidas[index] = {
+        titulo,
+        explicacao,
+        orcamento
+    };
+
+    // Recalcula o valor inicial, se necessário
+    let valorInicialAtual = parseFloat(sessionStorage.getItem(`valorInicial_${fase}`)) || 0;
+
+    // Subtrai todos os orçamentos das medidas, incluindo o novo valor atualizado
+    fases[fase].medidas.forEach(medida => {
+        valorInicialAtual -= parseFloat(medida.orcamento) || 0;
+    });
+
+    // Atualiza o valor no sessionStorage
+    sessionStorage.setItem(`valorInicial_${fase}`, valorInicialAtual);
+
+    // Salva as medidas após a atualização
+    salvarMedidas(fase);
+
+    // Atualiza a tabela de medidas e esconde o formulário de edição
+    adicionarMedidaATabela(fase);
+    document.getElementById("medidanova").style.display = "none";
+    document.getElementById("medidasA").style.display = "block";
+}
 // Função para criar as medidas
-function criarMedida(fase) {
+function criarMedida(fase) 
+{
 
     const titulo = document.getElementById(`titulo_${fase}`).value;
     const explicacao = document.getElementById(`explicacao_${fase}`).value;
@@ -87,7 +160,7 @@ function adicionarMedidaATabela(fase) {
     // Limpa apenas o corpo da tabela (as medidas), mantendo o cabeçalho intacto
     tabela.innerHTML = "";  // Limpa apenas o tbody onde as medidas estão
 
-    fases[fase].medidas.forEach(medida => {
+    fases[fase].medidas.forEach((medida, index) => {
     // Cria uma nova linha (tr)
     const novaLinha = document.createElement("tr");
     
@@ -112,6 +185,7 @@ function adicionarMedidaATabela(fase) {
     editarTd.style.textAlign = "center";
     const editarBtn = document.createElement("button");
     editarBtn.textContent = "Editar";
+    editarBtn.onclick = () => editarmedida(fase, index);
     editarBtn.classList.add("btn", "btn-outline-primary");
     editarTd.appendChild(editarBtn);
     
@@ -119,6 +193,7 @@ function adicionarMedidaATabela(fase) {
     apagarTd.style.textAlign = "center";
     const apagarBtn = document.createElement("button");
     apagarBtn.textContent = "Apagar";
+    apagarBtn.onclick = () => apagarMedida(fase, index);
     apagarBtn.classList.add("btn", "btn-outline-primary");
     apagarTd.appendChild(apagarBtn);
 
@@ -135,7 +210,9 @@ function adicionarMedidaATabela(fase) {
     });
 }
 
-function carregarMedidasPredefinidas(fase) {
+// Define as medidas predefinidas feitas em html em medidas iguais as criadas
+function carregarMedidasPredefinidas(fase) 
+{
     // Identifica o tbody onde as medidas predefinidas estão
     const tabela = document.getElementById("medidasTabela").querySelector("tbody");
 
@@ -270,20 +347,6 @@ function salvarMedidaAtual(fase) {
     }
 }
 
-// Função para apagar uma medida
-function apagarMedida(fase, index) {
-    if (fases[fase].medidas.length > 1) {
-        fases[fase].medidas.splice(index, 1);  // Remove a medida da lista
-        fases[fase].medidaAtiva = Math.max(0, fases[fase].medidas.length - 1);  // Define a última medida como ativa
-        salvarMedidas(fase);  // Salva as medidas após a remoção
-        //atualizarInterfaceMedidas(fase);  // Atualiza a interface
-        //atualizarAbas(fase);  // Atualiza as abas para refletir as mudanças
-        atualizarTitulo(fase);  // Atualiza o valor inicial
-    } else {
-        alert("Não é possível apagar todas as medidas. Deve haver pelo menos uma.");
-    }
-}
-
 // Função para inicializar a fase 4 com a primeira medida
 function inicializarFase(fase) {
     // Exibe a caixa de valor inicial da fase 4
@@ -291,9 +354,10 @@ function inicializarFase(fase) {
     {
         restaurarMedidas(fase);  // Restaura as medidas ao carregar a página
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial
-        if(fases[fase].medidas.length === 0)
+        if(fases[fase].medidas.length === 0 && first === false)
         {
             carregarMedidasPredefinidas(4);
+            first = true;
         }
     }else if(fase === 5)
     {

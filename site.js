@@ -1,4 +1,6 @@
 let valorInicialTemporario = {}; // Para armazenar o valor inicial temporário para cada fase
+let first;
+
 
 // Função para verificar a senha
 function verificarSenha() 
@@ -25,7 +27,7 @@ function verificarSenha()
         // Salva o token no sessionStorage  para manter a autenticação
         sessionStorage .setItem('token', data.token); // Armazena o token JWT
 
-
+        first = false;
         // Armazena a hora de autenticação quando o login é bem-sucedido
         sessionStorage.setItem('horaInicio', Date.now());  // Define o timestamp no momento da autenticação
 
@@ -234,6 +236,7 @@ function finalizarFase3() {
     
 }*/
 // Função para atualizar o título ao subtrair o número inserido do número inicial
+
 function atualizarTitulo(fase, previsualizar = false) 
 {
     let orçamento = 0;

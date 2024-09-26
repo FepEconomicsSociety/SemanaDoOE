@@ -258,7 +258,7 @@ function atualizarTitulo(fase, previsualizar = false)
         for (let input of inputs) 
         {
             const valor = parseFloat(input.value);
-            if (valor < temp) 
+            if (valor < temp && input.id != "saude") 
             {
                 temp = valor;     // Atualiza o menor valor encontrado
                 idMenorValor = input.id;    // Armazena o id do input com o menor valor
@@ -291,7 +291,7 @@ function atualizarTitulo(fase, previsualizar = false)
     });
 
  // Durante a pré-visualização, adiciona de volta o valor antigo da medida antes de subtrair o novo
- if (previsualizar && document.getElementById(`atualizarmedidabtn_${fase}`).value) 
+ if (previsualizar && document.getElementById(`atualizarmedidabtn_${fase}`).value >= 0) 
     {
         let index = document.getElementById(`atualizarmedidabtn_${fase}`).value;
         const medidaAtual = fases[fase].medidas[index];

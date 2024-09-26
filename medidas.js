@@ -19,6 +19,7 @@ function novamedida(fase)
     document.getElementById(`medidanova_${fase}`).style.display = "block";
     document.getElementById(`medidasA_${fase}`).style.display = "none";
     document.getElementById(`criarmedidabtn_${fase}`).style.display = "inline-block";
+    document.getElementById(`atualizarmedidabtn_${fase}`).value = -1;
     document.getElementById(`atualizarmedidabtn_${fase}`).style.display = "none";
 
 }
@@ -198,7 +199,8 @@ function adicionarMedidaATabela(fase) {
     detalhesBtn.textContent = "Detalhes";
     detalhesBtn.classList.add("btn", "btn-outline-primary");
     detalhesBtn.setAttribute("data-toggle", "modal");
-    detalhesBtn.setAttribute("data-target", "#myModal");
+    detalhesBtn.setAttribute("data-target", `#myModal${fase}`);
+    detalhesBtn.onclick = () => mostrarDetalhesMedida(index, fase);  // Chama a função para exibir os detalhes
     detalhesTd.appendChild(detalhesBtn);
 
     const editarTd = document.createElement("td");
@@ -228,6 +230,20 @@ function adicionarMedidaATabela(fase) {
     // Adiciona a nova linha à tabela
     tabela.appendChild(novaLinha);
     });
+}
+
+function mostrarDetalhesMedida(index, fase) {
+
+    const medida = fases[fase].medidas[index];
+
+    // Atualiza o título do modal com o título da medida
+    document.querySelector(`#myModal${fase} .modal-title`).textContent = medida.titulo;
+
+    // Atualiza o corpo do modal com a explicação da medida
+    document.querySelector(`#myModal${fase} .modal-body`).innerHTML = `
+        <p><strong>Orçamento:</strong> ${medida.orcamento}M €</p>
+        <p><strong>Explicação:</strong> ${medida.explicacao}</p>
+    `;
 }
 
 // Define as medidas predefinidas feitas em html em medidas iguais as criadas

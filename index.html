@@ -473,32 +473,32 @@
             <div class="container">
                 <div class="row">
                     <div class="col" style="margin: 0.5vw;">
-                        Crescimento do PIB real: <input type="number" class="form-control" placeholder="Valor em %">
+                        Crescimento do PIB real: <input type="number" id="pib" class="form-control" placeholder="Valor em %">
                     </div>
                     <div class="col"  style="margin: 0.5vw;">
-                        Variação do consumo privado: <input type="number" class="form-control" placeholder="Valor em %">
+                        Variação do consumo privado: <input type="number" id="vcpriv" class="form-control" placeholder="Valor em %">
                     </div>
                     <div class="col" style="margin: 0.5vw;">
-                        Variação do consumo público: <input type="number" class="form-control" placeholder="Valor em %">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col" style="margin: 0.5vw;">
-                        Variação do investimento (FBCF): <input type="number" class="form-control" placeholder="Valor em %">
-                    </div>
-                    <div class="col" style="margin: 0.5vw;">
-                        Variação das exportações: <input type="number" class="form-control" placeholder="Valor em %">
-                    </div>
-                    <div class="col" style="margin: 0.5vw;">
-                        Variação das importações: <input type="number" class="form-control" placeholder="Valor em %"><br>
+                        Variação do consumo público: <input type="number" id="vcpub" class="form-control" placeholder="Valor em %">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col" style="margin: 0.5vw;">
-                        Inflação: <input type="number" class="form-control" placeholder="Valor em %">
+                        Variação do investimento (FBCF): <input type="number" id="fbcf" class="form-control" placeholder="Valor em %">
                     </div>
                     <div class="col" style="margin: 0.5vw;">
-                        Taxa de desemprego: <input type="number" class="form-control" placeholder="Valor em %">
+                        Variação das exportações: <input type="number" id="vexp" class="form-control" placeholder="Valor em %">
+                    </div>
+                    <div class="col" style="margin: 0.5vw;">
+                        Variação das importações: <input type="number" id="vimp" class="form-control" placeholder="Valor em %"><br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="margin: 0.5vw;">
+                        Inflação: <input type="number" id="infl" class="form-control" placeholder="Valor em %">
+                    </div>
+                    <div class="col" style="margin: 0.5vw;">
+                        Taxa de desemprego: <input type="number" id="tdes" class="form-control" placeholder="Valor em %">
                     </div>
                     <div class="col" style="margin: 0.5vw; padding: 1vw;">
                         
@@ -708,7 +708,7 @@
         </section>
 
         <section id="fase4" class="fase hidden">
-            <h2>Fase 4 - Ministério da saúde</h2>
+            <h2>Fase 4 - Ministério da Saúde</h2>
         
             <div class="caixa-valor-inicial" id="caixaValorInicial4" style="display: none;">
                 Valor Inicial: <span id="numeroInicial_4"></span>
@@ -740,7 +740,7 @@
                             <tr>
                                 <td>Contratação de novos médicos</td>
                                 <td style="text-align: center;">400M €</td>
-                                <td style="text-align: center;"><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-outline-primary">Detalhes</button></td>
+                                <td style="text-align: center;"><button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-outline-primary">Detalhes</button></td>
                                 <td style="text-align: center;"><button type="button" class="btn btn-outline-primary">Editar</button></td>
                                 <td style="text-align: center;"><button type="button" class="btn btn-outline-primary">Apagar</button></td>
                             </tr>
@@ -781,7 +781,7 @@
 
             </div>
 
-            <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal fade" id="myModal4" role="dialog">
                 <div class="modal-dialog">
                   <!-- Modal content-->
                   <div class="modal-content">
@@ -872,7 +872,8 @@
 
             </div>
 
-            <div class="modal fade" id="myModal" role="dialog">
+
+            <div class="modal fade" id="myModal5" role="dialog">
                 <div class="modal-dialog">
                   <!-- Modal content-->
                   <div class="modal-content">
@@ -890,8 +891,6 @@
                   
                 </div>
               </div>
-
-        
             <!-- Botão para adicionar uma nova medida -->
             <br>
             <br>

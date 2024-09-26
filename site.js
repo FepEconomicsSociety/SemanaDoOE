@@ -412,13 +412,31 @@ function gerarPDF() {
         };
 
         // Gera o PDF e retorna uma Promise
-        html2pdf().from(elementoTemporario).set(opt).save()
+            html2pdf().from(elementoTemporario).set(opt).save()
             .then(() => {
                 resolve(true);
             })
             .catch((error) => {
                 reject(error);
             });
+               /*   // Gera o PDF e converte para Base64
+                html2pdf().from(elementoTemporario).set(opt).outputPdf('datauristring').then(function(pdfBase64) {
+                    pdfBase64 = pdfBase64.split(',')[1];  // Extrai a parte Base64 da string
+                    console.log(pdfBase64); // Para verificar se a string Base64 está correta
+
+                    // Coloca a string Base64 no campo oculto
+                    document.getElementById('pdfBase64').value = pdfBase64;
+
+                    // Submete o formulário aqui após garantir que o PDF foi gerado
+
+                    document.getElementById('emailForm').submit();
+
+                    resolve(true);  // Garante que a promessa é resolvida
+                }).catch((error) => {
+                    console.error("Erro ao gerar PDF:", error);
+                    reject(error);
+                });*/
+
     });
 }
 // Função para confirmar o envio e limpar os dados após a confirmação do usuário
@@ -427,59 +445,6 @@ function confirmarEnvio() {
     alert("Dados enviados com sucesso. Os dados foram limpos.");
     location.reload();  // Recarrega a página
 
-
-  /*  // Gera o PDF e converte para Base64
-    html2pdf().from(elementoTemporario).set(opt).outputPdf('datauristring').then(function(pdfBase64) {
-        // Remove o prefixo "data:application/pdf;base64," para enviar somente o Base64
-        pdfBase64 = pdfBase64.split(',')[1];
-        
-        // Atualiza o campo de entrada oculto com o PDF em Base64
-        document.getElementById('pdfBase64').value = pdfBase64;
-
-        // Submete o formulário
-        document.getElementById('emailForm').submit();
-    });
-*/
-
-      /*  // Gera o PDF e converte para Data URL (base64)
-        html2pdf().from(elementoTemporario).set(opt).outputPdf('dataurlstring').then(function(pdfBase64) {
-            // Converte o Data URL para um Blob
-            const pdfBlob = dataURLToBlob(pdfBase64);
-    
-            // Envia o PDF para o servidor
-            enviarPDFParaServidor(pdfBlob);
-        });*/
 }
-
-/*// Função para converter dataURL para Blob
-function dataURLToBlob(dataURL) {
-    const arr = dataURL.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new Blob([u8arr], { type: mime });
-}
-
-// Função para enviar o PDF para o servidor
-function enviarPDFParaServidor(pdfBlob) {
-    const formData = new FormData();
-    formData.append('file', pdfBlob, 'ProjecaoMacroeconomica2025.pdf');
-
-    fetch('http://localhost:3000/enviar-email', {  // Substitua pela URL do seu servidor
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert('PDF enviado por e-mail com sucesso!');
-        console.log('Resposta do servidor:', data);
-    })
-    .catch(error => {
-        console.error('Erro ao enviar o PDF:', error);
-        alert('Erro ao enviar o PDF.');
-    });
-}
-*/
 
 window.onload = init;

@@ -8,7 +8,7 @@ function verificarSenha()
     const senhaDigitada = document.getElementById('senhaInput').value;
     const mensagemErro = document.getElementById('mensagemErro');
 
-    fetch("https://server-jvxz.onrender.com/login",{ 
+    fetch("https://server-jvxz.onrender.com/auth/login",{ 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ senha: senhaDigitada })

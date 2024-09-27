@@ -68,13 +68,13 @@ function pass()
     if(a==1)
     {
         document.getElementById('senhaInput').type='password';
-        document.getElementById('pass-icon').src='/images/hide-pass.png';
+        document.getElementById('pass-icon').src='https://FepEconomicsSociety.github.io/SemanaDoOE/images/hide-pass.png';
         a=0;
     }
     else
     {
         document.getElementById('senhaInput').type='text';
-        document.getElementById('pass-icon').src='/images/show-pass.png';
+        document.getElementById('pass-icon').src='https://FepEconomicsSociety.github.io/SemanaDoOE/images/show-pass.png';
         a=1;
     }
 }

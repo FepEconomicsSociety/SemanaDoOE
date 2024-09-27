@@ -7,6 +7,9 @@ function verificarSenha()
 {
     const senhaDigitada = document.getElementById('senhaInput').value;
     const mensagemErro = document.getElementById('mensagemErro');
+    const senhaCaixa = document.querySelector('.senha-caixa'); // Seleciona a caixa da senha
+    // Remove a classe 'incorreta' se já estiver presente
+    senhaCaixa.classList.remove('incorreta');
 
     fetch("https://server-jvxz.onrender.com/auth/login",{ 
         method: 'POST',
@@ -20,7 +23,14 @@ function verificarSenha()
         } 
         else 
         {
-            throw new Error('Senha incorreta');
+         // Exibe a fitinha de erro
+            senhaCaixa.classList.add('incorreta');     
+            // Remove a fitinha após 3 segundos
+            setTimeout(() => {
+                senhaCaixa.classList.remove('incorreta');
+
+            }, 3000);
+            throw new Error(''); 
         }
     })
     .then(data => {

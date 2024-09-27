@@ -1,3 +1,111 @@
+/* Container que mantém o conteúdo da senha centralizado */
+.senha-container {
+    display: flex;
+    justify-content: center;  /* Centraliza horizontalmente */
+    align-items: center;      /* Centraliza verticalmente */
+    height: 100vh;            /* Altura total da viewport */
+    background-color: #f4f4f4; /* Fundo da área de senha */
+    padding: 0;
+}
+
+/* Caixa onde os elementos de input e o botão serão colocados */
+.senha-caixa {
+    background-color: #cc2900; /* Fundo vermelho */
+    padding: 2em;              /* Espaçamento interno da caixa */
+    border-radius: 10px;       /* Bordas arredondadas */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);  /* Sombra para dar destaque */
+    text-align: center;        /* Centraliza o conteúdo na caixa */
+    max-width: 400px;          /* Largura máxima */
+    width: 100%;               /* Garante que ocupe 100% da largura até o limite */
+    position: relative;        /* Necessário para o uso do ::after */
+    z-index: 2;                /* Z-index maior para ficar na frente */
+}
+
+/* Fitinha para erro com transição */
+.senha-caixa::after {
+    content: "Senha incorreta!";
+    position: absolute;
+    left: 90%; /* Começa na borda esquerda da caixa */
+    top: 50%;
+    transform: translateY(-40%); /* Centraliza verticalmente */
+    background-color: #d52b1e; /* Vermelho para destacar o erro */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap; /* Evita quebra de linha */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Fita deve estar atrás da caixa */
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.3s ease, left 0.3s ease; /* Transição para suavizar a animação */
+}
+
+/* Aparece e se move quando a senha está incorreta */
+.senha-caixa.incorreta::after {
+    opacity: 1; /* Mostra a mensagem */
+    left: calc(100% + 5px); /* Move a fita para fora da caixa para a direita */
+}
+
+/* Estilo do título */
+.senha-caixa h2 {
+    margin-bottom: 1em;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* Estilo do input de senha */
+.senha-caixa input[type="password"] {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* Botão de envio */
+.senha-caixa button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;  /* Ocupa toda a largura do input */
+    transition: background-color 0.3s ease;
+}
+
+/* Hover no botão */
+.senha-caixa button:hover {
+    background-color: #0056b3;
+}
+
+/* Mensagem de erro */
+.senha-caixa p {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 1em;
+}
+
+/* Estilo responsivo para telas pequenas */
+@media (max-width: 480px) {
+    .senha-caixa {
+        padding: 1.5em;
+    }
+
+    .senha-caixa h2 {
+        font-size: 20px;
+    }
+
+    .senha-caixa button {
+        font-size: 0.9em;
+    }
+}
+
+/*------------------------------------------------------------------------------------------*/
+
 /*Estrutura principal do site (header, footer, etc...)*/
 body {
     font-family: Arial, sans-serif;

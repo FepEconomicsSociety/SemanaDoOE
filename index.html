@@ -25,11 +25,13 @@
         <div class="senha-container">
             <div class="senha-caixa">
                 <h2>Por favor, insira a senha para acessar o site:</h2>
-
-                <input type="password" id="senhaInput" placeholder="Digite a senha">
-                <button onclick="verificarSenha()">Entrar</button>
+                <div class="input-container">
+                    <input type="password" id="senhaInput" placeholder="Digite a senha"> 
+                    <img src="/images/hide-pass.png" onclick="pass()" class="pass-icon" id="pass-icon">
+                </div>
+                    <button onclick="verificarSenha()">Entrar</button>
                 <p id="mensagemErro" style="color: red;"></p>
-
+                <div id="loading" class="loading" style="display:none;"></div>
             </div>
         </div>
         <footer class="footer-content"> </footer>
@@ -928,7 +930,6 @@
     </form>-->
         </section>
         <!-- Mais seções para as fases subsequentes -->
-
 </main>
 
 

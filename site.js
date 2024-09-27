@@ -1,6 +1,6 @@
 let valorInicialTemporario = {}; // Para armazenar o valor inicial temporário para cada fase
 let first;
-
+var a;
 
 // Função para verificar a senha
 function verificarSenha() 
@@ -8,8 +8,12 @@ function verificarSenha()
     const senhaDigitada = document.getElementById('senhaInput').value;
     const mensagemErro = document.getElementById('mensagemErro');
     const senhaCaixa = document.querySelector('.senha-caixa'); // Seleciona a caixa da senha
+    const loading = document.getElementById('loading'); // Seleciona o círculo de carregamento
+
     // Remove a classe 'incorreta' se já estiver presente
     senhaCaixa.classList.remove('incorreta');
+    mensagemErro.textContent = '';
+    loading.style.display = 'block'; // Exibe o círculo de carregamento
 
     fetch("https://server-jvxz.onrender.com/auth/login",{ 
         method: 'POST',
@@ -52,9 +56,27 @@ function verificarSenha()
         document.getElementById('footer').style.display = 'block';
     })
     .catch(error => {
+        loading.style.display = 'none'; // Esconde o círculo de carregamento em caso de erro
+
         mensagemErro.textContent = error.message;
     });
     
+}
+
+function pass()
+{
+    if(a==1)
+    {
+        document.getElementById('senhaInput').type='password';
+        document.getElementById('pass-icon').src='/images/hide-pass.png';
+        a=0;
+    }
+    else
+    {
+        document.getElementById('senhaInput').type='text';
+        document.getElementById('pass-icon').src='/images/show-pass.png';
+        a=1;
+    }
 }
 
 // Função para verificar se os campos de nome e e-mail estão preenchidos
@@ -369,6 +391,37 @@ function verificarExpiracao()
     }
 }
 
+function coletarDadosFases() {
+    const dados = {
+        fase2: {
+            pib: document.getElementById('pib').value,
+            vcpriv: document.getElementById('vcpriv').value,
+            vcpub: document.getElementById('vcpub').value,
+            fbcf: document.getElementById('fbcf').value,
+            vexp: document.getElementById('vexp').value,
+            vimp: document.getElementById('vimp').value,
+            infl: document.getElementById('infl').value,
+            tdes: document.getElementById('tdes').value,
+        },
+        fase4: {
+            medidas: fases[4].medidas.map(medida => ({
+                titulo: medida.titulo,
+                orcamento: medida.orcamento,
+                explicacao: medida.explicacao 
+            })),
+        },
+        fase5: {
+            medidas: fases[5].medidas.map(medida => ({
+                titulo: medida.titulo,
+                orcamento: medida.orcamento,
+                explicacao: medida.explicacao 
+            })),
+            comentarioExtra: document.getElementById('projecaoText').value,
+        },
+    };
+    return dados;
+}
+
 function formulario() 
 {
     gerarPDF()
@@ -391,7 +444,9 @@ function formulario()
 
 function gerarPDF() {
     return new Promise((resolve, reject) => {
-        const textoProjecao = document.getElementById('projecaoText');  // Seleciona o textarea correto
+        
+        const dados = coletarDadosFases(); // Coleta os dados de todas as fases
+
         const nomeGrupo = document.getElementById('nome').value;  // Captura o nome do grupo
         // Verifica se o nome do grupo está vazio
         if (!nomeGrupo.trim()) {
@@ -401,16 +456,58 @@ function gerarPDF() {
             return;
         }
 
-        // Verifica se o campo de projeção está vazio
-        if (!textoProjecao.value.trim()) {
-            alert("Por favor, insira a um comentário extra.");
-            resolve(false);  // Retorna false se o campo de projeção estiver vazio
-            return;
-        }
-
         // Cria um elemento temporário para o conteúdo do PDF
         const elementoTemporario = document.createElement('div');
-        elementoTemporario.innerHTML = `<h2>Projeção Macroeconômica 2025</h2><p>${textoProjecao.value}</p>`;
+        
+        // Criação do conteúdo para o PDF
+        let conteudoPDF = `<div class="fase">
+                    <h2>Projeção Macroeconômica 2025</h2>
+                    <p>Grupo: ${nomeGrupo}</p>
+                    <h3>Fase 2</h3>
+                    <p>Crescimento do PIB real: ${dados.fase2.pib}%</p>
+                    <p>Variação do consumo privado: ${dados.fase2.vcpriv}%</p>
+                    <p>Variação do consumo público: ${dados.fase2.vcpub}%</p>
+                    <p>Variação do investimento (FBCF): ${dados.fase2.fbcf}%</p>
+                    <p>Variação das exportações: ${dados.fase2.vexp}%</p>
+                    <p>Variação das importações: ${dados.fase2.vimp}%</p>
+                    <p>Inflação: ${dados.fase2.infl}%</p>
+                    <p>Taxa de desemprego: ${dados.fase2.tdes}%</p>
+                   </div>
+                   <div class="fase">
+                    <h3>Fase 4 - Medidas</h3>`;
+        if (dados.fase4.medidas.length === 0) 
+        {
+            conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>`;
+        } 
+        else 
+        {
+            dados.fase4.medidas.forEach(medida => {
+                conteudoPDF += `<h4>${medida.titulo}:</h4>
+                                <p>Orçamento: ${medida.orcamento}M €</p>
+                                <p>Explicação: ${medida.explicacao}</p>`;            
+            });
+        }
+        conteudoPDF += `</div>
+                <div class="fase">
+                    <h3>Fase 5</h3>`;
+                if (dados.fase5.medidas.length === 0) 
+                    {
+                        conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>`;
+                    } 
+                    else 
+                    {
+                        dados.fase5.medidas.forEach(medida => {
+                            conteudoPDF += `<h4>${medida.titulo}:</h4>
+                                            <p>Orçamento: ${medida.orcamento}M €</p>
+                                            <p>Explicação: ${medida.explicacao}</p>`;            
+                        });
+                    }
+                       
+        conteudoPDF += `<h3>Comentários adicionais</h3>
+                        <p>Comentário Extra: ${dados.fase5.comentarioExtra}</p>
+                        </div>`;
+        elementoTemporario.innerHTML = conteudoPDF; // Define o conteúdo gerado no elemento temporário
+
 
         // Configurações para o html2pdf
         const opt = {
@@ -429,24 +526,6 @@ function gerarPDF() {
             .catch((error) => {
                 reject(error);
             });
-               /*   // Gera o PDF e converte para Base64
-                html2pdf().from(elementoTemporario).set(opt).outputPdf('datauristring').then(function(pdfBase64) {
-                    pdfBase64 = pdfBase64.split(',')[1];  // Extrai a parte Base64 da string
-                    console.log(pdfBase64); // Para verificar se a string Base64 está correta
-
-                    // Coloca a string Base64 no campo oculto
-                    document.getElementById('pdfBase64').value = pdfBase64;
-
-                    // Submete o formulário aqui após garantir que o PDF foi gerado
-
-                    document.getElementById('emailForm').submit();
-
-                    resolve(true);  // Garante que a promessa é resolvida
-                }).catch((error) => {
-                    console.error("Erro ao gerar PDF:", error);
-                    reject(error);
-                });*/
-
     });
 }
 // Função para confirmar o envio e limpar os dados após a confirmação do usuário

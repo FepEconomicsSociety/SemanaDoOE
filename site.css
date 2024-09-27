@@ -1,3 +1,4 @@
+/* Pagina da senha*/
 /* Container que mantém o conteúdo da senha centralizado */
 .senha-container {
     display: flex;
@@ -18,7 +19,6 @@
     max-width: 400px;          /* Largura máxima */
     width: 100%;               /* Garante que ocupe 100% da largura até o limite */
     position: relative;        /* Necessário para o uso do ::after */
-    z-index: 2;                /* Z-index maior para ficar na frente */
 }
 
 /* Fitinha para erro com transição */
@@ -35,7 +35,6 @@
     font-size: 14px;
     white-space: nowrap; /* Evita quebra de linha */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1; /* Fita deve estar atrás da caixa */
     opacity: 0; /* Inicialmente invisível */
     transition: opacity 0.3s ease, left 0.3s ease; /* Transição para suavizar a animação */
 }
@@ -53,15 +52,40 @@
     color: #ffffff;
 }
 
-/* Estilo do input de senha */
-.senha-caixa input[type="password"] {
+/* Contêiner para o input e o ícone de senha */
+.input-container {
+    position: relative;
     width: 100%;
-    padding: 0.5em;
+}
+
+/* Estilo do input de senha */
+.senha-caixa input[type="password"], 
+.senha-caixa input[type="text"] {
+    width: 100%;
+    padding: 0.5em 2.5em 0.5em 0.5em; /* Adiciona padding à direita para o ícone */
     margin-bottom: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
     box-sizing: border-box;
+}
+
+/* Estilo do ícone de senha */
+.pass-icon {
+    position: absolute;
+    top: 40%;
+    right: 0px; /* Espaçamento à direita */
+    transform: translateY(-50%); /* Centraliza verticalmente no input */
+    cursor: pointer;
+    font-size: 1.5em; /* Tamanho do ícone */
+    color: #ccc; /* Cor do ícone */
+    transition: color 0.3s ease;
+    width: 50px;
+}
+
+/* Alterar a cor do ícone quando o cursor passar sobre ele */
+.pass-icon:hover {
+    color: #007bff;
 }
 
 /* Botão de envio */
@@ -102,6 +126,22 @@
     .senha-caixa button {
         font-size: 0.9em;
     }
+}
+
+/* Estilos para o círculo de carregamento */
+.loading {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #cc2900; /* Cor da borda superior */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto; /* Centraliza o círculo */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /*------------------------------------------------------------------------------------------*/
@@ -415,4 +455,16 @@ tr{
 }
 
 
+/* Seção para Fase */
+.fase {
+    page-break-after: auto; /* Permite que cada fase quebrem naturalmente */
+}
 
+/* Quebra de página para evitar cortes */
+p, h4 {
+    page-break-inside: auto; /* Permite cortes dentro de parágrafos e títulos naturalmente */
+}
+
+table {
+    page-break-inside: auto; /* Permite que tabelas se quebrem naturalmente */
+}

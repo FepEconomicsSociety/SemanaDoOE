@@ -454,17 +454,46 @@ tr{
     font-weight: normal;
 }
 
+.modal-body {
+    max-height: 400px; /* Altura máxima do modal */
+    overflow-y: auto;  /* Ativa a barra de rolagem quando necessário */
+    padding: 20px;     /* Espaçamento interno do modal */
+    box-sizing: border-box; /* Inclui padding na largura total */
+}
 
+.modal-title {
+    font-size: 1.5em; /* Ajuste o tamanho do título se necessário */
+    margin-bottom: 10px; /* Espaçamento inferior do título */
+}
+
+/* Correçao da estrutura do pdf criado*/
 /* Seção para Fase */
 .fase {
-    page-break-after: auto; /* Permite que cada fase quebrem naturalmente */
+    page-break-after: auto; /* Permite que as fases quebrem naturalmente */
+    page-break-inside: avoid; /* Evita quebra dentro da seção */
 }
 
 /* Quebra de página para evitar cortes */
 p, h4 {
-    page-break-inside: auto; /* Permite cortes dentro de parágrafos e títulos naturalmente */
+    page-break-inside: avoid; /* Evita cortes dentro de parágrafos e títulos */
 }
 
 table {
-    page-break-inside: auto; /* Permite que tabelas se quebrem naturalmente */
+    page-break-inside: avoid; /* Evita cortes dentro de tabelas */
 }
+
+/* Força o conteúdo a mover para a próxima página se for necessário */
+.container {
+    break-inside: avoid;
+}
+
+/* Impede que o título e o orçamento sejam separados */
+.orcamento-container {
+    page-break-inside: avoid; /* Impede quebra dentro do grupo de título e orçamento */
+}
+/* Impede que o título e o orçamento sejam separados */
+.medidas-container {
+    page-break-inside: avoid; /* Impede quebra dentro do grupo de título e orçamento */
+}
+
+/*------------------------------------------------------------------------------------------*/

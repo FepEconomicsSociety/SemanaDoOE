@@ -42,13 +42,12 @@ function verificarSenha()
         sessionStorage .setItem('token', data.token); // Armazena o token JWT
 
         first = false;
-        // Armazena a hora de autenticação quando o login é bem-sucedido
-        sessionStorage.setItem('horaInicio', Date.now());  // Define o timestamp no momento da autenticação
+
 
         // Salva o estado de login para evitar novo pedido de senha após refresh
         sessionStorage .setItem('autenticado', 'true');
-        sessionStorage .setItem('horaAutenticacao', Date.now());  // Salva o timestamp da autenticação
-        
+        // Armazena a hora de autenticação quando o login é bem-sucedido
+        sessionStorage.setItem('horaInicio', Date.now());  // Define o timestamp no momento da autenticação
         document.getElementById('senhaPage').style.display = 'none';
         document.getElementById('conteudoSite').style.display = 'block';
     
@@ -403,6 +402,28 @@ function coletarDadosFases() {
             infl: document.getElementById('infl').value,
             tdes: document.getElementById('tdes').value,
         },
+        fase3: {
+            orcamentos: [
+                { ministerio: 'Administração Interna', valor: document.getElementById('admint').value || 'Não inserido' },
+                { ministerio: 'Agricultura e Alimentação', valor: document.getElementById('agral').value || 'Não inserido' },
+                { ministerio: 'Ambiente e Ação Climática', valor: document.getElementById('ambal').value || 'Não inserido' },
+                { ministerio: 'Ciência Tecnologia e Ensino Superior', valor: document.getElementById('tecs').value || 'Não inserido' },
+                { ministerio: 'Coesão Territorial', valor: document.getElementById('cterr').value || 'Não inserido' },
+                { ministerio: 'Cultura', valor: document.getElementById('cult').value || 'Não inserido' },
+                { ministerio: 'Defesa Nacional', valor: document.getElementById('dn').value || 'Não inserido' },
+                { ministerio: 'Economia e Mar', valor: document.getElementById('ecm').value || 'Não inserido' },
+                { ministerio: 'Educação', valor: document.getElementById('educ').value || 'Não inserido' },
+                { ministerio: 'Encargos Gerais do Estado', valor: document.getElementById('encge').value || 'Não inserido' },
+                { ministerio: 'Finanças', valor: document.getElementById('fin').value || 'Não inserido' },
+                { ministerio: 'Habitação', valor: document.getElementById('hab').value || 'Não inserido' },
+                { ministerio: 'Infraestruturas', valor: document.getElementById('infa').value || 'Não inserido' },
+                { ministerio: 'Justiça', valor: document.getElementById('just').value || 'Não inserido' },
+                { ministerio: 'Negócios Estrangeiros', valor: document.getElementById('negest').value || 'Não inserido' },
+                { ministerio: 'Presidência do Conselho de Ministros', valor: document.getElementById('precom').value || 'Não inserido' },
+                { ministerio: 'Saúde', valor: document.getElementById('saude').value || 'Não inserido' },
+                { ministerio: 'Trabalho, Solidariedade e Segurança Social', valor: document.getElementById('tsss').value || 'Não inserido' }
+            ]
+        },
         fase4: {
             medidas: fases[4].medidas.map(medida => ({
                 titulo: medida.titulo,
@@ -472,9 +493,21 @@ function gerarPDF() {
                     <p>Variação das importações: ${dados.fase2.vimp}%</p>
                     <p>Inflação: ${dados.fase2.infl}%</p>
                     <p>Taxa de desemprego: ${dados.fase2.tdes}%</p>
-                   </div>
-                   <div class="fase">
-                    <h3>Fase 4 - Medidas</h3>`;
+                   </div>`;
+
+            conteudoPDF +=  `<div class="fase">
+                            <h3>Fase 3 - Orçamentação dos ministérios</h3>`;
+            dados.fase3.orcamentos.forEach(orcamento => {
+                conteudoPDF += `<div class="orcamento-container"> 
+                <h4>${orcamento.ministerio}:</h4>
+                <p>Orçamento: ${orcamento.valor}M €</p>
+            </div>`;
+            });
+        
+        conteudoPDF +=  `</div>
+                        <div class="fase">
+                        <h3>Fase 4 - Medidas</h3>`;
+
         if (dados.fase4.medidas.length === 0) 
         {
             conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>`;
@@ -482,9 +515,11 @@ function gerarPDF() {
         else 
         {
             dados.fase4.medidas.forEach(medida => {
-                conteudoPDF += `<h4>${medida.titulo}:</h4>
+                conteudoPDF += `<div class="medidas-container"> 
+                                <h4>${medida.titulo}:</h4>
                                 <p>Orçamento: ${medida.orcamento}M €</p>
-                                <p>Explicação: ${medida.explicacao}</p>`;            
+                                <p>Explicação: ${medida.explicacao}</p>
+                                </div>`;            
             });
         }
         conteudoPDF += `</div>

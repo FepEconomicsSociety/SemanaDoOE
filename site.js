@@ -23,6 +23,7 @@ function verificarSenha()
     .then(response => {
         if (response.ok) 
         {
+            first = false;
             return response.json();
         } 
         else 

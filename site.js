@@ -233,9 +233,10 @@ function diferenca_anual() {
 function finalizarFase3() {
     // Seleciona todos os inputs dentro da seção "fase3"
     const inputs = document.querySelectorAll('#fase3 input[type="number"]');
-    
+    const inputs2 = document.querySelectorAll('#fase2 input[type="number"]');
     // Verifica se todos os inputs têm um valor
     let todosPreenchidos = true; // Inicializa como verdadeiro
+    let todosPreenchidos2 = true; // Inicializa como verdadeiro
 
     for (let input of inputs) {
         if (input.value === '' || input.value === null) {
@@ -243,13 +244,30 @@ function finalizarFase3() {
             break; // Sai do loop se encontrar um campo vazio
         }
     }
+    for (let input of inputs2) {
+        if (input.value === '' || input.value === null) {
+            todosPreenchidos2 = false; // Define como falso se algum campo estiver vazio
+            break; // Sai do loop se encontrar um campo vazio
+        }
+    }
 
-    if (todosPreenchidos) {
+    if (todosPreenchidos && todosPreenchidos2) 
+    {
         // Se todos os dados estiverem inseridos, permite a navegação
         navigateTo('fase4'); // Altere para a próxima fase que deseja
-    } else {
+    } 
+    else if(todosPreenchidos && !todosPreenchidos2)
+    {
         // Se não, exibe uma mensagem de aviso
-        alert("Por favor, preencha todos os campos antes de prosseguir.");
+        alert("Por favor, preencha todos os campos da fase 2 antes de prosseguir.");
+    }
+    else if(!todosPreenchidos && todosPreenchidos2)
+    {
+        alert("Por favor, preencha todos os campos da fase 3 antes de prosseguir.");
+    }
+    else
+    {
+        alert("Por favor, preencha todos os campos das fases 2 e 3 antes de prosseguir.");
     }
 }
 
@@ -482,7 +500,7 @@ function gerarPDF() {
         
         // Criação do conteúdo para o PDF
         let conteudoPDF = `<div class="fase">
-                    <h2>Projeção Macroeconômica 2025</h2>
+                    <h2>Semana do Orçamento de Estado</h2>
                     <p>Grupo: ${nomeGrupo}</p>
                     <h3>Fase 2</h3>
                     <p>Crescimento do PIB real: ${dados.fase2.pib}%</p>
@@ -527,7 +545,8 @@ function gerarPDF() {
                     <h3>Fase 5</h3>`;
                 if (dados.fase5.medidas.length === 0) 
                     {
-                        conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>`;
+                        conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>
+                        </div>`; 
                     } 
                     else 
                     {
@@ -537,10 +556,18 @@ function gerarPDF() {
                                             <p>Explicação: ${medida.explicacao}</p>`;            
                         });
                     }
-                       
-        conteudoPDF += `<h3>Comentários adicionais</h3>
-                        <p>Comentário Extra: ${dados.fase5.comentarioExtra}</p>
-                        </div>`;
+        conteudoPDF += `<h3>Comentários adicionais</h3>`;         
+        if(dados.fase5.comentarioExtra.length === 0)
+        {
+            conteudoPDF += `<p>Comentário Extra: Nenhuma explicação foi adicionada!</p>
+                            </div>`;
+        }
+        else
+        {
+            conteudoPDF +=`<p>Comentário Extra: ${dados.fase5.comentarioExtra}</p>
+                        </div>`; 
+        }
+                        
         elementoTemporario.innerHTML = conteudoPDF; // Define o conteúdo gerado no elemento temporário
 
 
@@ -550,7 +577,8 @@ function gerarPDF() {
             filename: `SOE_2025_${nomeGrupo}.pdf`,  // Substitui "nomedogrupo" pelo valor inserido
             image: { type: 'jpeg', quality: 0.98 },
             html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['css', 'legacy'] }
         };
 
         // Gera o PDF e retorna uma Promise

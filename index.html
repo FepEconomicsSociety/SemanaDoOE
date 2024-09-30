@@ -526,7 +526,7 @@
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
                 <h2>Fase 3 - Orçamentação dos ministérios</h2>
                 <div class="caixa-valor-inicial" id="caixaValorInicial" style="display: none;">
-                    Diferença anual: <span id="numeroInicial"></span>
+                    Diferença anual: <span id="numeroInicial"></span>M €
                 </div>
 
                 <p>
@@ -720,7 +720,7 @@
             <h2>Fase 4 - Ministério da Saúde</h2>
         
             <div class="caixa-valor-inicial" id="caixaValorInicial4" style="display: none;">
-                Valor Inicial: <span id="numeroInicial_4"></span>
+                Orçamento: <span id="numeroInicial_4"></span>M €
             </div>
 
             
@@ -768,7 +768,7 @@
                     <br>
 
                     <p>Diga-nos o título da sua medida:</p>
-                    <textarea class="titulo" id="titulo_4" rows="1" cols="50" placeholder="Insira o título aqui ..." maxlength="80"></textarea>
+                    <textarea class="titulo" id="titulo_4" rows="1" cols="50" placeholder="Insira o título aqui ..." maxlength="60"></textarea>
 
                     <br>
 
@@ -778,7 +778,7 @@
                     <br>
 
                     <p>Insira o orçamento:</p>
-                    <input type="number" class= "orcamento" id="orcamento_4" rows="1" cols="50" placeholder="Digite o orçamento qui..." oninput="atualizarTitulo(4,true)"></input>
+                    <input type="number" class= "orcamento" id="orcamento_4" rows="1" cols="50" placeholder="Digite o orçamento qui..." oninput="atualizarTitulo(4,true)"></input>M €
 
                     <br>
                     <br>
@@ -820,9 +820,8 @@
             <h2>Fase 5 - Ministério da ...</h2>
 
             <div class="caixa-valor-inicial" id="caixaValorInicial5" style="display: none;">
-                Valor Inicial: <span id="numeroInicial_5"></span>
+                Orçamento: <span id="numeroInicial_5"></span>M €
             </div>
-
             <div class="container" id="medidasA_5">
                 <div class="row" style="margin-top: 3vw;">
                 
@@ -845,7 +844,16 @@
                         </tbody>
                     </table>
                 </div>
+                    <div id = zona_medidas5>
+                        <br>
+                        <br>
+                        
+                        <p>Adicione aqui algum comentário extra:</p>
+                        <textarea id="projecaoText" rows="10" cols="50" placeholder="Adicione algum comentário extra ..."></textarea>
+                    </div>
             </div>
+
+            
 
             <!-- Esta parte deve aparecer quando se clicar no botão de nova medida -->
             <!-- Dá para estilizar estas coisas out em mesmo de ser feito por js? -->
@@ -856,7 +864,7 @@
                     <br>
 
                     <p>Diga-nos o título da sua medida:</p>
-                    <textarea class="titulo" id="titulo_5" rows="1" cols="50" placeholder="Insira o título aqui ..." maxlength="80"></textarea>
+                    <textarea class="titulo" id="titulo_5" rows="1" cols="50" placeholder="Insira o título aqui ..." maxlength="60"></textarea>
 
                     <br>
 
@@ -866,7 +874,7 @@
                     <br>
 
                     <p>Insira o orçamento:</p>
-                    <input type="number" class= "orcamento" id="orcamento_5" rows="1" cols="50" placeholder="Digite o orçamento qui..." oninput="atualizarTitulo(5,true)"></input>
+                    <input type="number" class= "orcamento" id="orcamento_5" rows="1" cols="50" placeholder="Digite o orçamento qui..." oninput="atualizarTitulo(5,true)"></input>M €
 
                     <br>
                     <br>
@@ -897,14 +905,6 @@
                   
                 </div>
               </div>
-            <!-- Botão para adicionar uma nova medida -->
-            <br>
-            <br>
-
-            <p>Adicione aqui algum comentário extra:</p>
-            <textarea id="projecaoText" rows="10" cols="50" placeholder="Adicione algum comentário extra ..."></textarea>
-
-            <p> pronto:</p>
             
             <!-- Botão para voltar à fase anterior -->
             <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase4')">Voltar</button>

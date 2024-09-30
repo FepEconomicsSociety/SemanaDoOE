@@ -471,6 +471,7 @@ tr{
 .fase {
     page-break-after: auto; /* Permite que as fases quebrem naturalmente */
     page-break-inside: avoid; /* Evita quebra dentro da seção */
+    word-wrap: break-word;
 }
 
 /* Quebra de página para evitar cortes */
@@ -490,10 +491,14 @@ table {
 /* Impede que o título e o orçamento sejam separados */
 .orcamento-container {
     page-break-inside: avoid; /* Impede quebra dentro do grupo de título e orçamento */
+    word-wrap: break-word;
 }
 /* Impede que o título e o orçamento sejam separados */
 .medidas-container {
     page-break-inside: avoid; /* Impede quebra dentro do grupo de título e orçamento */
+    word-wrap: break-word;  /* Quebra a linha se for muito longa */
+    white-space: pre-wrap;  /* Mantém quebras de linha e espaços */
+    
 }
 
 /*------------------------------------------------------------------------------------------*/

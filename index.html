@@ -44,7 +44,7 @@
     </header>
  
     <div class="main-content">
-        <section id="fase0" class="fase">
+        <section id="fase0" class="fase hidden">
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
@@ -352,7 +352,7 @@
                         </div>
 
                         <div class="col-6">
-                            <h5> Variação das Exportações / Importações (%)</h5>
+                            <h5> Variação das Exportações / Importações (% do PIB)</h5>
                             <canvas id="myChartExpImp"></canvas>
 
                             <script>
@@ -716,7 +716,7 @@
             <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="finalizarFase3()">Próxima Fase</button>
         </section>
 
-        <section id="fase4" class="fase hidden">
+        <section id="fase4" class="fase">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
 
             <h2>Fase 4 - Ministério da Saúde</h2>
@@ -827,11 +827,7 @@
             <h2>Fase 5 - Ministério da ...</h2>
 
             <div class="caixa-valor-inicial" id="caixaValorInicial5" style="display: none;">
-<<<<<<< Updated upstream
-                Orçamento: <span id="numeroInicial_5"></span>M €
-=======
                 Saldo disponível: <span id="numeroInicial_5"></span> M€
->>>>>>> Stashed changes
             </div>
             <p>
                 Outro texto bonito a explicar esta fase....
@@ -902,7 +898,7 @@
             </div>
 
 
-            <div class="modal fade" id="myModal5" role="dialog">
+            <div class="modal fade" id="myModal5" role="dialog" style="width: 70%;">
                 <div class="modal-dialog">
                   <!-- Modal content-->
                   <div class="modal-content">

@@ -153,6 +153,7 @@ body {
     padding: 0;
     height: 100%;
     background-color: #f4f4f4;
+    min-width: 900px;
 }
 /* Wrapper para todo o conteúdo da página */
 .wrapper {
@@ -175,14 +176,14 @@ header {
     text-align: center;
     padding: 1em 0;
     display: flex;  /* Centraliza o conteúdo */
-    justify-content: center;  /* Centraliza horizontalmente */
+    justify-content: flex-start; /* Alinha os itens para a esquerda */
     align-items: center;  /* Centraliza verticalmente */
     box-sizing: border-box;
     overflow: hidden;  /* Garante que o conteúdo não transborde */
 }
-
+/* Banner */
 #banner {
-    height: 5vw;  /* Ajusta a altura para ser responsiva com a tela */  
+    height: 10dvh;  /* Ajusta a altura para ser responsiva com a tela */  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,8 +194,37 @@ header h1 {
     font-size: 24px;  /* Tamanho fixo da fonte para o banner */
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
+    text-overflow: ellipsis;    
+}
+
+/* Estilo do ícone de senha */
+.logo-icon {
+    position: absolute;
+    top: 50%; /* Centraliza verticalmente com o texto */
+    left: 2%; /* Coloca o logo alinhado à esquerda */
+    transform: translateY(-50%); /* Ajusta o logo para ficar centralizado verticalmente */
+    max-width: 20%; /* Define um tamanho máximo para o logo */
+    height: auto; /* Mantém a proporção da imagem */
+    object-fit: contain; /* Ajusta a imagem ao seu container */
+    margin-right: 1em; /* Espaço entre o logo e o texto */
+}
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;  /* Muda para coluna quando o espaço é pequeno */
+        align-items: center;  /* Centraliza o conteúdo */
+        text-align: center;
+    }
+
+    #banner {
+        font-size: 4vw;  /* Aumenta um pouco a fonte em telas pequenas */
+        text-align: center;
+    }
+
+    .logo-icon {
+        max-width: 25%;  /* Aumenta o logo para melhor visualização em telas pequenas */
+        margin-bottom: 1em;  /* Espaço entre o logo e o texto */
+    }
 }
 
 /* Footer */

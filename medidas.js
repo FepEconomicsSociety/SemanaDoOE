@@ -267,6 +267,7 @@ function carregarMedidasPredefinidas(fase)
         });
     });
     salvarMedidas(fase);
+    first = true;
 
 }
 
@@ -390,11 +391,6 @@ function inicializarFase(fase) {
     {
         restaurarMedidas(fase);  // Restaura as medidas ao carregar a página
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial
-        if(fases[fase].medidas.length === 0 && first === false)
-        {
-            carregarMedidasPredefinidas(4);
-            first = true;
-        }
         adicionarMedidaATabela(fase);
         atualizarTitulo(fase, false);  // Atualiza o valor inicial
     }else if(fase === 5)

@@ -1,5 +1,5 @@
 let valorInicialTemporario = {}; // Para armazenar o valor inicial temporário para cada fase
-let first;
+let first = true;
 var a;
 
 // Função para verificar a senha
@@ -24,6 +24,7 @@ function verificarSenha()
         if (response.ok) 
         {
             first = false;
+            carregarMedidasPredefinidas(4);
             return response.json();
         } 
         else 

@@ -169,7 +169,8 @@ body {
 
 /* Header */
 header {
-    background-color: #cc2900;
+    background-color: #cc171d;
+    z-index: 1;
     color: white;
     position: relative;
     width: 100%;
@@ -203,8 +204,8 @@ header h1 {
     top: 50%; /* Centraliza verticalmente com o texto */
     left: 2%; /* Coloca o logo alinhado à esquerda */
     transform: translateY(-50%); /* Ajusta o logo para ficar centralizado verticalmente */
-    max-width: 20%; /* Define um tamanho máximo para o logo */
-    height: auto; /* Mantém a proporção da imagem */
+    max-width: 5%; /* Define um tamanho máximo para o logo */
+    height: 10vw; /* Mantém a proporção da imagem */
     object-fit: contain; /* Ajusta a imagem ao seu container */
     margin-right: 1em; /* Espaço entre o logo e o texto */
 }
@@ -229,13 +230,14 @@ header h1 {
 
 /* Footer */
 footer {
-    background-color: #cc2900;  /* Mesmo fundo do header */
+    background-color: #cc171d;  /* Mesmo fundo do header */
     color: white;
     text-align: center;  /* Centraliza o conteúdo do rodapé */
     padding: 1em 0;  /* Espaçamento semelhante ao do header */
     position: relative;
     bottom: 0;
     width: 100%;
+    z-index: 1;
 }
 
 footer a {
@@ -425,6 +427,7 @@ button:hover {
     margin: 0.5vw;
     padding: 2vw 1vw 1vw 1vw;
     box-shadow: 2px 2px #5285ec;
+    background-color: white;
 }
 
 .row{
@@ -535,6 +538,58 @@ table {
     word-wrap: break-word;  /* Quebra a linha se for muito longa */
     white-space: pre-wrap;  /* Mantém quebras de linha e espaços */
     
+}
+
+
+.linhaazul{
+    border: 7px solid white;
+    z-index: 1;
+    position: absolute;
+}
+
+#linha1{
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 75%;
+}
+
+#O{
+    width: 10vw;
+    position: absolute;
+    top: 5vw;
+    right: 8.45vw;
+}
+/*
+#linha2{
+    top: -5vw;
+    right: -15vw;
+    width: 60vw;
+    height: 35vw;
+}
+
+#linha3{
+    bottom: 0vw;
+    border: 5px solid #d5e7ff;
+    left: 35vw;
+    height: 45vw;
+}
+/*
+#linha4{
+    top: -5vw;
+    left: -5vw;
+    width: 25vw;
+    height: 25vw;
+}
+*/
+
+.main-content{
+    z-index: 0.5;
+    background-color: #d5e7ff;
+}
+
+.container{
+    background-color: #d5e7ff;
 }
 
 /*------------------------------------------------------------------------------------------*/

@@ -153,11 +153,28 @@ body {
     padding: 0;
     height: 100%;
     background-color: #f4f4f4;
-    min-width: 900px;
+    min-width: 620px;
 }
+.col {
+    flex: 1 1 100%; /* Ocupa toda a largura em telas pequenas */
+    margin: 0.5em 0; /* Margem entre os blocos */
+}
+
+@media (min-width: 768px) {
+    .col {
+        flex: 1 1 45%; /* Em tablets, ocupará cerca de metade da largura */
+    }
+}
+
+@media (min-width: 1024px) {
+    .col {
+        flex: 1 1 22%; /* Em desktops, voltará a ser 4 colunas */
+    }
+}
+
 /* Wrapper para todo o conteúdo da página */
 .wrapper {
-    min-height: 100vh;  /* Garante que a altura mínima seja 100% da viewport */
+    min-height: 100dvh;  /* Garante que a altura mínima seja 100% da viewport */
     display: flex;
     flex-direction: column;
 }
@@ -223,7 +240,7 @@ header h1 {
     }
 
     .logo-icon {
-        max-width: 25%;  /* Aumenta o logo para melhor visualização em telas pequenas */
+        /*max-width: 25%;*/  /* Aumenta o logo para melhor visualização em telas pequenas */
         margin-bottom: 1em;  /* Espaço entre o logo e o texto */
     }
 }
@@ -432,7 +449,11 @@ button:hover {
 
 .row{
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Espaço uniforme ao redor das colunas */
 }
+
 
 /* Hide the spin buttons in WebKit browsers */
 input::-webkit-outer-spin-button,
@@ -503,6 +524,8 @@ tr{
 .modal-title {
     font-size: 1.5em; /* Ajuste o tamanho do título se necessário */
     margin-bottom: 10px; /* Espaçamento inferior do título */
+    overflow-y: auto;  /* Ativa a barra de rolagem quando necessário */
+
 }
 
 /* Correçao da estrutura do pdf criado*/
@@ -542,10 +565,18 @@ table {
 
 
 .linhaazul{
+    position: relative;  /* Garante que a div tenha um contexto de posicionamento */
     border: 7px solid white;
     z-index: 1;
-    position: absolute;
+    padding: 30px;  /* Espaçamento interno */
+
+    overflow: hidden; /* Previne que o conteúdo extravase a borda */
+    margin-bottom: 20px; /* Espaço antes do footer */
+
+
 }
+
+
 
 #linha1{
     top: 20%;
@@ -554,12 +585,30 @@ table {
     height: 75%;
 }
 
+
 #O{
-    width: 10vw;
+    width: 100px;
+    height: 200px;
+  
     position: absolute;
-    top: 5vw;
-    right: 8.45vw;
+    top: 11.5%;
+    right: 10.5%;
+    left: auto;
+    bottom: auto;
 }
+@media (max-width: 1200px) {
+    #O{
+        width: 100px;
+        height: 200px;
+      
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        left: auto;
+        bottom: auto;
+    }
+}
+
 /*
 #linha2{
     top: -5vw;

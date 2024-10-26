@@ -564,12 +564,17 @@ function gerarPDF() {
         } 
         else 
         {
+            
             dados.fase4.medidas.forEach(medida => {
-                conteudoPDF += (`<div class="medidas-container"> 
+                const orcamentoFormatado = medida.orcamento
+                .toString()
+                .replace('.', ',')
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                conteudoPDF += `<div class="medidas-container"> 
                                 <h4>${medida.titulo}:</h4>
-                                <p>Orçamento: ${medida.orcamento}M €</p>
+                                <p>Orçamento: ${orcamentoFormatado}M €</p>
                                 <p>Explicação: ${medida.explicacao}</p>
-                                </div>`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");            
+                                </div>`;            
             });
         }
         conteudoPDF += `</div>
@@ -585,9 +590,13 @@ function gerarPDF() {
                     else 
                     {
                         dados.fase5.medidas.forEach(medida => {
-                            conteudoPDF += (`<h4>${medida.titulo}:</h4>
-                                            <p>Orçamento: ${medida.orcamento}M €</p>
-                                            <p>Explicação: ${medida.explicacao}</p>`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");            
+                            const orcamentoFormatado = medida.orcamento
+                            .toString()
+                            .replace('.', ',')
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                            conteudoPDF += `<h4>${medida.titulo}:</h4>
+                                            <p>Orçamento: ${orcamentoFormatado}M €</p>
+                                            <p>Explicação: ${medida.explicacao}</p>`;            
                         });
                     }
         conteudoPDF += `<h3>Comentários adicionais</h3>`;         

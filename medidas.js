@@ -239,12 +239,16 @@ function mostrarDetalhesMedida(index, fase) {
 
     // Atualiza o título do modal com o título da medida
     document.querySelector(`#myModal${fase} .modal-title`).textContent = medida.titulo;
-    
+        // Formata o valor do orçamento
+        const orcamentoFormatado = medida.orcamento
+        .toString()
+        .replace('.', ',')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     // Atualiza o corpo do modal com a explicação da medida
-    document.querySelector(`#myModal${fase} .modal-body`).innerHTML = (`
-        <p><strong>Orçamento:</strong> ${medida.orcamento}M €</p>
+    document.querySelector(`#myModal${fase} .modal-body`).innerHTML =`
+        <p><strong>Orçamento:</strong> ${orcamentoFormatado}M €</p>
         <p><strong>Explicação:</strong> ${medida.explicacao}</p>
-    `).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    `;
 }
 
 // Define as medidas predefinidas feitas em html em medidas iguais as criadas

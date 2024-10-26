@@ -46,6 +46,7 @@ function editarmedida(fase, index)
     document.getElementById(`titulo_${fase}`).value = fases[fase].medidas[index].titulo;
     document.getElementById(`explicacao_${fase}`).value = fases[fase].medidas[index].explicacao;
     document.getElementById(`orcamento_${fase}`).value = fases[fase].medidas[index].orcamento;
+    document.getElementById(`orcamento_${fase}`).value = document.getElementById(`orcamento_${fase}`).value.replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     document.getElementById(`atualizarmedidabtn_${fase}`).value = index;
 }
 
@@ -62,7 +63,7 @@ function apagarMedida(fase, index)
     }
 }
 
-//Atualiza a medida que esta a ser editada
+//Atualiza a medida que está a ser editada
 function atualizarmedida(fase)
 {
     // Identifica a medida sendo editada
@@ -71,7 +72,7 @@ function atualizarmedida(fase)
     // Obtém os novos valores do formulário
     const titulo = document.getElementById(`titulo_${fase}`).value;
     const explicacao = document.getElementById(`explicacao_${fase}`).value;
-    const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value) || 0;
+    const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
     //console.log(orcamento);
 
     // Verifica se todos os campos estão preenchidos corretamente
@@ -79,7 +80,7 @@ function atualizarmedida(fase)
         alert("Insira todos os parâmetros corretamente.");
         return;
     }
-
+    
     
     // Atualiza a medida no array com os novos valores
     fases[fase].medidas[index] = {
@@ -119,7 +120,7 @@ function criarMedida(fase)
 
     const titulo = document.getElementById(`titulo_${fase}`).value;
     const explicacao = document.getElementById(`explicacao_${fase}`).value;
-    const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value) || 0;
+    const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
 
     if (!titulo || !explicacao || !orcamento) {
         alert("Insira todos os parâmetros corretamente.");
@@ -135,17 +136,17 @@ function criarMedida(fase)
     
         if(fase == 4)
         {
-            orçamento = parseFloat(document.getElementById("saude").value) || 0;
+            orçamento = parseFloat(document.getElementById("saude").value.replace(/\./g, '').replace(',', '.')) || 0;
     
         }else if(fase == 5)
         {
             // Seleciona todos os inputs dentro da seção "fase3"
-        const inputs = document.querySelectorAll('#fase3 input[type="number"]');
+        const inputs = document.querySelectorAll('#fase3 input[type="text"]');
         let temp = Infinity;    // Inicia com o maior valor possível
 
         for (let input of inputs) 
         {
-            const valor = parseFloat(input.value);
+            const valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.'));
             if (valor < temp) 
             {
                 temp = valor;     // Atualiza o menor valor encontrado
@@ -173,7 +174,7 @@ function criarMedida(fase)
        adicionarMedidaATabela(fase);
 }
 
-// A diciona as medidas a tabela
+// Adiciona as medidas a tabela
 function adicionarMedidaATabela(fase) {
     // Identifica o tbody onde as medidas serão inseridas
     const tabela = document.getElementById(`medidasTabela_${fase}`).querySelector("tbody");
@@ -191,7 +192,7 @@ function adicionarMedidaATabela(fase) {
 
     const orcamentoTd = document.createElement("td");
     orcamentoTd.style.textAlign = "center";
-    orcamentoTd.textContent = `${medida.orcamento}M €`;
+    orcamentoTd.textContent = (`${medida.orcamento}M €`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
     const detalhesTd = document.createElement("td");
     detalhesTd.style.textAlign = "center";
@@ -238,12 +239,12 @@ function mostrarDetalhesMedida(index, fase) {
 
     // Atualiza o título do modal com o título da medida
     document.querySelector(`#myModal${fase} .modal-title`).textContent = medida.titulo;
-
+    
     // Atualiza o corpo do modal com a explicação da medida
-    document.querySelector(`#myModal${fase} .modal-body`).innerHTML = `
+    document.querySelector(`#myModal${fase} .modal-body`).innerHTML = (`
         <p><strong>Orçamento:</strong> ${medida.orcamento}M €</p>
         <p><strong>Explicação:</strong> ${medida.explicacao}</p>
-    `;
+    `).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 // Define as medidas predefinidas feitas em html em medidas iguais as criadas
@@ -274,7 +275,7 @@ function carregarMedidasPredefinidas(fase)
 // Função para salvar as medidas no sessionStorage
 function salvarMedidas(fase) {
     sessionStorage.setItem(`fases_${fase}`, JSON.stringify(fases[fase]));  // Salva o estado da fase
-    console.log(fases[fase]);
+    //console.log(fases[fase]);
 }
 
 // Função para atualizar a interface e mostrar a medida ativa (NAO ESTA A SER USADA)

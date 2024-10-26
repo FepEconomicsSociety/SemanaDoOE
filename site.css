@@ -608,6 +608,21 @@ table {
         bottom: auto;
     }
 }
+@media (max-width: 630px) {
+    #O{
+        width: 100px;
+        height: 200px;
+      
+        position: fixed;
+        top: 9%;
+        right: 8%;
+        left: auto;
+        bottom: auto;
+        /* Mantém a imagem na mesma posição */
+        transform: translateX(0); /* Adicione isso para garantir que a imagem não se mova lateralmente */  
+    
+    }
+}
 
 /*
 #linha2{

@@ -198,43 +198,67 @@ function init()
 
 function diferenca_anual() {
     const numeroInicialElemento = document.getElementById('numeroInicial');
-
-    // Variável para armazenar a soma dos valores já fornecidos (da primeira tabela)
-   /* let totalOrcamentosExistentes = 0;*/
-
-    // Variável para armazenar a soma dos valores inseridos nos inputs (da segunda tabela)
     let totalOrcamentosFornecidos = 0;
 
-    // Obter todos os valores da primeira tabela (já fornecidos)
-   /* const valoresExistentes = document.querySelectorAll('.valor');  // Pega todas as células com a classe "valor"
-    valoresExistentes.forEach(valor => {
-        // Remove caracteres não numéricos (exceto ponto e vírgula) e converte para float
-        const valorNumerico = parseFloat(valor.textContent.replace(/[^\d,.-]/g, '').replace(',', '.')) || 0;
-        totalOrcamentosExistentes += valorNumerico;  // Soma o valor existente
-    });
-*/
-    // IDs dos inputs que possuem os novos valores fornecidos
     const inputIds = ['admint', 'agral', 'ambal', 'tecs', 'cterr', 'cult', 'dn', 'ecm', 'educ', 'encge', 
                       'fin', 'hab', 'infa', 'just', 'negest', 'precom', 'saude', 'tsss'];
 
-    // Somar os valores dos inputs fornecidos
     inputIds.forEach(id => {
         const inputElement = document.getElementById(id);
-        const valorInput = parseFloat(inputElement.value) || 0;  // Se o valor não for inserido, assume 0
-        totalOrcamentosFornecidos += valorInput;  // Soma o valor fornecido
+        const valorInput = parseFloat(inputElement.value.replace(/\./g, '').replace(',', '.')) || 0;
+        totalOrcamentosFornecidos += valorInput;
     });
 
-    // Calcula a diferença entre a soma dos orçamentos fornecidos e os orçamentos existentes
     const diferenca = totalOrcamentosFornecidos - 93646.9;
+    numeroInicialElemento.textContent = diferenca.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
-    // Atualiza o valor da diferença na interface (elemento 'numeroInicial')
-    numeroInicialElemento.textContent = diferenca.toFixed(2);
+function formatarNumero(input) {
+    // Pega a posição inicial do cursor
+    const posicaoCursorInicial = input.selectionStart;
+    const valorAntigo = input.value;
+
+    // Remove qualquer caractere que não seja número, vírgula, ponto ou "-" apenas no início
+    input.value = input.value.replace(/(?!^-)[^0-9.,]/g, '');
+
+    // Garante que o "-" só esteja no início do valor
+    if (input.value.indexOf('-') > 0) {
+        input.value = input.value.replace(/-/g, ''); // Remove o sinal se não estiver no início
+    }
+
+    // Remove todos os pontos e converte vírgula para ponto (temporariamente)
+    let valor = input.value.replace(/\./g, '').replace(',', '.');
+
+    // Formata a parte inteira com pontos nos milhares e vírgula na parte decimal
+    const partes = valor.split('.');
+    const sinalNegativo = partes[0][0] === '-' ? '-' : ''; // Verifica o sinal
+    partes[0] = partes[0].replace('-', '').replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Formata a parte inteira sem o sinal
+    input.value = sinalNegativo + partes.join(',');
+
+    // Calcula a nova posição do cursor ajustando pela diferença de tamanho
+    let diferencaTamanho = input.value.length - valorAntigo.length;
+    let novaPosicao = posicaoCursorInicial + diferencaTamanho;
+
+    // Se o cursor está depois do "-" e estamos a apagar um dígito que não é o sinal, mantemos a posição
+    if (posicaoCursorInicial > 0 && input.value[posicaoCursorInicial - 1] === '-') {
+        novaPosicao = Math.max(novaPosicao - 1, 1); // Ajusta para não ir antes do sinal
+    }
+    else if (input.value[novaPosicao - 1] === '.' && diferencaTamanho > 0) {
+        novaPosicao -= 1; // Ajusta para ficar antes do ponto adicionado
+    }
+
+    // Ajusta a posição do cursor para mantê-lo próximo da posição inicial
+    if (novaPosicao < 0) novaPosicao = 0;
+    if (novaPosicao > input.value.length) novaPosicao = input.value.length;
+
+    // Restaura a posição do cursor
+    input.setSelectionRange(novaPosicao, novaPosicao);
 }
 
 /*Verifica se todos os dados na fase 3 foram preenchidos antes de continuar*/ 
 function finalizarFase3() {
     // Seleciona todos os inputs dentro da seção "fase3"
-    const inputs = document.querySelectorAll('#fase3 input[type="number"]');
+    const inputs = document.querySelectorAll('#fase3 input[type="text"]');
     const inputs2 = document.querySelectorAll('#fase2 input[type="number"]');
     // Verifica se todos os inputs têm um valor
     let todosPreenchidos = true; // Inicializa como verdadeiro
@@ -296,19 +320,19 @@ function atualizarTitulo(fase, previsualizar = false)
     
     if(fase == 4)
     {
-        orçamento = parseFloat(document.getElementById("saude").value) || 0;
+        orçamento = parseFloat(document.getElementById("saude").value.replace(/\./g, '').replace(',', '.')) || 0;
 
     }else if(fase == 5)
     {
         // Seleciona todos os inputs dentro da seção "fase3"
-        const inputs = document.querySelectorAll('#fase3 input[type="number"]');
+        const inputs = document.querySelectorAll('#fase3 input[type="text"]');
         let temp = Infinity;    // Inicia com o maior valor possível
         let idMenorValor = "";  // Armazena o id do input com menor valor
         let Nomeministerio = "";  // Para armazenar o nome do ministério com o menor valor
 
         for (let input of inputs) 
         {
-            const valor = parseFloat(input.value);
+            const valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.'));
             if (valor < temp && input.id != "saude") 
             {
                 temp = valor;     // Atualiza o menor valor encontrado
@@ -330,7 +354,7 @@ function atualizarTitulo(fase, previsualizar = false)
     }
 
     const numeroInicialElemento = document.getElementById(`numeroInicial_${fase}`);
-    const orcamentoInput = parseFloat(document.getElementById(`orcamento_${fase}`).value) || 0;
+    const orcamentoInput = parseFloat(document.getElementById(`orcamento_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
 
 
     // Recupera o valor inicial base (armazenado ou default 100)
@@ -356,7 +380,7 @@ function atualizarTitulo(fase, previsualizar = false)
     }
 
     // Atualiza o valor exibido na interface
-    numeroInicialElemento.textContent = valorInicial.toFixed(2);
+    numeroInicialElemento.textContent = valorInicial.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
 }
 
@@ -423,6 +447,7 @@ function coletarDadosFases() {
             tdes: document.getElementById('tdes').value,
         },
         fase3: {
+            diferencaAnual: document.getElementById('numeroInicial').innerText || 'Não inserido', // Adiciona a diferença anual
             orcamentos: [
                 { ministerio: 'Administração Interna', valor: document.getElementById('admint').value || 'Não inserido' },
                 { ministerio: 'Agricultura e Alimentação', valor: document.getElementById('agral').value || 'Não inserido' },
@@ -445,6 +470,7 @@ function coletarDadosFases() {
             ]
         },
         fase4: {
+            saldoDisponivel: document.getElementById('numeroInicial_4').innerText || 'Não inserido', // Adiciona o saldo disponível da fase 4
             medidas: fases[4].medidas.map(medida => ({
                 titulo: medida.titulo,
                 orcamento: medida.orcamento,
@@ -452,6 +478,7 @@ function coletarDadosFases() {
             })),
         },
         fase5: {
+            saldoDisponivel: document.getElementById('numeroInicial_5').innerText || 'Não inserido', // Adiciona o saldo disponível da fase 5
             medidas: fases[5].medidas.map(medida => ({
                 titulo: medida.titulo,
                 orcamento: medida.orcamento,
@@ -516,7 +543,8 @@ function gerarPDF() {
                    </div>`;
 
             conteudoPDF +=  `<div class="fase">
-                            <h3>Fase 3 - Orçamentação dos ministérios</h3>`;
+                            <h3>Fase 3 - Orçamentação dos ministérios</h3>
+                            <h4>Diferença anual: ${dados.fase3.diferencaAnual}M €</h4>`; // Adiciona a diferença anual
             dados.fase3.orcamentos.forEach(orcamento => {
                 conteudoPDF += `<div class="orcamento-container"> 
                 <h4>${orcamento.ministerio}:</h4>
@@ -526,7 +554,9 @@ function gerarPDF() {
         
         conteudoPDF +=  `</div>
                         <div class="fase">
-                        <h3>Fase 4 - Medidas</h3>`;
+                        <h3>Fase 4 - Medidas</h3>
+                        <h4>Saldo disponível: ${dados.fase4.saldoDisponivel}M €</h4>`; // Adiciona saldo disponível da fase 4
+
 
         if (dados.fase4.medidas.length === 0) 
         {
@@ -535,16 +565,18 @@ function gerarPDF() {
         else 
         {
             dados.fase4.medidas.forEach(medida => {
-                conteudoPDF += `<div class="medidas-container"> 
+                conteudoPDF += (`<div class="medidas-container"> 
                                 <h4>${medida.titulo}:</h4>
                                 <p>Orçamento: ${medida.orcamento}M €</p>
                                 <p>Explicação: ${medida.explicacao}</p>
-                                </div>`;            
+                                </div>`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");            
             });
         }
         conteudoPDF += `</div>
                 <div class="fase">
-                    <h3>Fase 5</h3>`;
+                    <h3>Fase 5</h3>
+                    <h4>Saldo disponível: ${dados.fase5.saldoDisponivel}M €</h4>`; // Adiciona saldo disponível da fase 4
+
                 if (dados.fase5.medidas.length === 0) 
                     {
                         conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>
@@ -553,9 +585,9 @@ function gerarPDF() {
                     else 
                     {
                         dados.fase5.medidas.forEach(medida => {
-                            conteudoPDF += `<h4>${medida.titulo}:</h4>
+                            conteudoPDF += (`<h4>${medida.titulo}:</h4>
                                             <p>Orçamento: ${medida.orcamento}M €</p>
-                                            <p>Explicação: ${medida.explicacao}</p>`;            
+                                            <p>Explicação: ${medida.explicacao}</p>`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");            
                         });
                     }
         conteudoPDF += `<h3>Comentários adicionais</h3>`;         

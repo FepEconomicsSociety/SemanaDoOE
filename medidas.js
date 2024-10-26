@@ -261,13 +261,14 @@ function carregarMedidasPredefinidas(fase)
     Array.from(tabela.querySelectorAll("tr")).forEach(linha => {
         const titulo = linha.querySelector("td:nth-child(1)").textContent.trim();
         const orcamento = linha.querySelector("td:nth-child(2)").textContent.replace('M €', '').trim();
+        const explicacao = linha.querySelector("td:nth-child(3)").textContent.trim();
         console.log(titulo);
         console.log(orcamento);
 
         // Adiciona a medida predefinida à estrutura de medidas
         fases[fase].medidas.push({
             titulo: titulo,
-            explicacao: "Medida já existente",  // Pode adicionar mais informações se necessário
+            explicacao: explicacao,  // Pode adicionar mais informações se necessário
             orcamento: parseFloat(orcamento)
         });
     });

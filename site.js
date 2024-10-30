@@ -265,7 +265,7 @@ function formatarpercentagem(input) {
     // Pega a posição inicial do cursor
     const posicaoCursorInicial = input.selectionStart;
     const valorAntigo = input.value.replace('.','');
-
+    input.value = input.value.replace('.','');
     // Remove qualquer caractere que não seja número, vírgula, ou ponto
     input.value = input.value.replace(/[^0-9.,]/g, '');
 

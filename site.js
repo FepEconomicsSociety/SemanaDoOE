@@ -209,8 +209,8 @@ function diferenca_anual() {
         totalOrcamentosFornecidos += valorInput;
     });
 
-    const diferenca = totalOrcamentosFornecidos - 93646.9;
-    numeroInicialElemento.textContent = diferenca.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    const diferenca = totalOrcamentosFornecidos;
+    numeroInicialElemento.textContent = diferenca.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 function formatarNumero(input) {

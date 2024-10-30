@@ -486,8 +486,8 @@ tr{
 /*Caixa para exibir o valor inicial nas fases 3, 4 e 5*/
 .caixa-valor-inicial {
     position: absolute;
-    top: 100px; /* Ajusta para logo abaixo do banner */
-    right: 10px;
+    top: 16.5%; /* Ajusta para logo abaixo do banner */
+    right: 1vw;
     background-color: #f0f0f0;
     padding: 10px;
     border: 2px solid #5285ec;
@@ -649,11 +649,11 @@ table {
 
 .main-content{
     z-index: 0.5;
-    background-color: #d5e7ff;
 }
 
-.container{
-    background-color: #d5e7ff;
+#areas .form-control{
+    width: 5vw !important;
+    float: right;
 }
 
 /*------------------------------------------------------------------------------------------*/

@@ -42,22 +42,22 @@
     </div>
 
     <!-- Conteúdo principal do site, ocultado até que a senha seja validada -->
-<main id="conteudoSite" style="display: none;">
-    <div class="wrapper">
-    <header>
+    <main id="conteudoSite" style="display: none;">
+        <div class="wrapper">
+        <header>
 
-        <img src="https://FepEconomicsSociety.github.io/SemanaDoOE/images/LogoFESBranco.png" class="logo-icon" id="logo-icon">
+            <img src="https://FepEconomicsSociety.github.io/SemanaDoOE/images/LogoFESBranco.png" class="logo-icon" id="logo-icon">
 
-        <div id="tittle_banner">
-            <h1 id="banner">Semana do Orçamento - FEP Economics Society</h1>
-        </div>
-    </header>
+            <div id="tittle_banner">
+                <h1 id="banner">Semana do Orçamento - FEP Economics Society</h1>
+            </div>
+        </header>
 
     <div class="main-content">
-        <section id="fase0" class="fase">
+        <section id="fase0" class="fase" style="background-color: #d5e7ff;">
             <img id="O" style="z-index: 2;" src="images/cartaz oe.png">
 
-        <div class="linhaazul" id="linha1">
+            <div class="linhaazul" id="linha1">
 
             <div class="container" id="fasesdoprograma">
                 <div class="row" style="width: 100%;">
@@ -117,7 +117,7 @@
         </div>
         </section>
 
-        <section id="fase1" class="fase hidden">
+        <section id="fase1" class="fase hidden" style="background-color: white;">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
                 <h2>Estatísticas de 2023</h2>
                 <p>Aqui terás acesso a algumas estatísticas macroeconómicos e os seus valores em anos anteriores. Podes tirar notas, mas deves consultar muitas outras estatísticas em sites de confiança.</p>
@@ -125,7 +125,7 @@
                 <!-- https://www.cfp.pt/pt/publicacoes/perspetivas-economicas-e-orcamentais/perspetivas-economicas-e-orcamentais-2024-2028 -->
             </div>
             
-            <div class="container">
+            <div class="container" style="background-color: white;">
         
                 <!-- Gráficos (imagens) -->
                     <div class="row" style="margin-top: 3vw;">
@@ -135,7 +135,7 @@
                             <!-- https://www.pordata.pt/pt/estatisticas/economia/crescimento-e-produtividade/taxa-de-crescimento-real-do-pib -->
                             <script>
                             const xPIB = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-                            const yPIB = [0.8,1.8,2,3.5,2.8,2.7,-8.3,5.7,6.8,2.3,1.6,1.9,2.1];
+                            const yPIB = [0.8,1.8,2,3.5,2.8,2.7,-8.3,5.7,6.8,2.3,1.8,2.4,2.1];
                             
                             new Chart("myChartPIB", {
                                 type: "line",
@@ -168,7 +168,7 @@
 
                             <script>
                             const xPIBA = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-                            const yPIBA = [173053.7,179713.2,186489.8,195947.2,205184.1,214374.6,200518.9,216053.2,242340.8,265525.1,269773.5,274899.2,280672.1];
+                            const yPIBA = [173053.7,179713.2,186489.8,195947.2,205184.1,214374.6,200518.9,216053.2,242340.8,265525.1,270304.6,276791.9,282604.5];
                             
                             new Chart("myChartPIBA", {
                                 type: "line",
@@ -203,7 +203,7 @@
                             <!-- https://bpstat.bportugal.pt/dados/series?mode=graphic&svid=bpNXAAAAAAA.!l!B!C!10!!!False!12!:1htU5U:uXqymudu6qRPf7U5wshT2GiSXP0&series=5739374 -->
                             <script>
                             const xTDesemprego = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-                            const yTDesemprego = [14,12.7,10.8,8.3,6.8,6.9,7.3,6.4,6.6,6.6,6.4,6.3,6.2];
+                            const yTDesemprego = [14,12.7,10.8,8.3,6.8,6.9,7.3,6.4,6.6,6.6,6.5,6.4,6.2];
                             
                             new Chart("myChartTDesemprego", {
                                 type: "line",
@@ -236,7 +236,7 @@
                             <!-- https://bpstat.bportugal.pt/dados/series?mode=graphic&svid=bpNXAAAAAAA.!l!B!C!10!!!False!12!:1htU5U:uXqymudu6qRPf7U5wshT2GiSXP0&series=5739374 -->
                             <script>
                             const xSO = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-                            const ySO = [-7.4,-4.4,-1.9,-3.0,-0.3,0.1,-5.8,-2.9,-0.3,1.2,0.5,0.6,0.1];
+                            const ySO = [-7.4,-4.4,-1.9,-3.0,-0.3,0.1,-5.8,-2.9,-0.3,1.2,0.7,0.4,0.1];
                             
                             new Chart("myChartSO", {
                                 type: "line",
@@ -272,7 +272,7 @@
                             <!-- https://www.pordata.pt/pt/estatisticas/contas-publicas/divida-e-defice/divida-publica-em-do-pib -->
                             <script>
                             const xDividaR = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-                            const yDividaR = [132.9,131.2,131.5,126.1,121.5,116.6,134.9,124.5,112.4,99.1,95.3,91.3,87.8];
+                            const yDividaR = [132.9,131.2,131.5,126.1,121.5,116.6,134.9,124.5,112.4,99.1,92.4,88,84.5];
                             
                             new Chart("myChartDividaR", {
                                 type: "line",
@@ -305,7 +305,7 @@
                             <!-- https://www.pordata.pt/pt/estatisticas/contas-publicas/divida-e-defice/divida-publica-em-do-pib -->
                             <script>
                             const xDividaA = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-                            const yDividaA = [230059,235746,245245,247175,249260,249977,270495,269089,272427,263085,257094,250983,246430];
+                            const yDividaA = [230059,235746,245245,247175,249260,249977,270495,269089,272427,263085,249761,243577,238801];
                             
                             new Chart("myChartDividaA", {
                                 type: "line",
@@ -340,7 +340,7 @@
                             <!-- https://www.pordata.pt/pt/estatisticas/inflacao/taxa-de-inflacao/taxa-de-inflacao-por-bens-e-servicos-indice-harmonizado-de -->
                             <script>
                             const xInflacao = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-                            const yInflacao = [-0.2,0.5,0.6,1.6,1.2,0.3,-0.1,0.9,8.1,5.3,2.6,2.2,2.0];
+                            const yInflacao = [-0.2,0.5,0.6,1.6,1.2,0.3,-0.1,0.9,8.1,5.3,2.7,2.2,2.1];
                             
                             new Chart("myChartInflacao", {
                                 type: "line",
@@ -373,8 +373,8 @@
 
                             <script>
                             const xExpImp = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026];
-                            const yExportacao = [3.06,4.88,2.74,11.64,6.48,4.63,-20.35,20.41,34.38,4.81,2.8,2.5,2.2];
-                            const yImportacao = [5.61,3.35,1.66,12.2,7.9,4.66,-14.86,21.59,31.9,-1.87,3,3.6,3.5];
+                            const yExportacao = [3.06,4.88,2.74,11.64,6.48,4.63,-20.35,20.41,34.38,4.81,3.6,2.8,2.6];
+                            const yImportacao = [5.61,3.35,1.66,12.2,7.9,4.66,-14.86,21.59,31.9,-1.87,3.6,5,3.4];
                             <!-- https://www.pordata.pt/pt/estatisticas/economia/crescimento-e-produtividade/exportacoes-e-importacoes -->
                             new Chart("myChartExpImp", {
                                 type: "line",
@@ -417,7 +417,7 @@
 
                 <div class="container">
                     <div class="row" style="width: auto;">
-                        <div class="col caixagp">
+                        <div class="col-lg col-sm-12 caixagp">
                             <h5 style="font-weight: bold;">Guerra Rússia - Ucrânia</h5>
                             <div class="caixatgp">
                                 <p>
@@ -427,41 +427,41 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col caixagp">
+                        <div class="col-lg col-sm-12 caixagp">
                             <h5 style="font-weight: bold;">Guerra Médio Oriente</h5>
                             <div class="caixatgp">
                                 <p>
-                                    Israel parece decidida a continuar a atacar zonas onde diz estarem terroristas, sem olhar a danos colaterais. 
+                                    Israel parece decidido a continuar a atacar zonas onde diz estarem terroristas, sem olhar a danos colaterais. 
                                     Depois de Gaza, o Líbano parece ser o próximo passo da operação de Netanyahu. 
                                     Embora um novo conluio dos países produtores de petróleo, com vista a afetar as economias aliadas de Israel, pareça improvável. 
-                                    Ainda assim, o preço do barril ainda pode vir a ser uma preocupação real para Portugal.
+                                    O preço do barril de petróleo ainda pode vir a ser uma preocupação para Portugal.
                                 </p>
                             </div>
                         </div>
-                        <div class="col caixagp">
+                        <div class="col-lg col-sm-12 caixagp">
                             <h5 style="font-weight: bold;">Eleições Estados Unidos</h5>
                             <div class="caixatgp">
                                 <p>
-                                    Nenhum dos candidatos às eleições aparenta ter um plano que consiga recuperar a força de outrora, da economia dos EUA. 
+                                    Nenhum dos candidatos às eleições aparenta ter um plano que consiga recuperar a força da economia dos EUA. 
                                     De qualquer das formas, uma possível eleição de Donald Trump seria um fator de grande instabilidade nas relações comerciais entre os EUA e 
-                                    a Europa. Portugal teria de aumentar a sua atenção com gastos em defesa, e encontrar formas de compensar eventuais perdas de receitas 
+                                    a Europa. Portugal teria de encontrar formas de compensar eventuais perdas de receitas 
                                     das exportações para os Estados Unidos. 
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 2vw; width: auto;">
-                        <div class="col caixagp">
+                        <div class="col-lg col-sm-12 caixagp">
                             <h5 style="font-weight: bold;">Maioria relativa do governo</h5>
                             <div class="caixatgp">
                                 <p>
                                     A falta de maioria absoluta do governo é um problema já conhecido pela maioria dos portugueses. A possibilidade da não aprovação do orçamento 
-                                    do estado seria, não só um fator de grande instabilidade para a economia portuguesa, mas também um fator que podia travar o nosso crescimento, 
+                                    do estado ano após ano será, não só um motivo de grande instabilidade para a economia portuguesa, mas também um fator que poderia travar o nosso crescimento económico e 
                                     pôr fim ao registo das "contas certas" que tantos querem manter.
                                 </p>
                             </div>
                         </div>
-                        <div class="col caixagp">
+                        <div class="col-lg col-sm-12 caixagp">
                             <h5 style="font-weight: bold;">Alterações Climáticas</h5>
                             <div class="caixatgp">
                                 <p>
@@ -471,13 +471,13 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col caixagp">
+                        <div class="col-lg col-sm-12 caixagp">
                             <h5 style="font-weight: bold;">Confronto comercial com a China</h5>
                             <div class="caixatgp">
                                 <p>
                                     Em linha com o comportamento dos EUA, a União Europeia tem adotado uma postura taxativa com bens importados da China, numa tentativa de 
-                                    manter as suas leis da concorrência e proteger os produtores europeus. Terão estas ações continuidade nos próximos meses / anos com a UE 
-                                    a entrar numa guerra comercial com a China? Seria a UE capaz de manter os seus mercados sem os produtos da China?
+                                    manter as suas leis da concorrência e proteger os produtores europeus. Tendo em conta os potenciais efeitos deste aumento do protecionismo 
+                                    em relação à China, como será que vai ser a relação entre estas duas potências daqui para a frente?
                                 </p>
                             </div>
                         </div>
@@ -489,7 +489,7 @@
         <section id="fase2" class="fase hidden">
             <div style="margin: 2vw; padding: 1vw; border: 2px #338dff solid; border-radius: 10px;">
                 <h2>Fase 2 - Projeções macroeconómicas para 2025</h2>
-                <p>Nesta fase, queremos que faças uma pequena previsão macroeconómica para o ano de 2025, tendo em conta a conjuntura atual, e os valores que têm definido a realidade nos últimos anos.</p>
+                <p>Nesta fase, queremos que faças uma pequena previsão macroeconómica para o ano de 2025. Já tiveste acesso a previsões do Conselho de Finanças Públicas, mas todo o governo tem as suas projeções.</p>
             </div>
             
             <!-- Existia uma textarea chamada projecaoText -->
@@ -499,31 +499,39 @@
                 <div class="row">
                     <div class="col" style="margin: 0.5vw;">
                         Crescimento do PIB real(%): <input type="number" id="pib" class="form-control" placeholder="Valor em %">
+                        <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.4%</label>
                     </div>
                     <div class="col"  style="margin: 0.5vw;">
                         Variação do consumo privado(%): <input type="number" id="vcpriv" class="form-control" placeholder="Valor em %">
+                        <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.5%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw;">
                         Variação do consumo público(%): <input type="number" id="vcpub" class="form-control" placeholder="Valor em %">
+                        <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.4%</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col" style="margin: 0.5vw;">
                         Variação do investimento (FBCF)(%): <input type="number" id="fbcf" class="form-control" placeholder="Valor em %">
+                        <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 8.7%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw;">
                         Variação das exportações(%): <input type="number" id="vexp" class="form-control" placeholder="Valor em %">
+                        <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.8%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw;">
-                        Variação das importações(%): <input type="number" id="vimp" class="form-control" placeholder="Valor em %"><br>
+                        Variação das importações(%): <input type="number" id="vimp" class="form-control" placeholder="Valor em %">
+                        <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 5%</label><br>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col" style="margin: 0.5vw;">
                         Inflação(%): <input type="number" id="infl" class="form-control" placeholder="Valor em %">
+                        <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.2%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw;">
                         Taxa de desemprego(%): <input type="number" id="tdes" class="form-control" placeholder="Valor em %">
+                        <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 6.4%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw; padding: 1vw;">
                         
@@ -542,13 +550,14 @@
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
                 <h2>Fase 3 - Orçamentação dos ministérios</h2>
                 <div class="caixa-valor-inicial" id="caixaValorInicial" style="display: none;">
-                    Diferença anual: <span id="numeroInicial"></span>M €
+                    Percentagem completa: <span id="numeroInicial"></span>%
                 </div>
 
                 <p>
-                    Agora terás de fazer uma distribuição orçamental pelos ministérios que existem, atualmente, em Portugal. 
+                    Agora terás de fazer uma distribuição orçamental pelos ministérios/áreas orçamentais que existem, atualmente, em Portugal. 
                    Terás acesso aos valores do ano anterior, e deves fazer as tuas projeções de acordo com as necessidades que acreditas que cada ministério tem.
                 </p>
+                <p>Os valores abaixo excluem ativos e passivos financeiros.</p>
             </div>
 
             <div class="container">
@@ -558,166 +567,166 @@
                         <table id="tabela" class="table table-hover">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Ministério</th>
-                                    <th style="text-align: center;">Orçamento (M€)</th>
+                                    <th>Área de atuação - 93646.9M</th>
+                                    <th style="text-align: center;">% da despesa atríbuída</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="ministerio">Administração Interna</td>
-                                    <td class="valor" id="orca">2.584,5€</td>
+                                    <td class="valor" id="orca">2,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Agricultura e Alimentação</td>
-                                    <td class="valor" id="orca">1.507,5€</td>
+                                    <td class="valor" id="orca">1,6%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Ambiente e Ação Climática</td>
-                                    <td class="valor" id="orca">3.551,6€</td>
+                                    <td class="valor" id="orca">3,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Ciência Tecnologia e Ensino Superior</td>
-                                    <td class="valor" id="orca">3.589,2€</td>
+                                    <td class="valor" id="orca">3,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Coesão Territorial</td>
-                                    <td class="valor" id="orca">237,5€</td>
+                                    <td class="valor" id="orca">0,3%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Cultura</td>
-                                    <td class="valor" id="orca">763,2€</td>
+                                    <td class="valor" id="orca">0,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Defesa Nacional</td>
-                                    <td class="valor" id="orca">2.849,7€</td>
+                                    <td class="valor" id="orca">3%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Economia e Mar</td>
-                                    <td class="valor" id="orca">2.056,3€</td>
+                                    <td class="valor" id="orca">2,2%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Educação</td>
-                                    <td class="valor" id="orca">7.255,2€</td>
+                                    <td class="valor" id="orca">7,7%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Encargos Gerais do Estado</td>
-                                    <td class="valor" id="orca">6.506,9€</td>
+                                    <td class="valor" id="orca">6,9%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Finanças</td>
-                                    <td class="valor" id="orca">12.871,9€</td>
+                                    <td class="valor" id="orca">13,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Habitação</td>
-                                    <td class="valor" id="orca">975,8€</td>
+                                    <td class="valor" id="orca">1,1%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Infraestruturas</td>
-                                    <td class="valor" id="orca">4.397,7€</td>
+                                    <td class="valor" id="orca">4,7%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Justiça</td>
-                                    <td class="valor" id="orca">1.961,4€</td>
+                                    <td class="valor" id="orca">2,1%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Negócios Estrangeiros</td>
-                                    <td class="valor" id="orca">484,8€</td>
+                                    <td class="valor" id="orca">0,5%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Presidência do Conselho de Ministros</td>
-                                    <td class="valor" id="orca">1.684,3€</td>
+                                    <td class="valor" id="orca">1,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Saúde</td>
-                                    <td class="valor" id="orca">15.656,3€</td>
+                                    <td class="valor" id="orca">16,7%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Trabalho, Solidariedade e Segurança Social</td>
-                                    <td class="valor" id="orca">24.713,1€</td>
+                                    <td class="valor" id="orca">26,4%</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="col">
-                        <table class="table table-hover">
+                        <table id="areas" class="table table-hover">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Ministério</th>
-                                    <th style="text-align: center;">Orçamento (M€)</th>
+                                    <th>Área de atuação</th>
+                                    <th style="text-align: center;">% da despesa atríbuída</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="ministerio" id="min_admint">Administração Interna</td>
-                                    <td class="valor"><input class="form-control" id="admint" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €" oninput="formatarNumero(this); diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="admint" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this); diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_agral">Agricultura e Alimentação</td>
-                                    <td class="valor"><input class="form-control" id="agral" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="agral" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_ambal">Ambiente e Ação Climática</td>
-                                    <td class="valor"><input class="form-control" id="ambal" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="ambal" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_tecs">Ciência Tecnologia e Ensino Superior</td>
-                                    <td class="valor"><input class="form-control" id="tecs" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="tecs" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_cterr">Coesão Territorial</td>
-                                    <td class="valor"><input class="form-control" id="cterr" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="cterr" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_cult">Cultura</td>
-                                    <td class="valor"><input class="form-control" id="cult" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="cult" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_dn">Defesa Nacional</td>
-                                    <td class="valor"><input class="form-control" id="dn" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="dn" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_ecm">Economia e Mar</td>
-                                    <td class="valor"><input class="form-control" id="ecm" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="ecm" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_educ">Educação</td>
-                                    <td class="valor"><input class="form-control" id="educ" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="educ" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_encge">Encargos Gerais do Estado</td>
-                                    <td class="valor"><input class="form-control" id="encge" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="encge" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_fin">Finanças</td>
-                                    <td class="valor"><input class="form-control" id="fin" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="fin" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_hab">Habitação</td>
-                                    <td class="valor"><input class="form-control" id="hab" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="hab" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_infa">Infraestruturas</td>
-                                    <td class="valor"><input class="form-control" id="infa" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="infa" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_just">Justiça</td>
-                                    <td class="valor"><input class="form-control" id="just" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="just" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_negest">Negócios Estrangeiros</td>
-                                    <td class="valor"><input class="form-control" id="negest" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="negest" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_precom">Presidência do Conselho de Ministros</td>
-                                    <td class="valor"><input class="form-control" id="precom" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="precom" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_saude">Saúde</td>
-                                    <td class="valor"><input class="form-control" id="saude" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="saude" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_tsss">Trabalho, Solidariedade e Segurança Social</td>
-                                    <td class="valor"><input class="form-control" id="tsss" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Valor em €"oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="tsss" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -741,20 +750,37 @@
                 Saldo disponível: <span id="numeroInicial_4"></span>M €
             </div>
             <p>
-                Texto bonito a explicar esta fase....
+                A primeira área em que terás de atuar será a saúde. Historicamente, a saúde é das áreas onde existe maior despesa publica. A complexidade deste setor
+                é conhecida por todos. Serás tu capaz de resolver a situação em apenas um orçamento?
+            </p>
+            <p>
+                Poderás ver quais os focos do orçamento anterior e, depois, criar as tuas próprias medidas a implementar em 2025. Boa sorte!
             </p>
         </div>
 
 
             <div class="container" id="medidasA_4">
+                <div class="row">
+                    <div class="col-12" style="margin-bottom: 2vw;">
+                        <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                        <p>ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque itaque esse quae odit mollitia, atque autem, praesentium, optio repellat voluptatum ea dolor delectus? Laudantium doloribus sequi est et magni! Corrupti.</p>    
+                    </div>
+                    <div class="col-12">
+                        <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                        <p>ipsum Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, eos odit corrupti quisquam vel accusamus perferendis facere reiciendis, iste suscipit blanditiis maxime laborum facilis cupiditate, veritatis molestias! Doloremque, iusto sint.</p>    
+                    </div>
+                    
+                </div>
                 <div class="row" style="margin-top: 3vw;">
                 
                     <table class="table" id="medidasTabela_4">
                         <thead>
                             <tr>
-                                <th style="border: none;"><h4>Medidas atuais</h4></th>
+                                <th style="border: none;"><h4>Novas medidas</h4></th>
                                 <th style="border: none;"></th>
-                                <th style="border: none; text-align: right;"><button type="button" onclick="novamedida(4)" class="btn btn-success">Nova medida</button></th>
+                                <th style="border: none;"></th>
+                                <th style="border: none;"></th>
+                                <th style="border: none;"><button type="button" style="float: right;" onclick="novamedida(4)" class="btn btn-success">Nova medida</button></th>
                             </tr>
                             <tr>
                                 <th>Título</th>
@@ -766,16 +792,7 @@
 
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Contratação de novos médicos</td>
-                                <td style="text-align: center;">400M €</td>
-                                <td hidden>Medida que já existe!</td>
-                                <td style="text-align: center;"><button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-outline-primary">Detalhes</button></td>
-                                <td style="text-align: center;"><button type="button" class="btn btn-outline-primary">Editar</button></td>
-                                <td style="text-align: center;"><button type="button" class="btn btn-outline-primary">Apagar</button></td>
-                            </tr>
-                            
+                        <tbody>                            
                         </tbody>
                     </table>
                 </div>

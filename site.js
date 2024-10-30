@@ -250,6 +250,15 @@ function diferenca_anual(id_atual) {
         // Atualiza o texto se não exceder 100%
         numeroInicialElemento.textContent = diferenca.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
+    // Altera a cor da borda com base no total
+    const caixaValorInicial = document.querySelector('.caixa-valor-inicial');
+    if (totalOrcamentosFornecidos < 100) {
+        numeroInicialElemento.style.color = "red";
+        caixaValorInicial.style.borderColor = 'red'; // Vermelho
+    } else if (totalOrcamentosFornecidos === 100) {
+        numeroInicialElemento.style.color = "green";
+        caixaValorInicial.style.borderColor = 'green'; // Verde
+    }
 }
 
 function formatarpercentagem(input) {

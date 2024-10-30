@@ -1,6 +1,9 @@
 let valorInicialTemporario = {}; // Para armazenar o valor inicial temporário para cada fase
 let first = true;
 var a;
+const avisoTimers = {}; // Objeto para armazenar os timers de cada input
+// Armazenar valores anteriores dos inputs
+const valoresAnteriores = {};
 
 // Função para verificar a senha
 function verificarSenha() 
@@ -196,7 +199,7 @@ function init()
 
 }*/
 
-function diferenca_anual() {
+/*function diferenca_anual() {
     const numeroInicialElemento = document.getElementById('numeroInicial');
     let totalOrcamentosFornecidos = 0;
 
@@ -211,8 +214,115 @@ function diferenca_anual() {
 
     const diferenca = totalOrcamentosFornecidos;
     numeroInicialElemento.textContent = diferenca.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}*/
+
+function diferenca_anual(id_atual) {
+    const numeroInicialElemento = document.getElementById('numeroInicial');
+    let totalOrcamentosFornecidos = 0;
+
+    const inputIds = ['admint', 'agral', 'ambal', 'tecs', 'cterr', 'cult', 'dn', 'ecm', 'educ', 'encge', 
+                      'fin', 'hab', 'infa', 'just', 'negest', 'precom', 'saude', 'tsss'];
+
+    inputIds.forEach(id => {
+        const inputElement = document.getElementById(id);
+        const valorInput = parseFloat(inputElement.value.replace(/\./g, '').replace(',', '.')) || 0;
+        totalOrcamentosFornecidos += valorInput;
+    });
+
+    const diferenca = totalOrcamentosFornecidos;
+    // Verifica se a soma dos orçamentos é maior que 100
+    if (diferenca > 100) {
+        alert("A soma dos orçamentos não pode ser maior que 100%. O valor será definido como 0.");
+        
+        // Define o valor de cada input como 0
+            const inputElement = document.getElementById(id_atual);
+            inputElement.value = '0'; // Define o valor do input como 0
+            totalOrcamentosFornecidos = 0;
+            inputIds.forEach(id => {
+                const inputElement = document.getElementById(id);
+                const valorInput = parseFloat(inputElement.value.replace(/\./g, '').replace(',', '.')) || 0;
+                totalOrcamentosFornecidos += valorInput;
+            });
+        
+            const resultado = totalOrcamentosFornecidos;
+            numeroInicialElemento.textContent = resultado.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    } else {
+        // Atualiza o texto se não exceder 100%
+        numeroInicialElemento.textContent = diferenca.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 }
 
+function formatarpercentagem(input) {
+    // Pega a posição inicial do cursor
+    const posicaoCursorInicial = input.selectionStart;
+    const valorAntigo = input.value.replace('.','');
+
+    // Remove qualquer caractere que não seja número, vírgula, ou ponto
+    input.value = input.value.replace(/[^0-9.,]/g, '');
+
+    // Converte a vírgula em ponto para que o número seja reconhecido como decimal
+    let valorNumerico = parseFloat(input.value.replace(',', '.'));
+
+    // Limita o valor entre 0 e 100
+    if (valorNumerico - 100 > 0) {
+        input.value = 100;
+        mostrarAviso(input, "Valor máximo é 100%");
+        
+    }else {
+        removerAviso(input);
+    }
+
+    // Formata o valor de volta para o input, com a vírgula como separador decimal
+    //input.value = valorNumerico.toString().replace('.', ',');
+
+    // Calcula a nova posição do cursor ajustando pela diferença de tamanho
+    let diferencaTamanho = input.value.length - valorAntigo.length;
+    let novaPosicao = posicaoCursorInicial + diferencaTamanho;
+
+    // Ajusta a posição do cursor para mantê-lo próximo da posição inicial
+    if (novaPosicao < 0) novaPosicao = 0;
+    if (novaPosicao > input.value.length) novaPosicao = input.value.length;
+
+    // Restaura a posição do cursor
+    input.setSelectionRange(novaPosicao, novaPosicao);
+}
+
+function mostrarAviso(input, mensagem) {
+    // Verifica se o aviso já existe
+    let aviso = input.parentNode.querySelector(".aviso-porcentagem");
+    if (!aviso) {
+        // Cria um novo elemento de aviso
+        aviso = document.createElement("span");
+        aviso.className = "aviso-porcentagem";
+        aviso.style.color = "red";
+        aviso.style.fontSize = "0.9em";
+        aviso.style.marginLeft = "8px";
+        aviso.textContent = mensagem;
+
+        // Adiciona o aviso ao lado do input
+        input.parentNode.appendChild(aviso);
+    } else {
+        // Se o aviso já existe, apenas atualiza a mensagem
+        aviso.textContent = mensagem;
+    }
+
+    // Limpa o timer anterior se existir
+    const inputId = input.id || input.name; // Use o ID ou nome do input como chave
+    clearTimeout(avisoTimers[inputId]);
+
+    // Remove o aviso automaticamente após 3 segundos
+    avisoTimers[inputId] = setTimeout(() => {
+        removerAviso(input);
+        delete avisoTimers[inputId]; // Remove o timer do objeto
+    }, 3000);
+}
+
+function removerAviso(input) {
+    const aviso = input.parentNode.querySelector(".aviso-porcentagem");
+    if (aviso) {
+        aviso.remove();
+    }
+}
 function formatarNumero(input) {
     // Pega a posição inicial do cursor
     const posicaoCursorInicial = input.selectionStart;

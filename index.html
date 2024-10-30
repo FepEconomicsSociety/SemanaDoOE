@@ -498,39 +498,39 @@
             <div class="container">
                 <div class="row">
                     <div class="col" style="margin: 0.5vw;">
-                        Crescimento do PIB real(%): <input type="number" id="pib" class="form-control" placeholder="Valor em %">
+                        Crescimento do PIB real(%): <input type="text" inputmode="numeric" pattern="[0-9]*" id="pib" class="form-control" placeholder="Valor em %" oninput="formatarpercentagem(this)">
                         <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.4%</label>
                     </div>
                     <div class="col"  style="margin: 0.5vw;">
-                        Variação do consumo privado(%): <input type="number" id="vcpriv" class="form-control" placeholder="Valor em %">
+                        Variação do consumo privado(%): <input type="text" inputmode="numeric" pattern="[0-9]*" id="vcpriv" class="form-control" placeholder="Valor em %" oninput="formatarpercentagem(this)">
                         <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.5%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw;">
-                        Variação do consumo público(%): <input type="number" id="vcpub" class="form-control" placeholder="Valor em %">
+                        Variação do consumo público(%): <input type="text" inputmode="numeric" pattern="[0-9]*" id="vcpub" class="form-control" placeholder="Valor em %" oninput="formatarpercentagem(this)">
                         <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.4%</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col" style="margin: 0.5vw;">
-                        Variação do investimento (FBCF)(%): <input type="number" id="fbcf" class="form-control" placeholder="Valor em %">
+                        Variação do investimento (FBCF)(%): <input type="text" inputmode="numeric" pattern="[0-9]*" id="fbcf" class="form-control" placeholder="Valor em %" oninput="formatarpercentagem(this)">
                         <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 8.7%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw;">
-                        Variação das exportações(%): <input type="number" id="vexp" class="form-control" placeholder="Valor em %">
+                        Variação das exportações(%): <input type="text" inputmode="numeric" pattern="[0-9]*" id="vexp" class="form-control" placeholder="Valor em %" oninput="formatarpercentagem(this)">
                         <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.8%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw;">
-                        Variação das importações(%): <input type="number" id="vimp" class="form-control" placeholder="Valor em %">
+                        Variação das importações(%): <input type="text" inputmode="numeric" pattern="[0-9]*" id="vimp" class="form-control" placeholder="Valor em %" oninput="formatarpercentagem(this)">
                         <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 5%</label><br>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col" style="margin: 0.5vw;">
-                        Inflação(%): <input type="number" id="infl" class="form-control" placeholder="Valor em %">
+                        Inflação(%): <input type="text" inputmode="numeric" pattern="[0-9]*" id="infl" class="form-control" placeholder="Valor em %" oninput="formatarpercentagem(this)">
                         <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 2.2%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw;">
-                        Taxa de desemprego(%): <input type="number" id="tdes" class="form-control" placeholder="Valor em %">
+                        Taxa de desemprego(%): <input type="text" inputmode="numeric" pattern="[0-9]*" id="tdes" class="form-control" placeholder="Valor em %" oninput="formatarpercentagem(this)">
                         <label style="font-size: 10px; margin-left: 1vw; width: 80px; color: red;">CFP: 6.4%</label>
                     </div>
                     <div class="col" style="margin: 0.5vw; padding: 1vw;">
@@ -658,75 +658,75 @@
                             <tbody>
                                 <tr>
                                     <td class="ministerio" id="min_admint">Administração Interna</td>
-                                    <td class="valor"><input class="form-control" id="admint" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this); diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="admint" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this); diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_agral">Agricultura e Alimentação</td>
-                                    <td class="valor"><input class="form-control" id="agral" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="agral" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_ambal">Ambiente e Ação Climática</td>
-                                    <td class="valor"><input class="form-control" id="ambal" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="ambal" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_tecs">Ciência Tecnologia e Ensino Superior</td>
-                                    <td class="valor"><input class="form-control" id="tecs" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="tecs" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_cterr">Coesão Territorial</td>
-                                    <td class="valor"><input class="form-control" id="cterr" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="cterr" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_cult">Cultura</td>
-                                    <td class="valor"><input class="form-control" id="cult" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="cult" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_dn">Defesa Nacional</td>
-                                    <td class="valor"><input class="form-control" id="dn" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="dn" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_ecm">Economia e Mar</td>
-                                    <td class="valor"><input class="form-control" id="ecm" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="ecm" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_educ">Educação</td>
-                                    <td class="valor"><input class="form-control" id="educ" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="educ" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_encge">Encargos Gerais do Estado</td>
-                                    <td class="valor"><input class="form-control" id="encge" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="encge" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_fin">Finanças</td>
-                                    <td class="valor"><input class="form-control" id="fin" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="fin" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_hab">Habitação</td>
-                                    <td class="valor"><input class="form-control" id="hab" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="hab" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_infa">Infraestruturas</td>
-                                    <td class="valor"><input class="form-control" id="infa" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="infa" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_just">Justiça</td>
-                                    <td class="valor"><input class="form-control" id="just" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="just" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_negest">Negócios Estrangeiros</td>
-                                    <td class="valor"><input class="form-control" id="negest" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="negest" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_precom">Presidência do Conselho de Ministros</td>
-                                    <td class="valor"><input class="form-control" id="precom" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="precom" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_saude">Saúde</td>
-                                    <td class="valor"><input class="form-control" id="saude" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="saude" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio" id="min_tsss">Trabalho, Solidariedade e Segurança Social</td>
-                                    <td class="valor"><input class="form-control" id="tsss" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarNumero(this);diferenca_anual()"></td>
+                                    <td class="valor"><input class="form-control" id="tsss" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="%" style="text-align: center;" oninput="formatarpercentagem(this);diferenca_anual(id)"></td>
                                 </tr>
                             </tbody>
                         </table>

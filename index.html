@@ -483,7 +483,7 @@
                         </div>
                     </div>
                 </div>
-            <button class="btn btn-primary" style="width: 70%; margin-top: 2vw; position: relative; left: 50%; transform: translate(-50%, 0%);" onclick="navigateTo('fase2')">Próxima Fase</button>
+            <button class="btn btn-primary" style="width: 70%; margin-top: 2vw; margin-bottom: 2vw; position: relative; left: 50%; transform: translate(-50%, 0%);" onclick="navigateTo('fase2')">Próxima Fase</button>
         </section>
 
         <section id="fase2" class="fase hidden">
@@ -548,7 +548,7 @@
 
         <section id="fase3" class="fase hidden">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
-                <h2>Fase 3 - Orçamentação dos ministérios</h2>
+                <h2>Fase 3 - Orçamentação das áreas de atuação</h2>
                 <div class="caixa-valor-inicial" id="caixaValorInicial" style="display: none;">
                     Percentagem completa: <span id="numeroInicial"></span>%
                 </div>
@@ -567,82 +567,82 @@
                         <table id="tabela" class="table table-hover">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Área de atuação - 93646.9M</th>
+                                    <th>Área de atuação</th>
                                     <th style="text-align: center;">% da despesa atríbuída</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="ministerio">Administração Interna</td>
-                                    <td class="valor" id="orca">2,8%</td>
+                                    <td class="valor" id="vadmint">2,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Agricultura e Alimentação</td>
-                                    <td class="valor" id="orca">1,6%</td>
+                                    <td class="valor" id="vagral">1,6%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Ambiente e Ação Climática</td>
-                                    <td class="valor" id="orca">3,8%</td>
+                                    <td class="valor" id="vambal">3,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Ciência Tecnologia e Ensino Superior</td>
-                                    <td class="valor" id="orca">3,8%</td>
+                                    <td class="valor" id="vtecs">3,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Coesão Territorial</td>
-                                    <td class="valor" id="orca">0,3%</td>
+                                    <td class="valor" id="vcterr">0,3%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Cultura</td>
-                                    <td class="valor" id="orca">0,8%</td>
+                                    <td class="valor" id="vcult">0,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Defesa Nacional</td>
-                                    <td class="valor" id="orca">3%</td>
+                                    <td class="valor" id="vdn">3%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Economia e Mar</td>
-                                    <td class="valor" id="orca">2,2%</td>
+                                    <td class="valor" id="vecm">2,2%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Educação</td>
-                                    <td class="valor" id="orca">7,7%</td>
+                                    <td class="valor" id="veduc">7,7%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Encargos Gerais do Estado</td>
-                                    <td class="valor" id="orca">6,9%</td>
+                                    <td class="valor" id="venge">6,9%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Finanças</td>
-                                    <td class="valor" id="orca">13,8%</td>
+                                    <td class="valor" id="vfin">13,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Habitação</td>
-                                    <td class="valor" id="orca">1,1%</td>
+                                    <td class="valor" id="vhab">1,1%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Infraestruturas</td>
-                                    <td class="valor" id="orca">4,7%</td>
+                                    <td class="valor" id="vinfa">4,7%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Justiça</td>
-                                    <td class="valor" id="orca">2,1%</td>
+                                    <td class="valor" id="vjust">2,1%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Negócios Estrangeiros</td>
-                                    <td class="valor" id="orca">0,5%</td>
+                                    <td class="valor" id="vnegest">0,5%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Presidência do Conselho de Ministros</td>
-                                    <td class="valor" id="orca">1,8%</td>
+                                    <td class="valor" id="vprecom">1,8%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Saúde</td>
-                                    <td class="valor" id="orca">16,7%</td>
+                                    <td class="valor" id="vsaude">16,7%</td>
                                 </tr>
                                 <tr>
                                     <td class="ministerio">Trabalho, Solidariedade e Segurança Social</td>
-                                    <td class="valor" id="orca">26,4%</td>
+                                    <td class="valor" id="vtsss">26,4%</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -735,20 +735,21 @@
             </div>
             
             <!-- Botão para voltar à fase anterior -->
-            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase2')">Voltar</button>
+            <button style=" margin-bottom: 2vw; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase2')">Voltar</button>
             
             <!-- Botão para a próxima fase -->
-            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="finalizarFase3()">Próxima Fase</button>
+            <button style=" margin-bottom: 2vw; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="finalizarFase3()">Próxima Fase</button>
         </section>
 
         <section id="fase4" class="fase hidden">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
 
-            <h2>Fase 4 - Ministério da Saúde</h2>
+            <h2>Fase 4 - Área da Saúde</h2>
         
             <div class="caixa-valor-inicial" id="caixaValorInicial4" style="display: none;">
                 Saldo disponível: <span id="numeroInicial_4"></span>M €
             </div>
+            
             <p>
                 A primeira área em que terás de atuar será a saúde. Historicamente, a saúde é das áreas onde existe maior despesa publica. A complexidade deste setor
                 é conhecida por todos. Serás tu capaz de resolver a situação em apenas um orçamento?
@@ -776,7 +777,7 @@
                     <table class="table" id="medidasTabela_4">
                         <thead>
                             <tr>
-                                <th style="border: none;"><h4>Novas medidas</h4></th>
+                                <th style="border: none;"><h4>Criação de medidas</h4></th>
                                 <th style="border: none;"></th>
                                 <th style="border: none;"></th>
                                 <th style="border: none;"></th>
@@ -801,34 +802,39 @@
             <!-- Esta parte deve aparecer quando se clicar no botão de nova medida -->
             <!-- Dá para estilizar estas coisas out em mesmo de ser feito por js? -->
 
-            <div id="medidanova_4" class="container" style="margin-top: 3vw; display: none;">
+            <div id="medidanova_4" class="container" style="margin-top: 3vw; margin-bottom: 2vw; display: none;">
                     <!-- Container onde as medidas serão exibidas -->
-                
-                    <div id="medidasContainer4"></div>
-                    <h2>Nova medida:</h2>
+                    
+                    
 
+                    <div id="formnmedida4">
+                        <div class="row" style="margin: 0;">
+                            <h2>Nova medida</h2>
+                            <p>Para criar uma nova medida deves dar-lhe um título explicativo, descrever-nos como é que ela seria implementada,
+                                e no caso de ela levar à geração de receita ou despesa, deves também indicar como chegaste ao valor indicado.</p>
+                        </div>
+                        <div class="row" style="margin: 0; margin-top: 2vw;">
+                            <textarea class="titulo col-6" id="titulo_4" placeholder="Título da medida" style="resize: none;"></textarea>
 
-                    <p>Diga-nos o título da sua medida:</p>
-                    <textarea class="titulo" id="titulo_4" rows="1" cols="50" placeholder="Insira o título aqui ..." maxlength="60"></textarea>
+                            <!-- Alterar Ids e outras coisas -> agr está em orçamento, mas deve passar para receita e despesa-->
+                            <div class="col-1"></div>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
+                            <div class="col-1"></div>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="orcamento_4" placeholder="Despesa em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
 
-                    <br>
-
-                    <p>Deverá explicar-nos o objetivo da medida e como chegou ao valor orçado:</p>
-                    <textarea class="explicacao" id="explicacao_4" rows="10" cols="50" placeholder="Escreva a explicação aqui ..."></textarea>
-            
-                    <br>
-
-                    <p>Insira o orçamento:</p>
-                    <input type="text" inputmode="numeric" pattern="[0-9]*" class= "orcamento" id="orcamento_4" rows="1" cols="50" placeholder="Digite o orçamento qui..." oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>M €
-
-                    <br>
-                    <br>
-                    <!-- Botão para adicionar uma nova medida -->
-                    <button class="medidasbtns" id="atualizarmedidabtn_4" onclick="atualizarmedida(4)">Atualizar Medida</button>
-                    <button class="medidasbtns" id="criarmedidabtn_4" onclick="criarMedida(4)">Adicionar Nova Medida</button>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                            <textarea class="explicacao col-12" id="explicacao_4" placeholder="Explicação da medida e do orçamento"></textarea>    
+                        </div>
     
-                    <button class="medidasbtns" id="cancelarmedidabtn_4" onclick="cancelar(4)">Cancelar</button>
-
+                                        
+                        <!-- Botão para adicionar uma nova medida -->
+                        <button class="medidasbtns" id="atualizarmedidabtn_4" onclick="atualizarmedida(4)">Atualizar Medida</button>
+                        <button class="medidasbtns" id="criarmedidabtn_4" onclick="criarMedida(4)">Adicionar Nova Medida</button>
+        
+                        <button class="medidasbtns" id="cancelarmedidabtn_4" onclick="cancelar(4)">Cancelar</button>
+                    </div>
+                    
             </div>
             <div class="modal fade" id="myModal4" role="dialog">
                 <div class="modal-dialog">
@@ -849,55 +855,65 @@
                 </div>
               </div>
 
-            <!-- Botão para voltar à fase anterior TEMPORARIO, COMENTAR ESTE BOTAO PARA NAA PERMITIR VOLTAR A FASE 3! -->
-            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase3')">Voltar</button>
-            
+            <!-- Botão para voltar à fase anterior TEMPORARIO, COMENTAR ESTE BOTAO PARA NAA PERMITIR VOLTAR A FASE 3!
+             Bloqueado pelo Miguel :)
+            <button style=" margin-bottom: 2vw; margin-top: 1vw; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase3')">Voltar</button>
+            -->
             <!-- Botão para a próxima fase -->
-            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase5')">Próxima Fase</button>
+            <button id="btnpfase" style="margin: 1vw 15vw 2vw 0vw; width: 20%; float: right;" class="btn btn-primary" onclick="navigateTo('fase5')">Próxima Fase</button>
         </section>
         
         <section id="fase5" class="fase hidden">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
 
-            <h2>Fase 5 - Ministério da ...</h2>
+            <h2>Fase 5 - Área de ...</h2>
 
             <div class="caixa-valor-inicial" id="caixaValorInicial5" style="display: none;">
                 Saldo disponível: <span id="numeroInicial_5"></span> M€
             </div>
             <p>
-                Outro texto bonito a explicar esta fase....
+                Nesta quinta fase terás de fazer o mesmo que na anterior, mas agora terás de orçamentar a área a que atribuíste um orçamento menor. Boa sorte!
             </p>
+            <p id="teste"></p>
         </div>
-            <div class="container" id="medidasA_5">
-                <div class="row" style="margin-top: 3vw;">
-                
-                    <table class="table" id="medidasTabela_5">
-                        <thead>
-                            <tr>
-                                <th style="border: none;"><h4>Medidas atuais</h4></th>
-                                <th style="border: none;"></th>
-                                <th style="border: none; text-align: right;"><button type="button" onclick="novamedida(5)" class="btn btn-success">Nova medida</button></th>
-                            </tr>
-                            <tr>
-                                <th>Título</th>
-                                <th style="text-align: center;">Orçamento</th>
-                                <th style="text-align: center;">#</th>
-                                <th style="text-align: center;">Editar</th>
-                                <th style="text-align: center;">Apagar</th>
-                            </tr>
-                        </thead>
-                        <tbody> 
-                        </tbody>
-                    </table>
+        <div class="container" id="medidasA_5">
+            <div class="row">
+                <div class="col-12" style="margin-bottom: 2vw;">
+                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque itaque esse quae odit mollitia, atque autem, praesentium, optio repellat voluptatum ea dolor delectus? Laudantium doloribus sequi est et magni! Corrupti.</p>    
                 </div>
-                    <div id = zona_medidas5>
-                        <br>
-                        <br>
-                        
-                        <p>Adicione aqui algum comentário extra:</p>
-                        <textarea id="projecaoText" rows="10" cols="50" placeholder="Adicione algum comentário extra ..."></textarea>
-                    </div>
+                <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>ipsum Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, eos odit corrupti quisquam vel accusamus perferendis facere reiciendis, iste suscipit blanditiis maxime laborum facilis cupiditate, veritatis molestias! Doloremque, iusto sint.</p>    
+                </div>
+                
             </div>
+            <div class="row" style="margin-top: 3vw;">
+            
+                <table class="table" id="medidasTabela_5">
+                    <thead>
+                        <tr>
+                            <th style="border: none;"><h4>Criação de medidas</h4></th>
+                            <th style="border: none;"></th>
+                            <th style="border: none;"></th>
+                            <th style="border: none;"></th>
+                            <th style="border: none;"><button type="button" style="float: right;" onclick="novamedida(5)" class="btn btn-success">Nova medida</button></th>
+                        </tr>
+                        <tr>
+                            <th>Título</th>
+                            <th style="text-align: center;">Orçamento</th>
+                            <th style="text-align: center;">#</th>
+                            <th style="text-align: center;">Editar</th>
+                            <th style="text-align: center;">Apagar</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
             
 
@@ -905,32 +921,38 @@
             <!-- Dá para estilizar estas coisas out em mesmo de ser feito por js? -->
 
             <div id="medidanova_5" class="container" style="margin-top: 3vw; display: none;">
-                    <!-- Container onde as medidas serão exibidas -->
-                    <div id="medidasContainer5"></div>
-                    <h2>Nova medida:</h2>
+                <!-- Container onde as medidas serão exibidas -->
+                
+                
 
+                <div id="formnmedida4">
+                    <div class="row" style="margin: 0;">
+                        <h2>Nova medida</h2>
+                        <p>Para criar uma nova medida deves dar-lhe um título explicativo, descrever-nos como é que ela seria implementada,
+                            e no caso de ela levar à geração de receita ou despesa, deves também indicar como chegaste ao valor indicado.</p>
+                    </div>
+                    <div class="row" style="margin: 0; margin-top: 2vw;">
+                        <textarea class="titulo col-6" id="titulo_5" placeholder="Título da medida" style="resize: none;"></textarea>
 
-                    <p>Diga-nos o título da sua medida:</p>
-                    <textarea class="titulo" id="titulo_5" rows="1" cols="50" placeholder="Insira o título aqui ..." maxlength="60"></textarea>
+                        <!-- Alterar Ids e outras coisas -> agr está em orçamento, mas deve passar para receita e despesa-->
+                        <div class="col-1"></div>
+                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
+                        <div class="col-1"></div>
+                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="orcamento_5" placeholder="Despesa em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
 
-                    <br>
+                    </div>
+                    <div class="row" style="margin: 0;">
+                        <textarea class="explicacao col-12" id="explicacao_5" placeholder="Explicação da medida e do orçamento"></textarea>    
+                    </div>
 
-                    <p>Deverá explicar-nos o objetivo da medida e como chegou ao valor orçado:</p>
-                    <textarea class="explicacao" id="explicacao_5" rows="10" cols="50" placeholder="Escreva a explicação aqui ..."></textarea>
-            
-                    <br>
-
-                    <p>Insira o orçamento:</p>
-                    <input type="text" inputmode="numeric" pattern="[0-9]*" class= "orcamento" id="orcamento_5" rows="1" cols="50" placeholder="Digite o orçamento qui..." oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>M €
-
-                    <br>
-                    <br>
+                                    
                     <!-- Botão para adicionar uma nova medida -->
                     <button class="medidasbtns" id="atualizarmedidabtn_5" onclick="atualizarmedida(5)">Atualizar Medida</button>
                     <button class="medidasbtns" id="criarmedidabtn_5" onclick="criarMedida(5)">Adicionar Nova Medida</button>
     
                     <button class="medidasbtns" id="cancelarmedidabtn_5" onclick="cancelar(5)">Cancelar</button>
-
+                </div>
+                
             </div>
 
 
@@ -954,10 +976,11 @@
               </div>
             
             <!-- Botão para voltar à fase anterior -->
-            <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase4')">Voltar</button>
+            <button id="btnvoltar" style="margin-bottom: 2vw; width: 15%; position: relative; left: 13%;" class="btn btn-outline-primary" onclick="navigateTo('fase4')">Voltar</button>
             
+            <br>
             <!-- O botão para gerar o PDF -->
-<button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" id="gerarPdfBtn" onclick="formulario()">Gerar PDF</button>
+<button style="margin-bottom: 2vw; margin-top: 5vw; width: 80%; position: relative; left: 10%;" class="btn btn-primary" id="gerarPdfBtn" onclick="formulario()">Gerar PDF</button>
 
 <!-- Botão para confirmar que o PDF foi salvo -->
 <button  id="confirmarBtn" style="display:none;" onclick="confirmarEnvio()">Finalizar</button >

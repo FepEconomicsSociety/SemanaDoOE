@@ -129,12 +129,14 @@ function navigateTo(faseId)
     }
     else if (faseId === 'fase4') {
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
+        document.getElementById("btnpfase").style.display = "block";
         inicializarFase(4);
         atualizarTitulo(4,false);  // Atualiza o valor inicial da fase 4
     }
     else if (faseId === 'fase5')
     {
         document.getElementById('caixaValorInicial5').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
+        document.getElementById("gerarPdfBtn").style.display = "block";
         inicializarFase(5);
         atualizarTitulo(5,false);  // Atualiza o valor inicial da fase 4
     }
@@ -253,9 +255,11 @@ function diferenca_anual(id_atual) {
     // Altera a cor da borda com base no total
     const caixaValorInicial = document.querySelector('.caixa-valor-inicial');
     if (totalOrcamentosFornecidos < 100) {
+        document.getElementById("caixaValorInicial").style.color = "red";
         numeroInicialElemento.style.color = "red";
         caixaValorInicial.style.borderColor = 'red'; // Vermelho
     } else if (totalOrcamentosFornecidos === 100) {
+        document.getElementById("caixaValorInicial").style.color = "green";
         numeroInicialElemento.style.color = "green";
         caixaValorInicial.style.borderColor = 'green'; // Verde
     }
@@ -437,9 +441,13 @@ function atualizarTitulo(fase, previsualizar = false)
 {
     let orçamento = 0;
     
+    
+
     if(fase == 4)
     {
-        orçamento = parseFloat(document.getElementById("saude").value.replace(/\./g, '').replace(',', '.')) || 0;
+        percentagem = parseFloat(document.getElementById("saude").value.replace(/\./g, '').replace(',', '.')) / 100 || 0;
+        
+        orçamento = 93646.9 * (1 + parseFloat(document.getElementById("pib").value.replace(/\./g, '').replace(',', '.')) / 100) * (percentagem) - 15656.3;
 
     }else if(fase == 5)
     {
@@ -451,7 +459,7 @@ function atualizarTitulo(fase, previsualizar = false)
 
         for (let input of inputs) 
         {
-            const valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.'));
+            const valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.')) / 100;
             if (valor < temp && input.id != "saude") 
             {
                 temp = valor;     // Atualiza o menor valor encontrado
@@ -467,9 +475,12 @@ function atualizarTitulo(fase, previsualizar = false)
             Nomeministerio = document.getElementById(ministerioId).textContent;
 
             // Atualiza o nome da fase 5 com o ministério de menor valor
-            document.querySelector('#fase5 h2').textContent = `Fase 5 - Ministério de ${Nomeministerio}`;
+            document.querySelector('#fase5 h2').textContent = `Fase 5 - Área de ${Nomeministerio}`;
         }
-        orçamento = temp;
+        valorinicialarea = parseFloat(document.getElementById('v'+ idMenorValor).textContent.replace(/\./g, '').replace(',', '.').replace("%", "")) / 100 * 93646.9;
+        orçamento = 93646.9 * (1 + parseFloat(document.getElementById("pib").value.replace(/\./g, '').replace(',', '.')) / 100) * (temp) - valorinicialarea;
+
+        // document.getElementById("teste").textContent = "Valor inicial: " + valorinicialarea + "; Valor novo: " + 93646.9 * (1 + parseFloat(document.getElementById("pib").value.replace(/\./g, '').replace(',', '.')) / 100) * (temp);
     }
 
     const numeroInicialElemento = document.getElementById(`numeroInicial_${fase}`);

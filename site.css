@@ -282,7 +282,7 @@ footer a:hover {
 
 .fase 
 {
-    margin-bottom: 2em;
+    margin-bottom: 0em;
 }
 
 .hidden 
@@ -315,10 +315,9 @@ footer a:hover {
 {
     min-width: 500px;  /* Tamanho mínimo da largura */
     min-height: 150px; /* Tamanho mínimo da altura */
-    max-width: 500px;  /* Tamanho mínimo da largura */
-    max-height:  400px; /* Tamanho mínimo da altura */
     resize: both;      /* Permite redimensionar apenas para aumentar */
     box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura */
+    margin: 1vw;
 }
 
 .orcamento
@@ -424,7 +423,7 @@ button:hover {
 {
     background-color: #007bff; /* Cor de fundo do botão primário */
     color: #fff; /* Cor do texto */
-    margin-bottom: 15px;
+    margin-bottom: 2vw;
     padding: 0.375rem 0.75rem; /* Padding */
     border: 1px solid transparent; /* Borda */
     border-radius: 0.25rem; /* Raio da borda */
@@ -655,5 +654,12 @@ table {
     width: 5vw !important;
     float: right;
 }
+
+#formnmedida4{
+    border: 2px solid #d5e7ff;
+    border-radius: 3vw;
+    padding: 2vw;
+}
+
 
 /*------------------------------------------------------------------------------------------*/

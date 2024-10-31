@@ -21,6 +21,9 @@ function novamedida(fase)
     document.getElementById(`criarmedidabtn_${fase}`).style.display = "inline-block";
     document.getElementById(`atualizarmedidabtn_${fase}`).value = -1;
     document.getElementById(`atualizarmedidabtn_${fase}`).style.display = "none";
+    document.getElementById('btnvoltar').style.display = "none";
+    document.getElementById('btnpfase').style.display = "none";
+    document.getElementById("gerarPdfBtn").style.display = "none";
 
 }
 
@@ -33,7 +36,10 @@ function cancelar(fase)
     // Esconde o formulário de nova medida e exibe a lista de medidas
     document.getElementById(`medidanova_${fase}`).style.display = "none";
     document.getElementById(`medidasA_${fase}`).style.display = "block";
-       
+    document.getElementById('btnvoltar').style.display = "block";
+
+    if(fase == 4) document.getElementById('btnpfase').style.display = "block";
+    if(fase == 5) document.getElementById("gerarPdfBtn").style.display = "block";
 }
 
 function editarmedida(fase, index)
@@ -48,6 +54,9 @@ function editarmedida(fase, index)
     document.getElementById(`orcamento_${fase}`).value = fases[fase].medidas[index].orcamento;
     document.getElementById(`orcamento_${fase}`).value = document.getElementById(`orcamento_${fase}`).value.replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     document.getElementById(`atualizarmedidabtn_${fase}`).value = index;
+    document.getElementById('btnvoltar').style.display = "none";
+    document.getElementById('btnpfase').style.display = "none";
+    document.getElementById("gerarPdfBtn").style.display = "block";
 }
 
 // Função para apagar uma medida

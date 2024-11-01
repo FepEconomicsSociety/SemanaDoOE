@@ -143,7 +143,7 @@ function criarMedida(fase)
     const receita = parseFloat(document.getElementById(`receita_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
     const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
 
-    if (!titulo || !explicacao || !orcamento || !receita) {
+    if (!titulo || !explicacao || (!orcamento && !receita) || (orcamento && receita) ) {
         alert("Insira todos os parâmetros corretamente.");
         return;
     }
@@ -219,7 +219,7 @@ function adicionarMedidaATabela(fase) {
 
     const orcamentoTd = document.createElement("td");
     orcamentoTd.style.textAlign = "center";
-    orcamentoTd.textContent = (`-${medida.orcamento}M € / +${medida.receita}M €`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    orcamentoTd.textContent = (`${-medida.orcamento+medida.receita}M €`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
     const detalhesTd = document.createElement("td");
     detalhesTd.style.textAlign = "center";
@@ -244,7 +244,7 @@ function adicionarMedidaATabela(fase) {
     const apagarBtn = document.createElement("button");
     apagarBtn.textContent = "Apagar";
     apagarBtn.onclick = () => apagarMedida(fase, index);
-    apagarBtn.classList.add("btn", "btn-outline-primary");
+    apagarBtn.classList.add("btn", "btn-outline-danger");
     apagarTd.appendChild(apagarBtn);
 
     // Adiciona as células à nova linha
@@ -284,9 +284,16 @@ function mostrarDetalhesMedida(index, fase) {
 
     // Atualiza o corpo do modal com a explicação da medida
     document.querySelector(`#myModal${fase} .modal-body`).innerHTML =`
-        <p><strong>Receita:</strong> +${receitaFormatada}M €</p>
-        <p><strong>Despesa:</strong> -${orcamentoFormatado}M €</p>
-        <p><strong>Explicação:</strong> ${medida.explicacao}</p>
+        <div>
+        <p style="float: left;"><strong>Receita:</strong> ${receitaFormatada}M €</p>
+        <p style="float: right;"><strong>Despesa:</strong> ${orcamentoFormatado}M €</p>
+        </div>
+        <br>
+        <br>
+        <div>
+        <h6><strong>Explicação</strong></h6>
+        <p>${medida.explicacao}</p>
+        </div>
     `;
 }
 

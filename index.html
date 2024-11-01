@@ -550,7 +550,7 @@
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
                 <h2>Fase 3 - Orçamentação das áreas de atuação</h2>
                 <div class="caixa-valor-inicial" id="caixaValorInicial" style="display: none;">
-                    Percentagem completa: <span id="numeroInicial"></span>%
+                    Percentagem total: <span id="numeroInicial"></span>%
                 </div>
 
                 <p>
@@ -847,9 +847,6 @@
                     <div class="modal-body">
                         <p>Aqui devem aparecer os detalhes de cada medida.</p>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
                   </div>
                   
                 </div>
@@ -878,64 +875,76 @@
         </div>
         <div class="container" id="medidasA_5">
         <!--AQUI PODEM SER ESCRITAS AS MEDIDAS PREDEFINIDAS DOS MINISTERIOS ESCOLHIDOS -->
-            <div id="Medidas_Predefinidas">
 
-                <div class="row" id="Medidas_Ministerio_da_Magia" hidden>
-                    <div class="col-12" style="margin-bottom: 2vw;">
-                        <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                        <p>ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque itaque esse quae odit mollitia, atque autem, praesentium, optio repellat voluptatum ea dolor delectus? Laudantium doloribus sequi est et magni! Corrupti.</p>    
-                    </div>
-                    <div class="col-12">
-                        <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                        <p>ipsum Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, eos odit corrupti quisquam vel accusamus perferendis facere reiciendis, iste suscipit blanditiis maxime laborum facilis cupiditate, veritatis molestias! Doloremque, iusto sint.</p>    
-                    </div>
+
+            <div class="row" id="Medidas_Ministerio_da_Magia" hidden>
+                <div class="col-12">
+                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque itaque esse quae odit mollitia, atque autem, praesentium, optio repellat voluptatum ea dolor delectus? Laudantium doloribus sequi est et magni! Corrupti.</p>    
                 </div>
-
-                <div class="row" id="Medidas_Ministerio_do_Roubo" hidden>
-                    <div class="col-12" style="margin-bottom: 2vw;">
-                        <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                        <p>Aqui so há roubo.</p>    
-                    </div>
-                    <div class="col-12">
-                        <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                        <p>Muito roubo mesmo.</p>    
-                    </div>
+                <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>ipsum Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, eos odit corrupti quisquam vel accusamus perferendis facere reiciendis, iste suscipit blanditiis maxime laborum facilis cupiditate, veritatis molestias! Doloremque, iusto sint.</p>    
                 </div>
-
-                <div class="row" id="Medidas_negest" hidden>
-                    <div class="col-12" style="margin-bottom: 2vw;">
-                        <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                        <p>Negocios.</p>    
-                    </div>
-                    <div class="col-12">
-                        <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                        <p>Estrangeiros.</p>    
-                    </div>
-                </div>
-
-                <div class="row" id="Medidas_cult" hidden>
-                    <div class="col-12" style="margin-bottom: 2vw;">
-                        <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                        <p>Cultura.</p>    
-                    </div>
-                    <div class="col-12">
-                        <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                        <p>Cultural.</p>    
-                    </div>
-                </div>
-
-                <div class="row" id="Medidas_cterr" hidden>
-                    <div class="col-12" style="margin-bottom: 2vw;">
-                        <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                        <p>Terrorismo.</p>    
-                    </div>
-                    <div class="col-12">
-                        <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                        <p>Quer dizer, Territorial.</p>    
-                    </div>
-                </div>
-
             </div>
+
+            <div class="row" id="Medidas_Ministerio_do_Roubo" hidden>
+                <div class="col-12">
+                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>Aqui so há roubo.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Muito roubo mesmo.</p>    
+                </div>
+            </div>
+
+            <div class="row" id="Medidas_negest" hidden>
+                <div class="col-12">
+                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>Negocios.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Estrangeiros.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Existe um ministério do roubo?</p>    
+                </div>
+            </div>
+
+            <div class="row" id="Medidas_cult" hidden>
+                <div class="col-12">
+                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>Cultura.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Cultural.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Vai para o ministério dos negócios estrangeiros!</p>    
+                </div>
+            </div>
+
+            <div class="row" id="Medidas_cterr" hidden>
+                <div class="col-12">
+                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>Terrorismo.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Quer dizer, Territorial.</p>    
+                </div>
+                    <div class="col-12">
+                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Vai para o ministério da cultura!</p>    
+                </div>
+            </div>
+
+
             <div class="row" style="margin-top: 3vw;">
                 <table class="table" id="medidasTabela_5">
                     <thead>
@@ -1026,11 +1035,15 @@
             <button id="btnvoltar" style="margin-bottom: 2vw; width: 15%; position: relative; left: 13%;" class="btn btn-outline-primary" onclick="navigateTo('fase4')">Voltar</button>
             
             <br>
-            <!-- O botão para gerar o PDF -->
-<button style="margin-bottom: 2vw; margin-top: 5vw; width: 80%; position: relative; left: 10%;" class="btn btn-primary" id="gerarPdfBtn" onclick="formulario()">Gerar PDF</button>
 
-<!-- Botão para confirmar que o PDF foi salvo -->
-<button  id="confirmarBtn" style="display:none;" onclick="confirmarEnvio()">Finalizar</button >
+            <div style="display: flex;">
+                <!-- O botão para gerar o PDF -->
+                <button style="margin-bottom: 2vw; margin-top: 5vw; width: 20%; position: relative; left: 10%;" class="btn btn-primary" id="gerarPdfBtn" onclick="formulario()">Gerar PDF</button>
+
+                <!-- Botão para confirmar que o PDF foi salvo -->
+                <button style="margin-bottom: 2vw; margin-top: 5vw; width: 30%; position: relative; left: 30%; display: none;" class="btn btn-info" id="confirmarBtn"  onclick="confirmarEnvio()">Finalizar</button >
+            </div>
+            
         
             <!-- Botão para a próxima fase -->
             <!--<button onclick="navigateTo('fase')">Próxima Fase</button>-->

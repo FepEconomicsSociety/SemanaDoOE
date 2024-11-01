@@ -394,24 +394,7 @@ button:hover {
     margin-bottom: 10px; 
 }
 
-#confirmarBtn
-{
-    margin-top: 50px;
-    min-width: 120px; width: 40%;
-    position: relative; 
-    left: 10%;
-    background-color: #007bff; /* Cor de fundo do botão primário */
-    color: #fff; /* Cor do texto */
-    padding: 0.375rem 0.75rem; /* Padding */
-    border: 1px solid transparent; /* Borda */
-    border-radius: 0.25rem; /* Raio da borda */
-    transition: background-color 0.3s; /* Transição suave */
-}
 
-#confirmarBtn:hover {
-    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
-    color: #fff; /* Mantenha a cor do texto */
-}
 
 /* CSS para adicionar espaço acima do botão */
 #btnApagar 

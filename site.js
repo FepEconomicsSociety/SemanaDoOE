@@ -109,8 +109,7 @@ function validarEmail(email)
 
 // Função para navegação entre as fases
 function navigateTo(faseId) 
-{
-    
+{ 
     // Esconder todas as fases
     const fases = document.querySelectorAll('.fase');
     fases.forEach(fase => fase.classList.add('hidden'));
@@ -125,7 +124,7 @@ function navigateTo(faseId)
 
     if (faseId === 'fase3' ) {
         caixaValorInicial.style.display = 'block'; // Exibe a caixa
-        diferenca_anual();
+        diferenca_anual("admint");
     }
     else if (faseId === 'fase4') {
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
@@ -167,7 +166,7 @@ function init()
         const faseAtual = sessionStorage.getItem('faseAtual') || 'fase0';  // Se não houver fase armazenada, comece na fase1
         navigateTo(faseAtual);// Navega para a fase armazenada
 
-        diferenca_anual();        // Chama a função para calcular a diferença dos orçamentos depois de inicializar as fases
+        diferenca_anual("admint");        // Chama a função para calcular a diferença dos orçamentos depois de inicializar as fases
         
          
     } else {
@@ -247,6 +246,7 @@ function diferenca_anual(id_atual) {
             });
         
             const resultado = totalOrcamentosFornecidos;
+            console.log("ahhh:",resultado);
             numeroInicialElemento.textContent = resultado.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     } else {
         // Atualiza o texto se não exceder 100%
@@ -254,11 +254,11 @@ function diferenca_anual(id_atual) {
     }
     // Altera a cor da borda com base no total
     const caixaValorInicial = document.querySelector('.caixa-valor-inicial');
-    if (totalOrcamentosFornecidos < 100) {
+    if (parseFloat(totalOrcamentosFornecidos) < 100) {
         document.getElementById("caixaValorInicial").style.color = "red";
         numeroInicialElemento.style.color = "red";
         caixaValorInicial.style.borderColor = 'red'; // Vermelho
-    } else if (totalOrcamentosFornecidos === 100) {
+    } else if (parseFloat(totalOrcamentosFornecidos) === 100) {
         document.getElementById("caixaValorInicial").style.color = "green";
         numeroInicialElemento.style.color = "green";
         caixaValorInicial.style.borderColor = 'green'; // Verde
@@ -336,6 +336,7 @@ function removerAviso(input) {
         aviso.remove();
     }
 }
+
 function formatarNumero(input) {
     // Pega a posição inicial do cursor
     const posicaoCursorInicial = input.selectionStart;
@@ -378,14 +379,15 @@ function formatarNumero(input) {
     input.setSelectionRange(novaPosicao, novaPosicao);
 }
 
-/*Verifica se todos os dados na fase 3 foram preenchidos antes de continuar*/ 
-function finalizarFase3() {
+/*Verifica se todos os dados na fase 2 e 3 foram preenchidos antes de continuar*/ 
+function finalizarFase(fase) {
     // Seleciona todos os inputs dentro da seção "fase3"
-    const inputs = document.querySelectorAll('#fase3 input[type="text"]');
-    const inputs2 = document.querySelectorAll('#fase2 input[type="number"]');
+    const inputs = document.querySelectorAll(`#fase${fase} input[type="text"]`);
+    const percentagemtotal = parseFloat(document.getElementById('numeroInicial').textContent.replace(',','.')); 
+    console.log(percentagemtotal);
+
     // Verifica se todos os inputs têm um valor
     let todosPreenchidos = true; // Inicializa como verdadeiro
-    let todosPreenchidos2 = true; // Inicializa como verdadeiro
 
     for (let input of inputs) {
         if (input.value === '' || input.value === null) {
@@ -393,56 +395,29 @@ function finalizarFase3() {
             break; // Sai do loop se encontrar um campo vazio
         }
     }
-    for (let input of inputs2) {
-        if (input.value === '' || input.value === null) {
-            todosPreenchidos2 = false; // Define como falso se algum campo estiver vazio
-            break; // Sai do loop se encontrar um campo vazio
-        }
-    }
 
-    if (todosPreenchidos && todosPreenchidos2) 
+    if (todosPreenchidos && fase === 2 || fase === 3 && todosPreenchidos && percentagemtotal === 100) 
     {
         // Se todos os dados estiverem inseridos, permite a navegação
-        navigateTo('fase4'); // Altere para a próxima fase que deseja
-    } 
-    else if(todosPreenchidos && !todosPreenchidos2)
+        navigateTo(`fase${fase+1}`); // Altere para a próxima fase que deseja
+    }    
+    else if (todosPreenchidos && fase === 3 && percentagemtotal != 100)
+    {
+        alert("A percentagem total tem que ser 100%.");
+    }
+    else
     {
         // Se não, exibe uma mensagem de aviso
-        alert("Por favor, preencha todos os campos da fase 2 antes de prosseguir.");
+        alert("Por favor, preencha todos os campos antes de prosseguir.");
     }
-    else if(!todosPreenchidos && todosPreenchidos2)
-    {
-        alert("Por favor, preencha todos os campos da fase 3 antes de prosseguir.");
-    }
-    else
-    {
-        alert("Por favor, preencha todos os campos das fases 2 e 3 antes de prosseguir.");
-    }
+
 }
 
-/*function finalizarFase3() {
-    
-    const orcamentoFase3 = parseFloat(document.getElementById('saude').value);
-    if(orcamentoFase3 === 0)
-    {
-        alert("insira o valor para a saude");
-        return;
-    }
-    else
-    {
-        sessionStorage.setItem('orcamentoFase3', orcamentoFase3); // Armazena o valor no sessionStorage
-        navigateTo('fase4');
-    }
-    
-}*/
-// Função para atualizar o título ao subtrair o número inserido do número inicial
-
+// Função para atualizar o título do orçamento disponivel do ministerio
 function atualizarTitulo(fase, previsualizar = false) 
 {
     let orçamento = 0;
     
-    
-
     if(fase == 4)
     {
         percentagem = parseFloat(document.getElementById("saude").value.replace(/\./g, '').replace(',', '.')) / 100 || 0;
@@ -456,14 +431,18 @@ function atualizarTitulo(fase, previsualizar = false)
         let temp = Infinity;    // Inicia com o maior valor possível
         let idMenorValor = "";  // Armazena o id do input com menor valor
         let Nomeministerio = "";  // Para armazenar o nome do ministério com o menor valor
-
+        // Define os IDs que desejas incluir
+        const ministeriosDesejados = ['cterr', 'cult', 'negest'];
         for (let input of inputs) 
         {
-            const valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.')) / 100;
-            if (valor < temp && input.id != "saude") 
+            if(ministeriosDesejados.includes(input.id))
             {
-                temp = valor;     // Atualiza o menor valor encontrado
-                idMenorValor = input.id;    // Armazena o id do input com o menor valor
+                const valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.')) / 100;
+                if (valor < temp && input.id != "saude") 
+                {
+                    temp = valor;     // Atualiza o menor valor encontrado
+                    idMenorValor = input.id;    // Armazena o id do input com o menor valor
+                }
             }
         }
 
@@ -476,20 +455,26 @@ function atualizarTitulo(fase, previsualizar = false)
 
             // Atualiza o nome da fase 5 com o ministério de menor valor
             document.querySelector('#fase5 h2').textContent = `Fase 5 - Área de ${Nomeministerio}`;
-        }
-        valorinicialarea = parseFloat(document.getElementById('v'+ idMenorValor).textContent.replace(/\./g, '').replace(',', '.').replace("%", "")) / 100 * 93646.9;
-        orçamento = 93646.9 * (1 + parseFloat(document.getElementById("pib").value.replace(/\./g, '').replace(',', '.')) / 100) * (temp) - valorinicialarea;
 
+            const valoranterior_ministerio = document.getElementById(`v${idMenorValor}`).textContent;
+            let valorinicialarea = parseFloat(valoranterior_ministerio.replace(/\./g, '').replace(',', '.').replace("%", "")) / 100 * 93646.9;
+            orçamento = 93646.9 * (1 + parseFloat(document.getElementById("pib").value.replace(/\./g, '').replace(',', '.')) / 100) * (temp) - valorinicialarea;
+        }
         // document.getElementById("teste").textContent = "Valor inicial: " + valorinicialarea + "; Valor novo: " + 93646.9 * (1 + parseFloat(document.getElementById("pib").value.replace(/\./g, '').replace(',', '.')) / 100) * (temp);
     }
 
     const numeroInicialElemento = document.getElementById(`numeroInicial_${fase}`);
+    const receitaInput = parseFloat(document.getElementById(`receita_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
     const orcamentoInput = parseFloat(document.getElementById(`orcamento_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
 
-
-    // Recupera o valor inicial base (armazenado ou default 100)
+    // Recupera o valor inicial base 
     let valorInicial = parseFloat(document.getElementById(`numeroInicial_${fase}`).value) || orçamento;
   
+    // Soma a receita de todas as medidas já adicionadas
+    fases[fase].medidas.forEach(medida => {
+        valorInicial += parseFloat(medida.receita) || 0;
+    });
+
     // Subtrai o orçamento de todas as medidas já adicionadas
     fases[fase].medidas.forEach(medida => {
         valorInicial -= parseFloat(medida.orcamento) || 0;
@@ -503,10 +488,14 @@ function atualizarTitulo(fase, previsualizar = false)
         if (medidaAtual && medidaAtual.orcamento) {  // Verifica se a medida existe
             valorInicial += parseFloat(medidaAtual.orcamento) || 0;  // Adiciona de volta o orçamento antigo
         }
+        if (medidaAtual && medidaAtual.receita) {  // Verifica se a medida existe
+            valorInicial -= parseFloat(medidaAtual.receita) || 0;  // Adiciona de volta o orçamento antigo
+        }
     }
     // Se for pré-visualização, subtrai o valor do orçamento que está sendo digitado
     if (previsualizar) {
         valorInicial -= orcamentoInput;
+        valorInicial += receitaInput;
     }
 
     // Atualiza o valor exibido na interface
@@ -603,6 +592,7 @@ function coletarDadosFases() {
             saldoDisponivel: document.getElementById('numeroInicial_4').innerText || 'Não inserido', // Adiciona o saldo disponível da fase 4
             medidas: fases[4].medidas.map(medida => ({
                 titulo: medida.titulo,
+                receita: medida.receita,
                 orcamento: medida.orcamento,
                 explicacao: medida.explicacao 
             })),
@@ -611,10 +601,11 @@ function coletarDadosFases() {
             saldoDisponivel: document.getElementById('numeroInicial_5').innerText || 'Não inserido', // Adiciona o saldo disponível da fase 5
             medidas: fases[5].medidas.map(medida => ({
                 titulo: medida.titulo,
+                receita: medida.receita,
                 orcamento: medida.orcamento,
                 explicacao: medida.explicacao 
             })),
-            comentarioExtra: document.getElementById('projecaoText').value,
+            //comentarioExtra: document.getElementById('projecaoText').value,
         },
     };
     return dados;
@@ -674,11 +665,11 @@ function gerarPDF() {
 
             conteudoPDF +=  `<div class="fase">
                             <h3>Fase 3 - Orçamentação dos ministérios</h3>
-                            <h4>Diferença anual: ${dados.fase3.diferencaAnual}M €</h4>`; // Adiciona a diferença anual
+                            <h4>Percentagem total: ${dados.fase3.diferencaAnual}%</h4>`; // Adiciona a diferença anual
             dados.fase3.orcamentos.forEach(orcamento => {
                 conteudoPDF += `<div class="orcamento-container"> 
                 <h4>${orcamento.ministerio}:</h4>
-                <p>Orçamento: ${orcamento.valor}M €</p>
+                <p>Orçamento: ${orcamento.valor}%</p>
             </div>`;
             });
         
@@ -696,12 +687,17 @@ function gerarPDF() {
         {
             
             dados.fase4.medidas.forEach(medida => {
+                const receitaFormatada = medida.receita
+                .toString()
+                .replace('.', ',')
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                 const orcamentoFormatado = medida.orcamento
                 .toString()
                 .replace('.', ',')
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                 conteudoPDF += `<div class="medidas-container"> 
                                 <h4>${medida.titulo}:</h4>
+                                <p>Receita: ${receitaFormatada}M €</p>
                                 <p>Orçamento: ${orcamentoFormatado}M €</p>
                                 <p>Explicação: ${medida.explicacao}</p>
                                 </div>`;            
@@ -720,17 +716,22 @@ function gerarPDF() {
                     else 
                     {
                         dados.fase5.medidas.forEach(medida => {
+                            const receitaFormatada = medida.receita
+                            .toString()
+                            .replace('.', ',')
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                             const orcamentoFormatado = medida.orcamento
                             .toString()
                             .replace('.', ',')
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                             conteudoPDF += `<h4>${medida.titulo}:</h4>
+                                            <p>Receita: ${receitaFormatada}M €</p>
                                             <p>Orçamento: ${orcamentoFormatado}M €</p>
                                             <p>Explicação: ${medida.explicacao}</p>`;            
                         });
                     }
-        conteudoPDF += `<h3>Comentários adicionais</h3>`;         
-        if(dados.fase5.comentarioExtra.length === 0)
+        //conteudoPDF += `<h3>Comentários adicionais</h3>`;         
+        /*if(dados.fase5.comentarioExtra.length === 0)
         {
             conteudoPDF += `<p>Comentário Extra: Nenhuma explicação foi adicionada!</p>
                             </div>`;
@@ -739,7 +740,7 @@ function gerarPDF() {
         {
             conteudoPDF +=`<p>Comentário Extra: ${dados.fase5.comentarioExtra}</p>
                         </div>`; 
-        }
+        }*/
                         
         elementoTemporario.innerHTML = conteudoPDF; // Define o conteúdo gerado no elemento temporário
 

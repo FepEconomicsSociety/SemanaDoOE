@@ -539,7 +539,7 @@
                         <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase1')">Voltar</button>
                                     
                         <!-- Botão para a próxima fase -->
-                        <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase3')">Próxima Fase</button>
+                        <button style=" margin-bottom: 5px; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="finalizarFase(2)">Próxima Fase</button>
 
                     </div>
                 </div>
@@ -738,7 +738,7 @@
             <button style=" margin-bottom: 2vw; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase2')">Voltar</button>
             
             <!-- Botão para a próxima fase -->
-            <button style=" margin-bottom: 2vw; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="finalizarFase3()">Próxima Fase</button>
+            <button style=" margin-bottom: 2vw; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="finalizarFase(3)">Próxima Fase</button>
         </section>
 
         <section id="fase4" class="fase hidden">
@@ -818,7 +818,7 @@
 
                             <!-- Alterar Ids e outras coisas -> agr está em orçamento, mas deve passar para receita e despesa-->
                             <div class="col-1"></div>
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="receita_4" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
                             <div class="col-1"></div>
                             <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="orcamento_4" placeholder="Despesa em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
 
@@ -936,7 +936,7 @@
 
                         <!-- Alterar Ids e outras coisas -> agr está em orçamento, mas deve passar para receita e despesa-->
                         <div class="col-1"></div>
-                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
+                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="receita_5" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
                         <div class="col-1"></div>
                         <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="orcamento_5" placeholder="Despesa em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
 

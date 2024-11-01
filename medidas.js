@@ -14,6 +14,7 @@ function novamedida(fase)
 {
     document.getElementById(`titulo_${fase}`).value = "";
     document.getElementById(`explicacao_${fase}`).value = "";
+    document.getElementById(`receita_${fase}`).value = "";
     document.getElementById(`orcamento_${fase}`).value = "";
     
     document.getElementById(`medidanova_${fase}`).style.display = "block";
@@ -51,6 +52,8 @@ function editarmedida(fase, index)
 
     document.getElementById(`titulo_${fase}`).value = fases[fase].medidas[index].titulo;
     document.getElementById(`explicacao_${fase}`).value = fases[fase].medidas[index].explicacao;
+    document.getElementById(`receita_${fase}`).value = fases[fase].medidas[index].receita;
+    document.getElementById(`receita_${fase}`).value = document.getElementById(`receita_${fase}`).value.replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     document.getElementById(`orcamento_${fase}`).value = fases[fase].medidas[index].orcamento;
     document.getElementById(`orcamento_${fase}`).value = document.getElementById(`orcamento_${fase}`).value.replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     document.getElementById(`atualizarmedidabtn_${fase}`).value = index;
@@ -81,11 +84,12 @@ function atualizarmedida(fase)
     // Obtém os novos valores do formulário
     const titulo = document.getElementById(`titulo_${fase}`).value;
     const explicacao = document.getElementById(`explicacao_${fase}`).value;
+    const receita = parseFloat(document.getElementById(`receita_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
     const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
     //console.log(orcamento);
 
     // Verifica se todos os campos estão preenchidos corretamente
-    if (!titulo || !explicacao || !orcamento) {
+    if (!titulo || !explicacao || !orcamento || !receita) {
         alert("Insira todos os parâmetros corretamente.");
         return;
     }
@@ -95,16 +99,23 @@ function atualizarmedida(fase)
     fases[fase].medidas[index] = {
         titulo,
         explicacao,
+        receita,
         orcamento
     };
 
     // Recalcula o valor inicial, se necessário
     let valorInicialAtual = parseFloat(sessionStorage.getItem(`valorInicial_${fase}`)) || 0;
 
+    // Soma todas as receitas das medidas, incluindo o novo valor atualizado
+    fases[fase].medidas.forEach(medida => {
+        valorInicialAtual += parseFloat(medida.receita) || 0;
+    });
+
     // Subtrai todos os orçamentos das medidas, incluindo o novo valor atualizado
     fases[fase].medidas.forEach(medida => {
         valorInicialAtual -= parseFloat(medida.orcamento) || 0;
     });
+    
     //console.log(valorInicialAtual);
 
 
@@ -129,15 +140,17 @@ function criarMedida(fase)
 
     const titulo = document.getElementById(`titulo_${fase}`).value;
     const explicacao = document.getElementById(`explicacao_${fase}`).value;
+    const receita = parseFloat(document.getElementById(`receita_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
     const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
 
-    if (!titulo || !explicacao || !orcamento) {
+    if (!titulo || !explicacao || !orcamento || !receita) {
         alert("Insira todos os parâmetros corretamente.");
         return;
     }
         fases[fase].medidas.push({
             titulo,
             explicacao,
+            receita,
             orcamento
         });
 
@@ -166,6 +179,11 @@ function criarMedida(fase)
        // Recalcula o valor inicial subtraindo o orçamento da nova medida
        let valorInicialAtual = parseFloat(sessionStorage.getItem(`valorInicial_${fase}`)) || orçamento;
     
+        // Subtrai todos os orçamentos das medidas, incluindo a nova medida
+        fases[fase].medidas.forEach(medida => {
+            valorInicialAtual += parseFloat(medida.receita) || 0;
+        });
+        
        // Subtrai todos os orçamentos das medidas, incluindo a nova medida
        fases[fase].medidas.forEach(medida => {
            valorInicialAtual -= parseFloat(medida.orcamento) || 0;
@@ -201,7 +219,7 @@ function adicionarMedidaATabela(fase) {
 
     const orcamentoTd = document.createElement("td");
     orcamentoTd.style.textAlign = "center";
-    orcamentoTd.textContent = (`${medida.orcamento}M €`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    orcamentoTd.textContent = (`-${medida.orcamento}M € / +${medida.receita}M €`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
     const detalhesTd = document.createElement("td");
     detalhesTd.style.textAlign = "center";
@@ -240,6 +258,9 @@ function adicionarMedidaATabela(fase) {
     // Adiciona a nova linha à tabela
     tabela.appendChild(novaLinha);
     });
+    document.getElementById("btnpfase").style.display = "block";
+    document.getElementById('btnvoltar').style.display = "block";
+    document.getElementById("gerarPdfBtn").style.display = "block";
 }
 
 function mostrarDetalhesMedida(index, fase) {
@@ -248,14 +269,23 @@ function mostrarDetalhesMedida(index, fase) {
 
     // Atualiza o título do modal com o título da medida
     document.querySelector(`#myModal${fase} .modal-title`).textContent = medida.titulo;
-        // Formata o valor do orçamento
-        const orcamentoFormatado = medida.orcamento
-        .toString()
-        .replace('.', ',')
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Formata o valor da receita
+    const receitaFormatada = medida.receita
+    .toString()
+    .replace('.', ',')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Formata o valor do orçamento
+    const orcamentoFormatado = medida.orcamento
+    .toString()
+    .replace('.', ',')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
     // Atualiza o corpo do modal com a explicação da medida
     document.querySelector(`#myModal${fase} .modal-body`).innerHTML =`
-        <p><strong>Orçamento:</strong> ${orcamentoFormatado}M €</p>
+        <p><strong>Receita:</strong> +${receitaFormatada}M €</p>
+        <p><strong>Orçamento:</strong> -${orcamentoFormatado}M €</p>
         <p><strong>Explicação:</strong> ${medida.explicacao}</p>
     `;
 }
@@ -269,15 +299,15 @@ function carregarMedidasPredefinidas(fase)
     // Itera pelas linhas da tabela e adiciona as medidas à estrutura de medidas
     Array.from(tabela.querySelectorAll("tr")).forEach(linha => {
         const titulo = linha.querySelector("td:nth-child(1)").textContent.trim();
-        const orcamento = linha.querySelector("td:nth-child(2)").textContent.replace('M €', '').trim();
-        const explicacao = linha.querySelector("td:nth-child(3)").textContent.trim();
-        console.log(titulo);
-        console.log(orcamento);
+        const receita = linha.querySelector("td:nth-child(2)").textContent.replace('M €', '').trim();
+        const orcamento = linha.querySelector("td:nth-child(3)").textContent.replace('M €', '').trim();
+        const explicacao = linha.querySelector("td:nth-child(4)").textContent.trim();
 
         // Adiciona a medida predefinida à estrutura de medidas
         fases[fase].medidas.push({
             titulo: titulo,
             explicacao: explicacao,  // Pode adicionar mais informações se necessário
+            receita: parseFloat(receita),
             orcamento: parseFloat(orcamento)
         });
     });
@@ -292,83 +322,10 @@ function salvarMedidas(fase) {
     //console.log(fases[fase]);
 }
 
-// Função para atualizar a interface e mostrar a medida ativa (NAO ESTA A SER USADA)
-function atualizarInterfaceMedidas(fase) {
-/*    const medidasContainer = document.getElementById(`medidasContainer${fase}`);
-    medidasContainer.innerHTML = "";  // Limpa o container
-
-    const medidaAtiva = fases[fase].medidaAtiva;
-    const medida = fases[fase].medidas[medidaAtiva];
-
-    // Rótulo e campo de título
-    const labelTitulo = document.createElement("p");
-    labelTitulo.textContent = "Diga-nos o título da sua medida";
-    medidasContainer.appendChild(labelTitulo);
-
-    const titulo = document.createElement("textarea");
-    titulo.id = `titulo_${fase}`;
-    titulo.rows = 1;
-    titulo.cols = 50;
-    titulo.placeholder = "Insira o título";
-    titulo.value = medida.titulo;
-    titulo.oninput = () => salvarMedidaAtual(fase);  // Associa a função oninput para salvar automaticamente
-    medidasContainer.appendChild(titulo);
-
-    // Rótulo e campo de explicação
-    const labelExplicacao = document.createElement("p");
-    labelExplicacao.textContent = "Deverá explicar-nos o objetivo da medida e como chegou ao valor orçado";
-    medidasContainer.appendChild(labelExplicacao);
-
-    const explicacao = document.createElement("textarea");
-    explicacao.id = `explicacao_${fase}`;
-    explicacao.rows = 10;
-    explicacao.cols = 50;
-    explicacao.placeholder = "Escreva a explicação aqui";
-    explicacao.value = medida.explicacao;
-    explicacao.oninput = () => salvarMedidaAtual(fase);  // Associa a função oninput para salvar automaticamente
-    medidasContainer.appendChild(explicacao);
-
-    // Rótulo e campo de orçamento
-    const labelOrcamento = document.createElement("p");
-    labelOrcamento.textContent = "Insira o orçamento:";
-    medidasContainer.appendChild(labelOrcamento);
-
-    const orcamento = document.createElement("input");
-    orcamento.type = "number";
-    orcamento.id = `numeroInput_${fase}`;
-    orcamento.placeholder = "Digite o orçamento";
-    orcamento.value = medida.orcamento;
-    orcamento.oninput = () => salvarMedidaAtual(fase);  // Associa a função oninput para salvar automaticamente
-    medidasContainer.appendChild(orcamento);*/
-
-    // Adiciona um botão para apagar a medida
-   /* const btnApagar = document.createElement("button");
-    btnApagar.textContent = "Apagar Medida";
-    btnApagar.onclick = () => apagarMedida(fase, medidaAtiva);
-    medidasContainer.appendChild(btnApagar);*/
-}
-
-// Função para criar as abas para todas as medidas (NAO ESTA A SER USADA)
-function atualizarAbas(fase) {
-    const abasContainer = document.getElementById(`abasContainer${fase}`);
-    abasContainer.innerHTML = "";  // Limpa todas as abas existentes
-
-    fases[fase].medidas.forEach((_, index) => {
-        const aba = document.createElement("button");
-        aba.textContent = `Medida ${index + 1}`;
-        aba.style.marginRight = "5px";  // Adiciona espaçamento entre os botões das abas
-        aba.onclick = () => {
-            fases[fase].medidaAtiva = index;  // Define a medida clicada como ativa
-            atualizarInterfaceMedidas(fase);  // Exibe a medida ativa
-        };
-        abasContainer.appendChild(aba);
-    });
-}
-
 // Função para restaurar as medidas do sessionStorage
 function restaurarMedidas(fase) {
     const faseSalva  = sessionStorage.getItem(`fases_${fase}`);
-    console.log(faseSalva);  // Debug: Verifica se as medidas estão sendo salvas corretamente
+    //console.log(faseSalva);  // Debug: Verifica se as medidas estão sendo salvas corretamente
 
     if (faseSalva) {
         fases[fase] = JSON.parse(faseSalva);  // Restaura as medidas e medida ativa
@@ -376,26 +333,6 @@ function restaurarMedidas(fase) {
         fases[fase] = {
             medidas: [],
         };     
-    }
-}
-
-// Função para salvar automaticamente os dados da medida ativa (NAO ESTA A SER USADA)
-function salvarMedidaAtual(fase) {
-    const medidaAtiva = fases[fase].medidaAtiva;
-
-    // Verifica se os elementos existem no DOM antes de tentar acessá-los
-    const tituloElement = document.getElementById(`titulo_${fase}`);
-    const explicacaoElement = document.getElementById(`explicacao_${fase}`);
-    const orcamentoElement = document.getElementById(`numeroInput_${fase}`);
-
-    if (tituloElement && explicacaoElement && orcamentoElement) {
-        fases[fase].medidas[medidaAtiva].titulo = tituloElement.value;
-        fases[fase].medidas[medidaAtiva].explicacao = explicacaoElement.value;
-        fases[fase].medidas[medidaAtiva].orcamento = orcamentoElement.value;
-        salvarMedidas(fase);  // Salva as medidas após qualquer alteração
-        atualizarTitulo(fase, false);  // Atualiza o valor inicial
-    } else {
-        console.error(`Erro: Elementos de entrada não encontrados para a fase ${fase}`);
     }
 }
 

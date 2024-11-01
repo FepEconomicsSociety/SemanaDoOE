@@ -27,7 +27,6 @@ function verificarSenha()
         if (response.ok) 
         {
             first = false;
-            carregarMedidasPredefinidas(4);
             return response.json();
         } 
         else 
@@ -47,8 +46,6 @@ function verificarSenha()
         sessionStorage .setItem('token', data.token); // Armazena o token JWT
 
         first = false;
-
-
         // Salva o estado de login para evitar novo pedido de senha após refresh
         sessionStorage .setItem('autenticado', 'true');
         // Armazena a hora de autenticação quando o login é bem-sucedido
@@ -246,7 +243,6 @@ function diferenca_anual(id_atual) {
             });
         
             const resultado = totalOrcamentosFornecidos;
-            console.log("ahhh:",resultado);
             numeroInicialElemento.textContent = resultado.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     } else {
         // Atualiza o texto se não exceder 100%
@@ -384,7 +380,6 @@ function finalizarFase(fase) {
     // Seleciona todos os inputs dentro da seção "fase3"
     const inputs = document.querySelectorAll(`#fase${fase} input[type="text"]`);
     const percentagemtotal = parseFloat(document.getElementById('numeroInicial').textContent.replace(',','.')); 
-    console.log(percentagemtotal);
 
     // Verifica se todos os inputs têm um valor
     let todosPreenchidos = true; // Inicializa como verdadeiro
@@ -456,6 +451,7 @@ function atualizarTitulo(fase, previsualizar = false)
             // Atualiza o nome da fase 5 com o ministério de menor valor
             document.querySelector('#fase5 h2').textContent = `Fase 5 - Área de ${Nomeministerio}`;
 
+            carregarMedidasPredefinidas(idMenorValor);
             const valoranterior_ministerio = document.getElementById(`v${idMenorValor}`).textContent;
             let valorinicialarea = parseFloat(valoranterior_ministerio.replace(/\./g, '').replace(',', '.').replace("%", "")) / 100 * 93646.9;
             orçamento = 93646.9 * (1 + parseFloat(document.getElementById("pib").value.replace(/\./g, '').replace(',', '.')) / 100) * (temp) - valorinicialarea;
@@ -669,7 +665,7 @@ function gerarPDF() {
             dados.fase3.orcamentos.forEach(orcamento => {
                 conteudoPDF += `<div class="orcamento-container"> 
                 <h4>${orcamento.ministerio}:</h4>
-                <p>Orçamento: ${orcamento.valor}%</p>
+                <p>Percentagem da despesa: ${orcamento.valor}%</p>
             </div>`;
             });
         
@@ -697,8 +693,8 @@ function gerarPDF() {
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                 conteudoPDF += `<div class="medidas-container"> 
                                 <h4>${medida.titulo}:</h4>
-                                <p>Receita: ${receitaFormatada}M €</p>
-                                <p>Orçamento: ${orcamentoFormatado}M €</p>
+                                <p>Receita: +${receitaFormatada}M €</p>
+                                <p>Despesa: -${orcamentoFormatado}M €</p>
                                 <p>Explicação: ${medida.explicacao}</p>
                                 </div>`;            
             });
@@ -725,8 +721,8 @@ function gerarPDF() {
                             .replace('.', ',')
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
                             conteudoPDF += `<h4>${medida.titulo}:</h4>
-                                            <p>Receita: ${receitaFormatada}M €</p>
-                                            <p>Orçamento: ${orcamentoFormatado}M €</p>
+                                            <p>Receita: +${receitaFormatada}M €</p>
+                                            <p>Despesa: -${orcamentoFormatado}M €</p>
                                             <p>Explicação: ${medida.explicacao}</p>`;            
                         });
                     }

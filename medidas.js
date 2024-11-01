@@ -285,13 +285,13 @@ function mostrarDetalhesMedida(index, fase) {
     // Atualiza o corpo do modal com a explicação da medida
     document.querySelector(`#myModal${fase} .modal-body`).innerHTML =`
         <p><strong>Receita:</strong> +${receitaFormatada}M €</p>
-        <p><strong>Orçamento:</strong> -${orcamentoFormatado}M €</p>
+        <p><strong>Despesa:</strong> -${orcamentoFormatado}M €</p>
         <p><strong>Explicação:</strong> ${medida.explicacao}</p>
     `;
 }
 
-// Define as medidas predefinidas feitas em html em medidas iguais as criadas
-function carregarMedidasPredefinidas(fase) 
+// Define as medidas predefinidas feitas em html em medidas iguais as criadas (Acho que nao vai ser usada)
+/*function carregarMedidasPredefinidas(fase) 
 {
     // Identifica o tbody onde as medidas predefinidas estão
     const tabela = document.getElementById(`medidasTabela_${fase}`).querySelector("tbody");
@@ -314,7 +314,20 @@ function carregarMedidasPredefinidas(fase)
     salvarMedidas(fase);
     first = true;
 
-}
+}*/
+
+// Define as medidas predefinidas feitas em html dependendo do ministerio que foi escolhido
+function carregarMedidasPredefinidas(ministerioId) 
+{
+    console.log(ministerioId);
+    console.log(`Medidas_${ministerioId}`);
+    
+    const medida = document.getElementById(`Medidas_${ministerioId}`);
+    if (medida) {
+        medida.hidden = false; // Define 'hidden' como falso
+    } else {
+        console.error(`Elemento com ID "Medidas_${ministerioId}" não encontrado.`);
+    }}
 
 // Função para salvar as medidas no sessionStorage
 function salvarMedidas(fase) {

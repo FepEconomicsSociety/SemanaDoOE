@@ -143,7 +143,7 @@ function criarMedida(fase)
     const receita = parseFloat(document.getElementById(`receita_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
     const orcamento = parseFloat(document.getElementById(`orcamento_${fase}`).value.replace(/\./g, '').replace(',', '.')) || 0;
 
-    if (!titulo || !explicacao || (!orcamento && !receita) || (orcamento && receita) ) {
+    if (!titulo || !explicacao || (!orcamento && !receita)) {
         alert("Insira todos os parâmetros corretamente.");
         return;
     }

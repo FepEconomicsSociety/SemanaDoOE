@@ -89,7 +89,7 @@ function atualizarmedida(fase)
     //console.log(orcamento);
 
     // Verifica se todos os campos estão preenchidos corretamente
-    if (!titulo || !explicacao || !orcamento || !receita) {
+    if (!titulo || !explicacao || (!orcamento && !receita)) {
         alert("Insira todos os parâmetros corretamente.");
         return;
     }
@@ -219,7 +219,7 @@ function adicionarMedidaATabela(fase) {
 
     const orcamentoTd = document.createElement("td");
     orcamentoTd.style.textAlign = "center";
-    orcamentoTd.textContent = (`${-medida.orcamento+medida.receita}M €`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    orcamentoTd.textContent = (`${parseFloat((-medida.orcamento)+(medida.receita)).toFixed(2)}M €`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
     const detalhesTd = document.createElement("td");
     detalhesTd.style.textAlign = "center";

@@ -853,11 +853,11 @@
               </div>
 
             <!-- Botão para voltar à fase anterior TEMPORARIO, COMENTAR ESTE BOTAO PARA NAA PERMITIR VOLTAR A FASE 3!
-             Bloqueado pelo Miguel :)
+             Bloqueado pelo Miguel :) 
             <button style=" margin-bottom: 2vw; margin-top: 1vw; min-width: 120px; width: 40%; position: relative; left: 10%;" class="btn btn-primary" onclick="navigateTo('fase3')">Voltar</button>
-            -->
+           -->
             <!-- Botão para a próxima fase -->
-            <button id="btnpfase" style="margin: 1vw 15vw 2vw 0vw; width: 20%; float: right;" class="btn btn-primary" onclick="navigateTo('fase5')">Próxima Fase</button>
+            <button id="btnpfase" style="margin: 1vw 15vw 2vw 0vw; width: 20%; float: right;" class="btn btn-primary" onclick="finalizarFase(4)">Próxima Fase</button>
         </section>
         
         <section id="fase5" class="fase hidden">
@@ -910,7 +910,7 @@
                 </div>
                 <div class="col-12">
                     <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>Existe um ministério do roubo?</p>    
+                    <p>Existe um ministério do roubo? Agora sim ;)</p>    
                 </div>
             </div>
 
@@ -1038,7 +1038,7 @@
 
             <div style="display: flex;">
                 <!-- O botão para gerar o PDF -->
-                <button style="margin-bottom: 2vw; margin-top: 5vw; width: 20%; position: relative; left: 10%;" class="btn btn-primary" id="gerarPdfBtn" onclick="formulario()">Gerar PDF</button>
+                <button style="margin-bottom: 2vw; margin-top: 5vw; width: 20%; position: relative; left: 10%;" class="btn btn-primary" id="gerarPdfBtn" onclick="finalizarFase(5)">Gerar PDF</button>
 
                 <!-- Botão para confirmar que o PDF foi salvo -->
                 <button style="margin-bottom: 2vw; margin-top: 5vw; width: 30%; position: relative; left: 30%; display: none;" class="btn btn-info" id="confirmarBtn"  onclick="confirmarEnvio()">Finalizar</button >

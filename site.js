@@ -379,7 +379,9 @@ function formatarNumero(input) {
 function finalizarFase(fase) {
     // Seleciona todos os inputs dentro da seção "fase3"
     const inputs = document.querySelectorAll(`#fase${fase} input[type="text"]`);
-    const percentagemtotal = parseFloat(document.getElementById('numeroInicial').textContent.replace(',','.')); 
+    const percentagemtotal = parseFloat(document.getElementById('numeroInicial').textContent.replace(',','.'));
+    let orcamento_fase;
+    if(fase ===4 || fase ===5){ orcamento_fase = parseFloat(document.getElementById(`numeroInicial_${fase}`).textContent.replace('.','').replace(',','.'))}; 
 
     // Verifica se todos os inputs têm um valor
     let todosPreenchidos = true; // Inicializa como verdadeiro
@@ -390,17 +392,23 @@ function finalizarFase(fase) {
             break; // Sai do loop se encontrar um campo vazio
         }
     }
-
+    if((fase === 4 && orcamento_fase <0 || fase === 5 && orcamento_fase < 0))
+    {
+        alert("O orçamento para o ministério nao pode ser negativo!");
+    } 
+    else if(fase === 4){navigateTo(`fase${fase+1}`);}
+    else if (fase ===5){formulario();}
+    
     if (todosPreenchidos && fase === 2 || fase === 3 && todosPreenchidos && percentagemtotal === 100) 
     {
         // Se todos os dados estiverem inseridos, permite a navegação
-        navigateTo(`fase${fase+1}`); // Altere para a próxima fase que deseja
+        navigateTo(`fase${fase+1}`); 
     }    
     else if (todosPreenchidos && fase === 3 && percentagemtotal != 100)
     {
         alert("A percentagem total tem que ser 100%.");
     }
-    else
+    else if(fase === 2 || fase === 3)
     {
         // Se não, exibe uma mensagem de aviso
         alert("Por favor, preencha todos os campos antes de prosseguir.");
@@ -493,8 +501,11 @@ function atualizarTitulo(fase, previsualizar = false)
         valorInicial -= orcamentoInput;
         valorInicial += receitaInput;
     }
-
-    // Atualiza o valor exibido na interface
+    // Ajusta o valor para zero caso esteja muito próximo de zero
+    if (Math.abs(valorInicial) < 0.01) {
+        valorInicial = 0;
+    }
+    // Atualiza o valor exibido na interface    
     numeroInicialElemento.textContent = valorInicial.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     
 }
@@ -763,10 +774,16 @@ function gerarPDF() {
 }
 // Função para confirmar o envio e limpar os dados após a confirmação do usuário
 function confirmarEnvio() {
-    sessionStorage.clear();
-    alert("Dados enviados com sucesso. Os dados foram limpos.");
-    location.reload();  // Recarrega a página
-
+    const confirmar = confirm("Tem a certeza que deseja terminar? Cetifique-se de que gerou o pdf corretamente antes de finalizar! Esta ação não poderá ser desfeita.");
+    
+    if (confirmar) {
+        sessionStorage.clear();
+        alert("Formulário terminado com sucesso. Os dados foram limpos.");
+        location.reload();  // Recarrega a página
+    } else {
+        // Se o usuário escolher cancelar, a função apenas termina sem limpar os dados
+        alert("Pode continuar a editar os dados.");
+    }
 }
 
 window.onload = init;

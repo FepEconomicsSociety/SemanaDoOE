@@ -863,89 +863,22 @@
         <section id="fase5" class="fase hidden">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
 
-            <h2>Fase 5 - Área de ...</h2>
+                <h2>Fase 5 - Área de ...</h2>
 
-            <div class="caixa-valor-inicial" id="caixaValorInicial5" style="display: none;">
-                Saldo disponível: <span id="numeroInicial_5"></span> M€
+                <div class="caixa-valor-inicial" id="caixaValorInicial5" style="display: none;">
+                    Saldo disponível: <span id="numeroInicial_5"></span> M€
+                </div>
+                <p>
+                    Nesta quinta fase terás de fazer o mesmo que na anterior, mas agora terás de orçamentar a área a que atribuíste um orçamento menor. Boa sorte!
+                </p>
             </div>
-            <p>
-                Nesta quinta fase terás de fazer o mesmo que na anterior, mas agora terás de orçamentar a área a que atribuíste um orçamento menor. Boa sorte!
-            </p>
-            <p id="teste"></p>
-        </div>
+            <!-- Botão para voltar à fase anterior -->
+            <button id="btnvoltar" style="margin-bottom: 2vw; width: 15%; position: absolute; left: 5%;" class="btn btn-outline-primary" onclick="navigateTo('fase4')">Voltar</button>
+
         <div class="container" id="medidasA_5">
-        <!--AQUI PODEM SER ESCRITAS AS MEDIDAS PREDEFINIDAS DOS MINISTERIOS ESCOLHIDOS -->
 
 
-            <div class="row" id="Medidas_Ministerio_da_Magia" hidden>
-                <div class="col-12">
-                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                    <p>ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque itaque esse quae odit mollitia, atque autem, praesentium, optio repellat voluptatum ea dolor delectus? Laudantium doloribus sequi est et magni! Corrupti.</p>    
-                </div>
-                <div class="col-12">
-                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>ipsum Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, eos odit corrupti quisquam vel accusamus perferendis facere reiciendis, iste suscipit blanditiis maxime laborum facilis cupiditate, veritatis molestias! Doloremque, iusto sint.</p>    
-                </div>
-            </div>
-
-            <div class="row" id="Medidas_Ministerio_do_Roubo" hidden>
-                <div class="col-12">
-                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                    <p>Aqui so há roubo.</p>    
-                </div>
-                <div class="col-12">
-                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>Muito roubo mesmo.</p>    
-                </div>
-            </div>
-
-            <div class="row" id="Medidas_negest" hidden>
-                <div class="col-12">
-                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                    <p>Negocios.</p>    
-                </div>
-                <div class="col-12">
-                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>Estrangeiros.</p>    
-                </div>
-                <div class="col-12">
-                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>Existe um ministério do roubo? Agora sim ;)</p>    
-                </div>
-            </div>
-
-            <div class="row" id="Medidas_cult" hidden>
-                <div class="col-12">
-                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                    <p>Cultura.</p>    
-                </div>
-                <div class="col-12">
-                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>Cultural.</p>    
-                </div>
-                <div class="col-12">
-                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>Vai para o ministério dos negócios estrangeiros!</p>    
-                </div>
-            </div>
-
-            <div class="row" id="Medidas_cterr" hidden>
-                <div class="col-12">
-                    <h5 style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
-                    <p>Terrorismo.</p>    
-                </div>
-                <div class="col-12">
-                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>Quer dizer, Territorial.</p>    
-                </div>
-                    <div class="col-12">
-                    <h5 style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
-                    <p>Vai para o ministério da cultura!</p>    
-                </div>
-            </div>
-
-
-            <div class="row" style="margin-top: 3vw;">
+            <div class="row" style="margin-top: 3vw; margin-bottom: 5vw;">
                 <table class="table" id="medidasTabela_5">
                     <thead>
                         <tr>
@@ -969,6 +902,142 @@
                     </tbody>
                 </table>
             </div>
+
+
+        <!--AQUI PODEM SER ESCRITAS AS MEDIDAS PREDEFINIDAS DOS MINISTERIOS ESCOLHIDOS -->
+
+
+            <div class="row" id="Medidas_Ministerio_da_Magia" hidden>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque itaque esse quae odit mollitia, atque autem, praesentium, optio repellat voluptatum ea dolor delectus? Laudantium doloribus sequi est et magni! Corrupti.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>ipsum Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, eos odit corrupti quisquam vel accusamus perferendis facere reiciendis, iste suscipit blanditiis maxime laborum facilis cupiditate, veritatis molestias! Doloremque, iusto sint.</p>    
+                </div>
+            </div>
+
+            <div class="row" id="Medidas_Ministerio_do_Roubo" hidden>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>Aqui so há roubo.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Muito roubo mesmo.</p>    
+                </div>
+            </div>
+
+            <div class="row" id="Medidas_negest" hidden>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="text-align: left;margin-bottom: 1vw;">Acordo de mobilidade CPLP</h5>
+                    <p>Em 2024, o governo comprometeu-se a manter o funcionamento do acordo sobre a mobilidade com a Comunidade de Países de Língua portuguesa.
+                        Este acordo prevê, não só uma maior liberdade na mobilidade entre os países da comunidade, como também a criação de novas e melhores condições
+                        para essa mesma mobilidade.
+                        <br>
+                        Alguns dos objetivos deste acordo são a promoção da imigração segura e integrada, assim como a promoção dos direitos dos emigrantes lusófonos.
+                    </p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="text-align: left;margin-bottom: 1vw;">Reforço da rede de ensino</h5>
+                    <p>Existe um compromisso em reforçar a rede de ensino da língua portuguesa no estrangeiro, melhorando as metodologias de ensino através de recursos
+                        digitais e programas de apoio à tradução e edição de obras em língua portuguesa.
+                        <br>
+                        Támbem tem sido feito um processo de consolidação e reforço dos apoios ao ensino da língua portuguesa nos diferentes níveis de ensino (básico, secundário e superior) no estrangeiro.
+                        Ainda os projetos de investigação em língua portuguesa estão no foco do estado.
+                    </p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Melhoria de recursos humanos</span><span style="float: right;">15,8 M€</span></h5>
+                    <p>Durante o ano de 2024, terá sido perspetivada a contratação de 133 novos colaboradores para a rede consular. É assumida uma crescente 
+                        demanda pelos serviços consulares, e o governo pretendo melhorar a eficiência e qualidade do atendimento.
+                        <br>
+                        Além da contratação de novos colaboradores, o governo compromete-se a um aumento médio de 27% nos salários dos consulares e à criação de um regime
+                        de proteção social.
+                    </p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Aquisição de bens e serviços</span><span style="float: right;">97,2 M€</span></h5>
+                    <p>Uma das rúbricas com maior impacto é a de aquisição de bens e serviços, onde se totalizam 97,2 milhões de euros em despesa. Algum destaque deverá
+                        ser dado aos 63,3 milhões de euros afetos à gestão administrativa e financeira do MNE. Com este valor são cobertos os custos correntes no âmbito do
+                        Plano de Recuperação e Resiliência (PRR).
+                    </p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="text-align: left;margin-bottom: 1vw;">Políticas para a Europa</h5>
+                    <p>A política externa portuguesa, tende a manter-se em linha com a do resto da Europa. Alguns objetivos foram definidos para 2024 no âmbito deste tipo de políticas.
+                        <ol>
+                            <li>Acompanhar o conlito entre a Rússia e a Ucrânia e suas implicações.</li>
+                            <li>
+                                Concluir negociações de acordos com Chile e México pelo acordo União Europeia - Mercosul. Assim como apoiar o progresso nas negociações de acordos
+                                comerciais com Austrália, Índia e Estados-Membros da Associação de Nações do Sudeste Asiático (ASEAN)
+                            </li>
+                            <li>Incentivar a concretização dos compromissos da última cimeira União Europeia - Comunidade de Estados Latino-Americanos e Caribenhos (CELAC)</li>
+                            <li>Participar na preparação e realização de cimeiras entre a UE e o Brasil ou a Índia</li>
+                            <li>Apoiar o desenvolvimento de uma agenda positiva com os EUA, que contribua para ultrapassar as tensões comerciais salvaguardando o entendimento político existente.</li>
+                            <li>Promover uma estratégia de combate ao terrorismo e ao extremismo violento.</li>
+                            <li>Participar no desenvolvimento da Política Comum de Segurança e Defesa e na Política de Vizinhança, com particular atenção aos países mediterrâneos, 
+                                do Sahel e da África Central.
+                            </li>
+                            <li>Cumprir as obrigações com as obrigações decorrentes do Mecanismo Europeu de Apoio à Paz.</li>
+                        </ol>
+                    </p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="text-align: left;margin-bottom: 1vw;">Políticas para a Europa</h5>
+                    <p>A política externa portuguesa, tende a manter-se em linha com a do resto da Europa. Alguns objetivos foram definidos para 2024 no âmbito deste tipo de políticas.
+                        <ol>
+                            <li>Implementar o programa Internacionalizar 2030 e a Carta de missão do conselho de administração da agência para o investimento e comércio externo de Portugal, 
+                                com o foco na atração de investimento estratégico e promovendo o crescimento e diversificação das exportações nacionais.
+                            </li>
+                            <li>Alavancar a atração de investimento em indústria verde e em economia de dados, através das transições energética e digital.</li>
+                            <li>Expandir, qualificar e segmentar a oferta de áreas de localização empresarial no território nacional.</li>
+                            <li>Reorientar a rede de diplomacia para os principais mercados emissores de investimento direto estrangeiro.</li>
+                            <li>Executar as medidas do PRR direcionadas à promoção da atração de investimento e do comércio externo.</li>
+                            <li>Apoiar formações de qualificação de recursos humanos orientadas para a atividade internacional e para os mercados externos.</li>
+                            <li>Alargar o apoio à formação jovem com qualificação superior em contexto internacional.</li>
+                            <li>Promover a qualificação do tecido produtivo nacional face aos critérios ambientais e sociais.</li>
+                        </ol>
+                    </p>    
+                </div>
+                <div class="col-12">
+                    <img src="images/quadro MNE.jpg" style="width: 80%; position: relative; left: 10%; top: 2vw;">
+                </div>
+            </div>
+
+            <div class="row" id="Medidas_cult" hidden>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>Cultura.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Cultural.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Vai para o ministério dos negócios estrangeiros!</p>    
+                </div>
+            </div>
+
+            <div class="row" id="Medidas_cterr" hidden>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="text-align: left;margin-bottom: 1vw;">Título 1</h5>
+                    <p>Terrorismo.</p>    
+                </div>
+                <div class="col-12">
+                    <h5 class="titulomedidafixa" style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Quer dizer, Territorial.</p>    
+                </div>
+                    <div class="col-12">
+                    <h5 class="titulomedidafixa" style="margin-bottom: 3vw;"><span style="float: left; width: 50%;">Título</span><span style="float: right;">x M€</span></h5>
+                    <p>Vai para o ministério da cultura!</p>    
+                </div>
+            </div>
+
+
+            
         </div>
 
             
@@ -1031,10 +1100,7 @@
                 </div>
               </div>
             
-            <!-- Botão para voltar à fase anterior -->
-            <button id="btnvoltar" style="margin-bottom: 2vw; width: 15%; position: relative; left: 13%;" class="btn btn-outline-primary" onclick="navigateTo('fase4')">Voltar</button>
             
-            <br>
 
             <div style="display: flex;">
                 <!-- O botão para gerar o PDF -->

@@ -435,7 +435,7 @@ function atualizarTitulo(fase, previsualizar = false)
         let idMenorValor = "";  // Armazena o id do input com menor valor
         let Nomeministerio = "";  // Para armazenar o nome do ministério com o menor valor
         // Define os IDs que desejas incluir
-        const ministeriosDesejados = ['cterr', 'cult', 'negest'];
+        const ministeriosDesejados = ['cterr', 'cult', 'negest', 'mhab'];
         for (let input of inputs) 
         {
             if(ministeriosDesejados.includes(input.id))

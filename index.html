@@ -55,7 +55,7 @@
 
     <div class="main-content">
         <section id="fase0" class="fase" style="background-color: #d5e7ff;">
-            <img id="O" style="z-index: 2;" src="images/cartaz oe.png">
+            <svg id="O" style="z-index: 2;"></svg>
 
             <div class="linhaazul" id="linha1">
 
@@ -860,20 +860,17 @@
                             <p>Para criar uma nova medida deves dar-lhe um título explicativo, descrever-nos como é que ela seria implementada,
                                 e no caso de ela levar à geração de receita ou despesa, deves também indicar como chegaste ao valor indicado.</p>
                         </div>
-                        <div class="row" style="margin: 0; margin-top: 2vw;">
-                            <textarea class="titulo col-6" id="titulo_4" placeholder="Título da medida" style="resize: none;"></textarea>
-
-                            <!-- Alterar Ids e outras coisas -> agr está em orçamento, mas deve passar para receita e despesa-->
-                            <div class="col-1"></div>
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="receita_4" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
-                            <div class="col-1"></div>
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="orcamento_4" placeholder="Despesa em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
-
+                        <div id="colunamedida">
+                            <div class="row" id="linhamedida">
+                                <textarea class="titulo" id="titulo_4" placeholder="Título da medida"></textarea>
+                                <!-- Alterar Ids e outras coisas -> agr está em orçamento, mas deve passar para receita e despesa-->
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="receita_4" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="orcamento_4" placeholder="Despesa em M€" oninput="formatarNumero(this);atualizarTitulo(4,true)"></input>
+                            </div>
+                            <div class="row" >
+                                <textarea class="explicacao" id="explicacao_4" placeholder="Explicação da medida e do orçamento"></textarea>    
+                            </div>
                         </div>
-                        <div class="row" style="margin: 0;">
-                            <textarea class="explicacao col-12" id="explicacao_4" placeholder="Explicação da medida e do orçamento"></textarea>    
-                        </div>
-    
                                         
                         <!-- Botão para adicionar uma nova medida -->
                         <button class="medidasbtns" id="atualizarmedidabtn_4" onclick="atualizarmedida(4)">Atualizar Medida</button>
@@ -920,7 +917,7 @@
                 </p>
             </div>
             <!-- Botão para voltar à fase anterior -->
-            <button id="btnvoltar" style="margin-bottom: 2vw; width: 15%; position: absolute; left: 5%;" class="btn btn-outline-primary" onclick="navigateTo('fase4')">Voltar</button>
+            <button id="btnvoltar" style="margin-bottom: 1vw; width: 15%; position: relative; left: 5%;" class="btn btn-outline-primary" onclick="navigateTo('fase4')">Voltar</button>
 
         <div class="container" id="medidasA_5">
 
@@ -1223,19 +1220,18 @@
                         <p>Para criar uma nova medida deves dar-lhe um título explicativo, descrever-nos como é que ela seria implementada,
                             e no caso de ela levar à geração de receita ou despesa, deves também indicar como chegaste ao valor indicado.</p>
                     </div>
-                    <div class="row" style="margin: 0; margin-top: 2vw;">
-                        <textarea class="titulo col-6" id="titulo_5" placeholder="Título da medida" style="resize: none;"></textarea>
 
-                        <!-- Alterar Ids e outras coisas -> agr está em orçamento, mas deve passar para receita e despesa-->
-                        <div class="col-1"></div>
-                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="receita_5" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
-                        <div class="col-1"></div>
-                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="col-2" id="orcamento_5" placeholder="Despesa em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
-
+                    <div id="colunamedida">
+                        <div class="row" id="linhamedida" >
+                            <textarea class="titulo" id="titulo_5" placeholder="Título da medida" ></textarea>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" id="receita_5" placeholder="Receita em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" id="orcamento_5" placeholder="Despesa em M€" oninput="formatarNumero(this);atualizarTitulo(5,true)"></input>
+                        </div>
+                        <div class="row">
+                            <textarea class="explicacao" id="explicacao_5" placeholder="Explicação da medida e do orçamento"></textarea>
+                        </div>
                     </div>
-                    <div class="row" style="margin: 0;">
-                        <textarea class="explicacao col-12" id="explicacao_5" placeholder="Explicação da medida e do orçamento"></textarea>    
-                    </div>
+                
 
                                     
                     <!-- Botão para adicionar uma nova medida -->

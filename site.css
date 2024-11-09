@@ -561,16 +561,15 @@ table {
 
 
 #linha1{
-    top: 20%;
     left: 10%;
     width: 80%;
-    height: 75%;
+    height: 80%;
 }
 
 
 #O {
-    width: 130px; /* Ajusta o tamanho em relação à largura da viewport */
-    height: 220px;
+    width: 145px; /* Ajusta o tamanho em relação à largura da viewport */
+    height: 200px;
 
     /* Usar a imagem em preto e branco como máscara */
     -webkit-mask-image: url('images/cartaz_oe_pretoebranco.png');
@@ -591,9 +590,8 @@ table {
 
     /* Posicionamento */
     position: absolute;
-    top: 12.4%; /* Posição relativa ao topo da viewport */
-    right:10.33%; /* Posição relativa ao lado direito da viewport */
-    
+    top: 11.6%; /* Posição relativa ao topo da viewport */
+    right: 10%;    
 }
 /*@media (max-width: 1200px) {
     #O{

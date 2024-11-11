@@ -21,45 +21,41 @@
 
 <body>
     
-    <div id="senhaPage">
-        <header id="banner">
-            <img src="https://FepEconomicsSociety.github.io/SemanaDoOE/images/LogoFESBranco.png" class="logo-icon" id="logo-icon">
-
-        </header>
-        <div class="senha-container">
-            <div class="senha-caixa">
-                <h2>Por favor, insira a senha para acessar o site:</h2>
-                <div class="input-container">
-                    <input type="password" id="senhaInput" placeholder="Digite a senha"> 
-                    <img src="https://FepEconomicsSociety.github.io/SemanaDoOE/images/hide-pass.png" onclick="pass()" class="pass-icon" id="pass-icon">
-                </div>
-                    <button onclick="verificarSenha()">Entrar</button>
-                <p id="mensagemErro" style="color: red;"></p>
-                <div id="loading" class="loading" style="display:none;"></div>
+<div id="senhaPage">
+    <header id="banner">
+        <img src="https://FepEconomicsSociety.github.io/SemanaDoOE/images/LogoFESBranco.png" class="logo-icon" id="logo-icon">
+    </header>
+    <div class="senha-container">
+        <div class="senha-caixa">
+            <h2>Por favor, insira a senha para acessar o site:</h2>
+            <div class="input-container">
+                <input type="password" id="senhaInput" placeholder="Digite a senha"> 
+                <img src="https://FepEconomicsSociety.github.io/SemanaDoOE/images/hide-pass.png" onclick="pass()" class="pass-icon" id="pass-icon">
             </div>
+                <button onclick="verificarSenha()">Entrar</button>
+            <p id="mensagemErro" style="color: red;"></p>
+            <div id="loading" class="loading" style="display:none;"></div>
         </div>
-        <footer class="footer-content"> </footer>
     </div>
+    <footer class="footer-content"></footer>
+</div>
 
     <!-- Conteúdo principal do site, ocultado até que a senha seja validada -->
     <main id="conteudoSite" style="display: none;">
         <div class="wrapper">
-        <header>
+            <header>
+                <img src="https://FepEconomicsSociety.github.io/SemanaDoOE/images/LogoFESBranco.png" class="logo-icon" id="logo-icon">
 
-            <img src="https://FepEconomicsSociety.github.io/SemanaDoOE/images/LogoFESBranco.png" class="logo-icon" id="logo-icon">
-
-            <div id="tittle_banner">
-                <h1 id="banner">Semana do Orçamento - FEP Economics Society</h1>
-            </div>
-        </header>
+                <div id="tittle_banner">
+                    <h1 id="banner">Semana do Orçamento - FEP Economics Society</h1>
+                </div>
+            </header>
+        </div>
 
     <div class="main-content">
         <section id="fase0" class="fase" style="background-color: #d5e7ff;">
-            <svg id="O" style="z-index: 2;"></svg>
-
-            <div class="linhaazul" id="linha1">
-
-            <div class="container" id="fasesdoprograma">
+            <img src="images/O.png" style="width: 10%; position: absolute; right: 3vw; top: 4vw;">
+            <div class="container" id="fasesdoprograma" style="z-index: 1;">
                 <div class="row" style="width: 100%;">
                     <h4 style="margin-top: 2vw;">Como vai funcionar esta atividade?</h4>
                 </div>
@@ -92,7 +88,6 @@
                                 O teu objetivo é gerir o orçamento da melhora forma, e fazer propostas que façam a diferença na nossa economia.
                             </p>
                         </div>
-                   
                 </div>
                 <div class="row" style="width: 100%; margin-top: 3vw;">
                     <h5>Para avançar, temos de saber que grupo está a participar.</h5>
@@ -114,7 +109,7 @@
                 </div>
             </div>
 
-        </div>
+
         </section>
 
         <section id="fase1" class="fase hidden" style="background-color: white;">
@@ -744,20 +739,20 @@
         <section id="fase4" class="fase hidden">
             <div style="margin: 2vw; padding: 1vw;border: 2px #338dff solid; border-radius: 10px;">
 
-            <h2>Fase 4 - Área da Saúde</h2>
-        
-            <div class="caixa-valor-inicial" id="caixaValorInicial4" style="display: none;">
-                Saldo disponível: <span id="numeroInicial_4"></span>M €
-            </div>
+                <h2>Fase 4 - Área da Saúde</h2>
             
-            <p>
-                A primeira área em que terás de atuar será a saúde. Historicamente, a saúde é das áreas onde existe maior despesa publica. A complexidade deste setor
-                é conhecida por todos. Serás tu capaz de resolver a situação em apenas um orçamento?
-            </p>
-            <p>
-                Poderás ver quais os focos do orçamento anterior e, depois, criar as tuas próprias medidas a implementar em 2025. Boa sorte!
-            </p>
-        </div>
+                <div class="caixa-valor-inicial" id="caixaValorInicial4" style="display: none;">
+                    Saldo disponível: <span id="numeroInicial_4"></span>M €
+                </div>
+                
+                <p>
+                    A primeira área em que terás de atuar será a saúde. Historicamente, a saúde é das áreas onde existe maior despesa publica. A complexidade deste setor
+                    é conhecida por todos. Serás tu capaz de resolver a situação em apenas um orçamento?
+                </p>
+                <p>
+                    Poderás ver quais os focos do orçamento anterior e, depois, criar as tuas próprias medidas a implementar em 2025. Boa sorte!
+                </p>
+            </div>
 
 
             <div class="container" id="medidasA_4">
@@ -1288,6 +1283,8 @@
         <button type="submit">Send</button>
     </form>-->
         </section>
+
+    </div>
         <!-- Mais seções para as fases subsequentes -->
 </main>
 

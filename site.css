@@ -173,8 +173,7 @@ body {
 }
 
 /* Wrapper para todo o conteúdo da página */
-.wrapper {
-    min-height: 100dvh;  /* Garante que a altura mínima seja 100% da viewport */
+.wrapper {  /* Garante que a altura mínima seja 100% da viewport */
     display: flex;
     flex-direction: column;
 }

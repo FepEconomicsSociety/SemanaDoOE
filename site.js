@@ -641,102 +641,109 @@ function formulario()
 function gerarPDF() {
     return new Promise((resolve, reject) => {
         
-        const dados = coletarDadosFases(); // Coleta os dados de todas as fases
+    const dados = coletarDadosFases(); // Coleta os dados de todas as fases
 
-        const nomeGrupo = document.getElementById('nome').value;  // Captura o nome do grupo
-        // Verifica se o nome do grupo está vazio
-        if (!nomeGrupo.trim()) {
-            alert("Por favor, insira o nome do grupo.");
-            resolve(false);  // Retorna false se o nome do grupo estiver vazio
-            navigateTo("fase0");
-            return;
-        }
+    const nomeGrupo = document.getElementById('nome').value;  // Captura o nome do grupo
+    // Verifica se o nome do grupo está vazio
+    if (!nomeGrupo.trim()) {
+        alert("Por favor, insira o nome do grupo.");
+        resolve(false);  // Retorna false se o nome do grupo estiver vazio
+        navigateTo("fase0");
+        return;
+    }
 
-        // Cria um elemento temporário para o conteúdo do PDF
-        const elementoTemporario = document.createElement('div');
+    // Cria um elemento temporário para o conteúdo do PDF
+    const elementoTemporario = document.createElement('div');
         
-        // Criação do conteúdo para o PDF
-        let conteudoPDF = `<div class="fase">
-                    <h2>Semana do Orçamento de Estado</h2>
-                    <p>Grupo: ${nomeGrupo}</p>
-                    <h3>Fase 2</h3>
-                    <p>Crescimento do PIB real: ${dados.fase2.pib}%</p>
-                    <p>Variação do consumo privado: ${dados.fase2.vcpriv}%</p>
-                    <p>Variação do consumo público: ${dados.fase2.vcpub}%</p>
-                    <p>Variação do investimento (FBCF): ${dados.fase2.fbcf}%</p>
-                    <p>Variação das exportações: ${dados.fase2.vexp}%</p>
-                    <p>Variação das importações: ${dados.fase2.vimp}%</p>
-                    <p>Inflação: ${dados.fase2.infl}%</p>
-                    <p>Taxa de desemprego: ${dados.fase2.tdes}%</p>
-                   </div>`;
-
-            conteudoPDF +=  `<div class="fase">
-                            <h3>Fase 3 - Orçamentação dos ministérios</h3>
-                            <h4>Percentagem total: ${dados.fase3.diferencaAnual}%</h4>`; // Adiciona a diferença anual
-            dados.fase3.orcamentos.forEach(orcamento => {
-                conteudoPDF += `<div class="orcamento-container"> 
-                <h4>${orcamento.ministerio}:</h4>
-                <p>Percentagem da despesa: ${orcamento.valor}%</p>
-            </div>`;
-            });
-        
-        conteudoPDF +=  `</div>
+    // Criação do conteúdo para o PDF
+    let conteudoPDF = `<div style="text-align: center; margin-bottom: 20px;">
+                            <h1 style="color: #333; font-size: 24px; font-weight: bold;">Semana do Orçamento de Estado</h1>
+                            <p style="font-size: 18px; color: #555;">Grupo: ${nomeGrupo}</p>
+                        </div>
+                        <hr style="border: none; height: 2px; background-color: #333;">
+                        
                         <div class="fase">
-                        <h3>Fase 4 - Medidas</h3>
+                            <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 20px;">Fase 2</h2>
+                            <p>Crescimento do PIB real: ${dados.fase2.pib}%</p>
+                            <p>Variação do consumo privado: ${dados.fase2.vcpriv}%</p>
+                            <p>Variação do consumo público: ${dados.fase2.vcpub}%</p>
+                            <p>Variação do investimento (FBCF): ${dados.fase2.fbcf}%</p>
+                            <p>Variação das exportações: ${dados.fase2.vexp}%</p>
+                            <p>Variação das importações: ${dados.fase2.vimp}%</p>
+                            <p>Inflação: ${dados.fase2.infl}%</p>
+                            <p>Taxa de desemprego: ${dados.fase2.tdes}%</p>
+                        </div>
+                        <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">`;
+
+    conteudoPDF +=  `<div class="fase">
+                        <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Fase 3 - Orçamentação dos Ministérios</h2>
+                        <h4>Percentagem total: ${dados.fase3.diferencaAnual}%</h4>`; // Adiciona a diferença anual
+    dados.fase3.orcamentos.forEach(orcamento => {
+    conteudoPDF += `<div class="orcamento-container" style="border: 1px solid #ddd; padding: 10px; margin: 5px 0; border-radius: 5px;"> 
+                        <h4>${orcamento.ministerio}:</h4>
+                        <p>Percentagem da despesa: ${orcamento.valor}%</p>
+                    </div>`;
+    });
+        
+    conteudoPDF +=  `</div>
+                    <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">
+                    <div class="fase">
+                        <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Fase 4 - Medidas</h2>
                         <h4>Saldo disponível: ${dados.fase4.saldoDisponivel}M €</h4>`; // Adiciona saldo disponível da fase 4
+    if (dados.fase4.medidas.length === 0) 
+    {
+        conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>`;
+    } 
+    else 
+    {
+        
+        dados.fase4.medidas.forEach(medida => {
+            const receitaFormatada = medida.receita
+            .toString()
+            .replace('.', ',')
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            const orcamentoFormatado = medida.orcamento
+            .toString()
+            .replace('.', ',')
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            conteudoPDF += `<div class="medidas-container" style="border: 1px solid #ddd; padding: 10px; margin: 0 0; border-radius: 5px;"> 
+                                <h5 style="margin: 0 0; color: #555;">${medida.titulo}:</h4>
+                                <p style="margin: 0 0;">Receita: +${receitaFormatada}M €</p>
+                                <p style="margin: 0 0;">Despesa: -${orcamentoFormatado}M €</p>
+                                <p style="margin: 0 0;">Explicação: ${medida.explicacao}</p>
+                            </div>`;            
+        });
+    }
+    conteudoPDF += `</div>
+                    <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">
+                    <div class="fase">
+                        <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Fase 5 - Medidas</h2>
+                        <h4>Saldo disponível: ${dados.fase5.saldoDisponivel}M €</h4>`; // Adiciona saldo disponível da fase 4
 
-
-        if (dados.fase4.medidas.length === 0) 
-        {
-            conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>`;
-        } 
-        else 
-        {
-            
-            dados.fase4.medidas.forEach(medida => {
-                const receitaFormatada = medida.receita
-                .toString()
-                .replace('.', ',')
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                const orcamentoFormatado = medida.orcamento
-                .toString()
-                .replace('.', ',')
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                conteudoPDF += `<div class="medidas-container"> 
-                                <h4>${medida.titulo}:</h4>
-                                <p>Receita: +${receitaFormatada}M €</p>
-                                <p>Despesa: -${orcamentoFormatado}M €</p>
-                                <p>Explicação: ${medida.explicacao}</p>
-                                </div>`;            
-            });
-        }
-        conteudoPDF += `</div>
-                <div class="fase">
-                    <h3>Fase 5</h3>
-                    <h4>Saldo disponível: ${dados.fase5.saldoDisponivel}M €</h4>`; // Adiciona saldo disponível da fase 4
-
-                if (dados.fase5.medidas.length === 0) 
-                    {
-                        conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>
-                        </div>`; 
-                    } 
-                    else 
-                    {
-                        dados.fase5.medidas.forEach(medida => {
-                            const receitaFormatada = medida.receita
-                            .toString()
-                            .replace('.', ',')
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                            const orcamentoFormatado = medida.orcamento
-                            .toString()
-                            .replace('.', ',')
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                            conteudoPDF += `<h4>${medida.titulo}:</h4>
-                                            <p>Receita: +${receitaFormatada}M €</p>
-                                            <p>Despesa: -${orcamentoFormatado}M €</p>
-                                            <p>Explicação: ${medida.explicacao}</p>`;            
-                        });
-                    }
+            if (dados.fase5.medidas.length === 0) 
+                {
+                    conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>
+                    </div>`; 
+                } 
+                else 
+                {
+                    dados.fase5.medidas.forEach(medida => {
+                        const receitaFormatada = medida.receita
+                        .toString()
+                        .replace('.', ',')
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                        const orcamentoFormatado = medida.orcamento
+                        .toString()
+                        .replace('.', ',')
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                        conteudoPDF += `<div class="medidas-container" style="border: 1px solid #ddd; padding: 10px; margin: 0 0; border-radius: 5px;"> 
+                                            <h4 style="margin: 0 0; color: #555;">${medida.titulo}:</h4>
+                                            <p style="margin: 0 0;">Receita: +${receitaFormatada}M €</p>
+                                            <p style="margin: 0 0;">Despesa: -${orcamentoFormatado}M €</p>
+                                            <p style="margin: 0 0;">Explicação: ${medida.explicacao}</p>
+                                        </div>`;           
+                    });
+                }
         //conteudoPDF += `<h3>Comentários adicionais</h3>`;         
         /*if(dados.fase5.comentarioExtra.length === 0)
         {
@@ -749,27 +756,24 @@ function gerarPDF() {
                         </div>`; 
         }*/
                         
-        elementoTemporario.innerHTML = conteudoPDF; // Define o conteúdo gerado no elemento temporário
-
-
-        // Configurações para o html2pdf
-        const opt = {
-            margin: 1,
-            filename: `SOE_2025_${nomeGrupo}.pdf`,  // Substitui "nomedogrupo" pelo valor inserido
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-            pagebreak: { mode: ['css', 'legacy'] }
-        };
-
-        // Gera o PDF e retorna uma Promise
-            html2pdf().from(elementoTemporario).set(opt).save()
-            .then(() => {
-                resolve(true);
-            })
-            .catch((error) => {
-                reject(error);
-            });
+    elementoTemporario.innerHTML = conteudoPDF; // Define o conteúdo gerado no elemento temporário
+    // Configurações para o html2pdf
+    const opt = {
+        margin: 1,
+        filename: `SOE_2025_${nomeGrupo}.pdf`,  // Substitui "nomedogrupo" pelo valor inserido
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'] }
+    };
+    // Gera o PDF e retorna uma Promise
+        html2pdf().from(elementoTemporario).set(opt).save()
+        .then(() => {
+            resolve(true);
+        })
+        .catch((error) => {
+            reject(error);
+        });
     });
 }
 // Função para confirmar o envio e limpar os dados após a confirmação do usuário

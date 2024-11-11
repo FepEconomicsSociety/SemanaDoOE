@@ -326,8 +326,8 @@ function mostrarDetalhesMedida(index, fase) {
 // Define as medidas predefinidas feitas em html dependendo do ministerio que foi escolhido
 function carregarMedidasPredefinidas(ministerioId) 
 {
-    console.log(ministerioId);
-    console.log(`Medidas_${ministerioId}`);
+    //console.log(ministerioId);
+    //console.log(`Medidas_${ministerioId}`);
     
     const medida = document.getElementById(`Medidas_${ministerioId}`);
     if (medida) {

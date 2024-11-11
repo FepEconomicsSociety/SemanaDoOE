@@ -575,24 +575,24 @@ function coletarDadosFases() {
         fase3: {
             diferencaAnual: document.getElementById('numeroInicial').innerText || 'Não inserido', // Adiciona a diferença anual
             orcamentos: [
-                { ministerio: 'Administração Interna', valor: document.getElementById('admint').value || 'Não inserido' },
-                { ministerio: 'Agricultura e Alimentação', valor: document.getElementById('agral').value || 'Não inserido' },
-                { ministerio: 'Ambiente e Ação Climática', valor: document.getElementById('ambal').value || 'Não inserido' },
-                { ministerio: 'Ciência Tecnologia e Ensino Superior', valor: document.getElementById('tecs').value || 'Não inserido' },
-                { ministerio: 'Coesão Territorial', valor: document.getElementById('cterr').value || 'Não inserido' },
-                { ministerio: 'Cultura', valor: document.getElementById('cult').value || 'Não inserido' },
-                { ministerio: 'Defesa Nacional', valor: document.getElementById('dn').value || 'Não inserido' },
-                { ministerio: 'Economia e Mar', valor: document.getElementById('ecm').value || 'Não inserido' },
-                { ministerio: 'Educação', valor: document.getElementById('educ').value || 'Não inserido' },
-                { ministerio: 'Encargos Gerais do Estado', valor: document.getElementById('encge').value || 'Não inserido' },
-                { ministerio: 'Finanças', valor: document.getElementById('fin').value || 'Não inserido' },
-                { ministerio: 'Habitação', valor: document.getElementById('hab').value || 'Não inserido' },
-                { ministerio: 'Infraestruturas', valor: document.getElementById('infa').value || 'Não inserido' },
-                { ministerio: 'Justiça', valor: document.getElementById('just').value || 'Não inserido' },
-                { ministerio: 'Negócios Estrangeiros', valor: document.getElementById('negest').value || 'Não inserido' },
-                { ministerio: 'Presidência do Conselho de Ministros', valor: document.getElementById('precom').value || 'Não inserido' },
-                { ministerio: 'Saúde', valor: document.getElementById('saude').value || 'Não inserido' },
-                { ministerio: 'Trabalho, Solidariedade e Segurança Social', valor: document.getElementById('tsss').value || 'Não inserido' }
+                { ministerio: 'Administração Interna', valor_2024:document.getElementById('vadmint').textContent, valor: document.getElementById('admint').value || 'Não inserido' },
+                { ministerio: 'Agricultura e Alimentação', valor_2024:document.getElementById('vagral').textContent, valor: document.getElementById('agral').value || 'Não inserido' },
+                { ministerio: 'Ambiente e Ação Climática', valor_2024:document.getElementById('vambal').textContent, valor: document.getElementById('ambal').value || 'Não inserido' },
+                { ministerio: 'Ciência Tecnologia e Ensino Superior', valor_2024:document.getElementById('vtecs').textContent, valor: document.getElementById('tecs').value || 'Não inserido' },
+                { ministerio: 'Coesão Territorial', valor_2024: document.getElementById('vcterr').textContent, valor: document.getElementById('cterr').value || 'Não inserido' },
+                { ministerio: 'Cultura', valor_2024: document.getElementById('vcult').textContent, valor: document.getElementById('cult').value || 'Não inserido' },
+                { ministerio: 'Defesa Nacional', valor_2024:document.getElementById('vdn').textContent, valor: document.getElementById('dn').value || 'Não inserido' },
+                { ministerio: 'Economia e Mar', valor_2024:document.getElementById('vecm').textContent, valor: document.getElementById('ecm').value || 'Não inserido' },
+                { ministerio: 'Educação', valor_2024: document.getElementById('veduc').textContent, valor: document.getElementById('educ').value || 'Não inserido' },
+                { ministerio: 'Encargos Gerais do Estado', valor_2024:document.getElementById('venge').textContent, valor: document.getElementById('encge').value || 'Não inserido' },
+                { ministerio: 'Finanças', valor_2024: document.getElementById('vfin').textContent, valor: document.getElementById('fin').value || 'Não inserido' },
+                { ministerio: 'Habitação', valor_2024: document.getElementById('vhab').textContent, valor: document.getElementById('hab').value || 'Não inserido' },
+                { ministerio: 'Infraestruturas', valor_2024: document.getElementById('vinfa').textContent, valor: document.getElementById('infa').value || 'Não inserido' },
+                { ministerio: 'Justiça', valor_2024: document.getElementById('vjust').textContent, valor: document.getElementById('just').value || 'Não inserido' },
+                { ministerio: 'Negócios Estrangeiros', valor_2024: document.getElementById('vnegest').textContent, valor: document.getElementById('negest').value || 'Não inserido' },
+                { ministerio: 'Presidência do Conselho de Ministros', valor_2024:document.getElementById('vprecom').textContent, valor: document.getElementById('precom').value || 'Não inserido' },
+                { ministerio: 'Saúde', valor_2024: document.getElementById('vsaude').textContent, valor: document.getElementById('saude').value || 'Não inserido' },
+                { ministerio: 'Trabalho, Solidariedade e Segurança Social', valor_2024: document.getElementById('vtsss').textContent, valor: document.getElementById('tsss').value || 'Não inserido' }
             ]
         },
         fase4: {
@@ -696,7 +696,7 @@ function gerarPDF() {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td rowspan="2" style="border: 1px solid #ddd; padding: 1px; text-align: center; font-weight: bold;">2025</td>`;
+                                    <td style="border-bottom: 1px solid #ccc; padding: 5px; text-align: center; background-color: #f2f2f2; color: #333;">Min.</td>`;
 
 
         // Adicionar ministérios na linha
@@ -704,8 +704,17 @@ function gerarPDF() {
             conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.ministerio}</td>`;
         });
 
-        conteudoPDF += `       </tr>
-                                <tr>`;
+        conteudoPDF += `</tr>
+                        <tr>
+                            <td style="border-bottom: 1px solid #ccc; padding: 5px; text-align: center; background-color: #f2f2f2; color: #333;">2024</td>`;
+
+        // Adicionar percentagens na segunda linha
+        orcamentoBloco.forEach(orcamento => {
+            conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.valor_2024}</td>`;
+        });
+        conteudoPDF += `</tr>
+                        <tr>
+                            <td style="border-bottom: 1px solid #ccc; padding: 5px; text-align: center; background-color: #f2f2f2; color: #333;">2025</td>`;
 
         // Adicionar percentagens na segunda linha
         orcamentoBloco.forEach(orcamento => {

@@ -675,18 +675,51 @@ function gerarPDF() {
                         </div>
                         <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">`;
 
-    conteudoPDF +=  `<div class="fase">
+    // Configurar o número máximo de ministérios por linha para evitar corte na página
+    const maxColumns = 6; 
+
+    // Início do conteúdo PDF
+    conteudoPDF += `<div class="fase" style="page-break-inside: avoid;">
                         <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Fase 3 - Orçamentação dos Ministérios</h2>
-                        <h4>Percentagem total: ${dados.fase3.diferencaAnual}%</h4>`; // Adiciona a diferença anual
-    dados.fase3.orcamentos.forEach(orcamento => {
-    conteudoPDF += `<div class="orcamento-container" style="border: 1px solid #ddd; padding: 10px; margin: 5px 0; border-radius: 5px;"> 
-                        <h4>${orcamento.ministerio}:</h4>
-                        <p>Percentagem da despesa: ${orcamento.valor}%</p>
-                    </div>`;
-    });
-        
-    conteudoPDF +=  `</div>
-                    <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">
+                        <h4>Percentagem total: ${dados.fase3.diferencaAnual}%</h4>`;
+
+    for (let i = 0; i < dados.fase3.orcamentos.length; i += maxColumns) {
+        // Extrair um bloco de orçamentos para uma nova tabela
+        let orcamentoBloco = dados.fase3.orcamentos.slice(i, i + maxColumns);
+
+        conteudoPDF += `<table style="width: 100%; border-collapse: collapse; margin-top: 10px; page-break-inside: avoid;">
+                            <thead>
+                                <tr>
+                                    <th style="border-bottom: 1px solid #ccc; padding: 10px; text-align: center; background-color: #f2f2f2; color: #333;">Ano</th>
+                                    <th colspan="${orcamentoBloco.length}" style="border-bottom: 1px solid #ccc; padding: 10px; text-align: center; background-color: #f2f2f2; color: #333;">Ministérios e Percentagens</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2" style="border: 1px solid #ddd; padding: 1px; text-align: center; font-weight: bold;">2025</td>`;
+
+
+        // Adicionar ministérios na linha
+        orcamentoBloco.forEach(orcamento => {
+            conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.ministerio}</td>`;
+        });
+
+        conteudoPDF += `       </tr>
+                                <tr>`;
+
+        // Adicionar percentagens na segunda linha
+        orcamentoBloco.forEach(orcamento => {
+            conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.valor}%</td>`;
+        });
+
+        conteudoPDF += `       </tr>
+                            </tbody>
+                        </table>
+                        <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">`;
+    }
+
+    // Fechar div da fase
+    conteudoPDF += `</div>
                     <div class="fase">
                         <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Fase 4 - Medidas</h2>
                         <h4>Saldo disponível: ${dados.fase4.saldoDisponivel}M €</h4>`; // Adiciona saldo disponível da fase 4

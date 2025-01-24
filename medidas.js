@@ -10,13 +10,12 @@ let fases = {
 };
 
 // Mostrar zona para definir medida
-function novamedida(fase)
-{
+function novamedida(fase) {
     document.getElementById(`titulo_${fase}`).value = "";
     document.getElementById(`explicacao_${fase}`).value = "";
     document.getElementById(`receita_${fase}`).value = "";
     document.getElementById(`orcamento_${fase}`).value = "";
-    
+
     document.getElementById(`medidanova_${fase}`).style.display = "block";
     document.getElementById(`medidasA_${fase}`).style.display = "none";
     document.getElementById(`criarmedidabtn_${fase}`).style.display = "inline-block";
@@ -29,8 +28,7 @@ function novamedida(fase)
 }
 
 // Cncelar a medida atual
-function cancelar(fase)
-{
+function cancelar(fase) {
     // Restaura o valor inicial antes de qualquer modificação
     atualizarTitulo(fase, false);
 
@@ -39,12 +37,11 @@ function cancelar(fase)
     document.getElementById(`medidasA_${fase}`).style.display = "block";
     document.getElementById('btnvoltar').style.display = "block";
 
-    if(fase == 4) document.getElementById('btnpfase').style.display = "block";
-    if(fase == 5) document.getElementById("gerarPdfBtn").style.display = "block";
+    if (fase == 4) document.getElementById('btnpfase').style.display = "block";
+    if (fase == 5) document.getElementById("gerarPdfBtn").style.display = "block";
 }
 
-function editarmedida(fase, index)
-{
+function editarmedida(fase, index) {
     document.getElementById(`medidanova_${fase}`).style.display = "block";
     document.getElementById(`medidasA_${fase}`).style.display = "none";
     document.getElementById(`criarmedidabtn_${fase}`).style.display = "none";
@@ -53,9 +50,9 @@ function editarmedida(fase, index)
     document.getElementById(`titulo_${fase}`).value = fases[fase].medidas[index].titulo;
     document.getElementById(`explicacao_${fase}`).value = fases[fase].medidas[index].explicacao;
     document.getElementById(`receita_${fase}`).value = fases[fase].medidas[index].receita;
-    document.getElementById(`receita_${fase}`).value = document.getElementById(`receita_${fase}`).value.replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    document.getElementById(`receita_${fase}`).value = document.getElementById(`receita_${fase}`).value.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     document.getElementById(`orcamento_${fase}`).value = fases[fase].medidas[index].orcamento;
-    document.getElementById(`orcamento_${fase}`).value = document.getElementById(`orcamento_${fase}`).value.replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    document.getElementById(`orcamento_${fase}`).value = document.getElementById(`orcamento_${fase}`).value.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     document.getElementById(`atualizarmedidabtn_${fase}`).value = index;
     document.getElementById('btnvoltar').style.display = "none";
     document.getElementById('btnpfase').style.display = "none";
@@ -63,8 +60,7 @@ function editarmedida(fase, index)
 }
 
 // Função para apagar uma medida
-function apagarMedida(fase, index) 
-{
+function apagarMedida(fase, index) {
     if (fases[fase].medidas.length > 0) {
         fases[fase].medidas.splice(index, 1);  // Remove a medida da lista
         salvarMedidas(fase);  // Salva as medidas após a remoção
@@ -76,8 +72,7 @@ function apagarMedida(fase, index)
 }
 
 //Atualiza a medida que está a ser editada
-function atualizarmedida(fase)
-{
+function atualizarmedida(fase) {
     // Identifica a medida sendo editada
     let index = document.getElementById(`atualizarmedidabtn_${fase}`).value;
 
@@ -93,8 +88,8 @@ function atualizarmedida(fase)
         alert("Insira todos os parâmetros corretamente.");
         return;
     }
-    
-    
+
+
     // Atualiza a medida no array com os novos valores
     fases[fase].medidas[index] = {
         titulo,
@@ -115,7 +110,7 @@ function atualizarmedida(fase)
     fases[fase].medidas.forEach(medida => {
         valorInicialAtual -= parseFloat(medida.orcamento) || 0;
     });
-    
+
     //console.log(valorInicialAtual);
 
 
@@ -135,8 +130,7 @@ function atualizarmedida(fase)
 }
 
 // Função para criar as medidas
-function criarMedida(fase) 
-{
+function criarMedida(fase) {
 
     const titulo = document.getElementById(`titulo_${fase}`).value;
     const explicacao = document.getElementById(`explicacao_${fase}`).value;
@@ -147,58 +141,54 @@ function criarMedida(fase)
         alert("Insira todos os parâmetros corretamente.");
         return;
     }
-        fases[fase].medidas.push({
-            titulo,
-            explicacao,
-            receita,
-            orcamento
-        });
+    fases[fase].medidas.push({
+        titulo,
+        explicacao,
+        receita,
+        orcamento
+    });
 
-        let orçamento = 0;
-    
-        if(fase == 4)
-        {
-            orçamento = parseFloat(document.getElementById("saude").value.replace(/\./g, '').replace(',', '.')) || 0;
-    
-        }else if(fase == 5)
-        {
-            // Seleciona todos os inputs dentro da seção "fase3"
+    let orçamento = 0;
+
+    if (fase == 4) {
+        orçamento = parseFloat(document.getElementById("saude").value.replace(/\./g, '').replace(',', '.')) || 0;
+
+    } else if (fase == 5) {
+        // Seleciona todos os inputs dentro da seção "fase3"
         const inputs = document.querySelectorAll('#fase3 input[type="text"]');
         let temp = Infinity;    // Inicia com o maior valor possível
 
-        for (let input of inputs) 
-        {
+        for (let input of inputs) {
             const valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.'));
-            if (valor < temp) 
-            {
+            if (valor < temp) {
                 temp = valor;     // Atualiza o menor valor encontrado
             }
         }
         orçamento = temp;
-        }
-       // Recalcula o valor inicial subtraindo o orçamento da nova medida
-       let valorInicialAtual = parseFloat(sessionStorage.getItem(`valorInicial_${fase}`)) || orçamento;
-    
-        // Subtrai todos os orçamentos das medidas, incluindo a nova medida
-        fases[fase].medidas.forEach(medida => {
-            valorInicialAtual += parseFloat(medida.receita) || 0;
-        });
-        
-       // Subtrai todos os orçamentos das medidas, incluindo a nova medida
-       fases[fase].medidas.forEach(medida => {
-           valorInicialAtual -= parseFloat(medida.orcamento) || 0;
-       });
-   
-       // Atualiza o valor no sessionStorage com o valor final
-       sessionStorage.setItem(`valorInicial_${fase}`, valorInicialAtual);
-       atualizarTitulo(fase, false);
-       salvarMedidas(fase);
-   
-       // Esconde o formulário de nova medida e volta para a lista de medidas
-       document.getElementById(`medidanova_${fase}`).style.display = "none";
-       document.getElementById(`medidasA_${fase}`).style.display = "block";
-       
-       adicionarMedidaATabela(fase);
+    }
+    // Recalcula o valor inicial subtraindo o orçamento da nova medida
+    let valorInicialAtual = parseFloat(sessionStorage.getItem(`valorInicial_${fase}`)) || orçamento;
+
+    // Subtrai todos os orçamentos das medidas, incluindo a nova medida
+    fases[fase].medidas.forEach(medida => {
+        valorInicialAtual += parseFloat(medida.receita) || 0;
+    });
+
+    // Subtrai todos os orçamentos das medidas, incluindo a nova medida
+    fases[fase].medidas.forEach(medida => {
+        valorInicialAtual -= parseFloat(medida.orcamento) || 0;
+    });
+
+    // Atualiza o valor no sessionStorage com o valor final
+    sessionStorage.setItem(`valorInicial_${fase}`, valorInicialAtual);
+    atualizarTitulo(fase, false);
+    salvarMedidas(fase);
+
+    // Esconde o formulário de nova medida e volta para a lista de medidas
+    document.getElementById(`medidanova_${fase}`).style.display = "none";
+    document.getElementById(`medidasA_${fase}`).style.display = "block";
+
+    adicionarMedidaATabela(fase);
 }
 
 // Adiciona as medidas a tabela
@@ -210,53 +200,53 @@ function adicionarMedidaATabela(fase) {
     tabela.innerHTML = "";  // Limpa apenas o tbody onde as medidas estão
 
     fases[fase].medidas.forEach((medida, index) => {
-    // Cria uma nova linha (tr)
-    const novaLinha = document.createElement("tr");
-    
-    // Cria as células (td) para o título, orçamento e botão de detalhes
-    const tituloTd = document.createElement("td");
-    tituloTd.textContent = medida.titulo;
+        // Cria uma nova linha (tr)
+        const novaLinha = document.createElement("tr");
 
-    const orcamentoTd = document.createElement("td");
-    orcamentoTd.style.textAlign = "center";
-    orcamentoTd.textContent = (`${parseFloat((-medida.orcamento)+(medida.receita)).toFixed(2)}M €`).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    
-    const detalhesTd = document.createElement("td");
-    detalhesTd.style.textAlign = "center";
-    const detalhesBtn = document.createElement("button");
-    detalhesBtn.textContent = "Detalhes";
-    detalhesBtn.classList.add("btn", "btn-outline-primary");
-    detalhesBtn.setAttribute("data-toggle", "modal");
-    detalhesBtn.setAttribute("data-target", `#myModal${fase}`);
-    detalhesBtn.onclick = () => mostrarDetalhesMedida(index, fase);  // Chama a função para exibir os detalhes
-    detalhesTd.appendChild(detalhesBtn);
+        // Cria as células (td) para o título, orçamento e botão de detalhes
+        const tituloTd = document.createElement("td");
+        tituloTd.textContent = medida.titulo;
 
-    const editarTd = document.createElement("td");
-    editarTd.style.textAlign = "center";
-    const editarBtn = document.createElement("button");
-    editarBtn.textContent = "Editar";
-    editarBtn.onclick = () => editarmedida(fase, index);
-    editarBtn.classList.add("btn", "btn-outline-primary");
-    editarTd.appendChild(editarBtn);
-    
-    const apagarTd = document.createElement("td");
-    apagarTd.style.textAlign = "center";
-    const apagarBtn = document.createElement("button");
-    apagarBtn.textContent = "Apagar";
-    apagarBtn.onclick = () => apagarMedida(fase, index);
-    apagarBtn.classList.add("btn", "btn-outline-danger");
-    apagarTd.appendChild(apagarBtn);
+        const orcamentoTd = document.createElement("td");
+        orcamentoTd.style.textAlign = "center";
+        orcamentoTd.textContent = (`${parseFloat((-medida.orcamento) + (medida.receita)).toFixed(2)}M €`).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-    // Adiciona as células à nova linha
-    novaLinha.appendChild(tituloTd);
-    novaLinha.appendChild(orcamentoTd);
-    novaLinha.appendChild(detalhesTd);  
-    novaLinha.appendChild(editarTd);  
-    novaLinha.appendChild(apagarTd);  
+        const detalhesTd = document.createElement("td");
+        detalhesTd.style.textAlign = "center";
+        const detalhesBtn = document.createElement("button");
+        detalhesBtn.textContent = "Detalhes";
+        detalhesBtn.classList.add("btn", "btn-outline-primary");
+        detalhesBtn.setAttribute("data-toggle", "modal");
+        detalhesBtn.setAttribute("data-target", `#myModal${fase}`);
+        detalhesBtn.onclick = () => mostrarDetalhesMedida(index, fase);  // Chama a função para exibir os detalhes
+        detalhesTd.appendChild(detalhesBtn);
+
+        const editarTd = document.createElement("td");
+        editarTd.style.textAlign = "center";
+        const editarBtn = document.createElement("button");
+        editarBtn.textContent = "Editar";
+        editarBtn.onclick = () => editarmedida(fase, index);
+        editarBtn.classList.add("btn", "btn-outline-primary");
+        editarTd.appendChild(editarBtn);
+
+        const apagarTd = document.createElement("td");
+        apagarTd.style.textAlign = "center";
+        const apagarBtn = document.createElement("button");
+        apagarBtn.textContent = "Apagar";
+        apagarBtn.onclick = () => apagarMedida(fase, index);
+        apagarBtn.classList.add("btn", "btn-outline-danger");
+        apagarTd.appendChild(apagarBtn);
+
+        // Adiciona as células à nova linha
+        novaLinha.appendChild(tituloTd);
+        novaLinha.appendChild(orcamentoTd);
+        novaLinha.appendChild(detalhesTd);
+        novaLinha.appendChild(editarTd);
+        novaLinha.appendChild(apagarTd);
 
 
-    // Adiciona a nova linha à tabela
-    tabela.appendChild(novaLinha);
+        // Adiciona a nova linha à tabela
+        tabela.appendChild(novaLinha);
     });
     document.getElementById("btnpfase").style.display = "block";
     document.getElementById('btnvoltar').style.display = "block";
@@ -272,18 +262,18 @@ function mostrarDetalhesMedida(index, fase) {
 
     // Formata o valor da receita
     const receitaFormatada = medida.receita
-    .toString()
-    .replace('.', ',')
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        .toString()
+        .replace('.', ',')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     // Formata o valor do orçamento
     const orcamentoFormatado = medida.orcamento
-    .toString()
-    .replace('.', ',')
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        .toString()
+        .replace('.', ',')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     // Atualiza o corpo do modal com a explicação da medida
-    document.querySelector(`#myModal${fase} .modal-body`).innerHTML =`
+    document.querySelector(`#myModal${fase} .modal-body`).innerHTML = `
         <div>
         <p style="float: left;"><strong>Receita:</strong> ${receitaFormatada}M €</p>
         <p style="float: right;"><strong>Despesa:</strong> ${orcamentoFormatado}M €</p>
@@ -324,17 +314,17 @@ function mostrarDetalhesMedida(index, fase) {
 }*/
 
 // Define as medidas predefinidas feitas em html dependendo do ministerio que foi escolhido
-function carregarMedidasPredefinidas(ministerioId) 
-{
+function carregarMedidasPredefinidas(ministerioId) {
     //console.log(ministerioId);
     //console.log(`Medidas_${ministerioId}`);
-    
+
     const medida = document.getElementById(`Medidas_${ministerioId}`);
     if (medida) {
         medida.hidden = false; // Define 'hidden' como falso
     } else {
         console.error(`Elemento com ID "Medidas_${ministerioId}" não encontrado.`);
-    }}
+    }
+}
 
 // Função para salvar as medidas no sessionStorage
 function salvarMedidas(fase) {
@@ -344,7 +334,7 @@ function salvarMedidas(fase) {
 
 // Função para restaurar as medidas do sessionStorage
 function restaurarMedidas(fase) {
-    const faseSalva  = sessionStorage.getItem(`fases_${fase}`);
+    const faseSalva = sessionStorage.getItem(`fases_${fase}`);
     //console.log(faseSalva);  // Debug: Verifica se as medidas estão sendo salvas corretamente
 
     if (faseSalva) {
@@ -352,21 +342,19 @@ function restaurarMedidas(fase) {
     } else {
         fases[fase] = {
             medidas: [],
-        };     
+        };
     }
 }
 
 // Função para inicializar a fase 4 com a primeira medida
 function inicializarFase(fase) {
     // Exibe a caixa de valor inicial da fase 4
-    if (fase === 4) 
-    {
+    if (fase === 4) {
         restaurarMedidas(fase);  // Restaura as medidas ao carregar a página
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial
         adicionarMedidaATabela(fase);
         atualizarTitulo(fase, false);  // Atualiza o valor inicial
-    }else if(fase === 5)
-    {
+    } else if (fase === 5) {
         restaurarMedidas(fase);  // Restaura as medidas ao carregar a página
         document.getElementById('caixaValorInicial5').style.display = 'block';  // Exibe a caixa de valor inicial
         adicionarMedidaATabela(fase);

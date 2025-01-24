@@ -6,8 +6,7 @@ const avisoTimers = {}; // Objeto para armazenar os timers de cada input
 const valoresAnteriores = {};
 
 // Função para verificar a senha
-function verificarSenha() 
-{
+function verificarSenha() {
     const senhaDigitada = document.getElementById('senhaInput').value;
     const mensagemErro = document.getElementById('mensagemErro');
     const senhaCaixa = document.querySelector('.senha-caixa'); // Seleciona a caixa da senha
@@ -18,77 +17,70 @@ function verificarSenha()
     mensagemErro.textContent = '';
     loading.style.display = 'block'; // Exibe o círculo de carregamento
 
-    fetch("https://server-jvxz.onrender.com/auth/login",{ 
+    fetch("https://server-jvxz.onrender.com/auth/login", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ senha: senhaDigitada })
     })
-    .then(response => {
-        if (response.ok) 
-        {
+        .then(response => {
+            if (response.ok) {
+                first = false;
+                return response.json();
+            }
+            else {
+                // Exibe a fitinha de erro
+                senhaCaixa.classList.add('incorreta');
+                // Remove a fitinha após 3 segundos
+                setTimeout(() => {
+                    senhaCaixa.classList.remove('incorreta');
+
+                }, 3000);
+                throw new Error('');
+            }
+        })
+        .then(data => {
+            // Salva o token no sessionStorage  para manter a autenticação
+            sessionStorage.setItem('token', data.token); // Armazena o token JWT
+
             first = false;
-            return response.json();
-        } 
-        else 
-        {
-         // Exibe a fitinha de erro
-            senhaCaixa.classList.add('incorreta');     
-            // Remove a fitinha após 3 segundos
-            setTimeout(() => {
-                senhaCaixa.classList.remove('incorreta');
+            // Salva o estado de login para evitar novo pedido de senha após refresh
+            sessionStorage.setItem('autenticado', 'true');
+            // Armazena a hora de autenticação quando o login é bem-sucedido
+            sessionStorage.setItem('horaInicio', Date.now());  // Define o timestamp no momento da autenticação
+            document.getElementById('senhaPage').style.display = 'none';
+            document.getElementById('conteudoSite').style.display = 'block';
 
-            }, 3000);
-            throw new Error(''); 
-        }
-    })
-    .then(data => {
-        // Salva o token no sessionStorage  para manter a autenticação
-        sessionStorage .setItem('token', data.token); // Armazena o token JWT
+            // Exibir o footer após o login
+            document.getElementById('footer').style.display = 'block';
+        })
+        .catch(error => {
+            loading.style.display = 'none'; // Esconde o círculo de carregamento em caso de erro
 
-        first = false;
-        // Salva o estado de login para evitar novo pedido de senha após refresh
-        sessionStorage .setItem('autenticado', 'true');
-        // Armazena a hora de autenticação quando o login é bem-sucedido
-        sessionStorage.setItem('horaInicio', Date.now());  // Define o timestamp no momento da autenticação
-        document.getElementById('senhaPage').style.display = 'none';
-        document.getElementById('conteudoSite').style.display = 'block';
-    
-        // Exibir o footer após o login
-        document.getElementById('footer').style.display = 'block';
-    })
-    .catch(error => {
-        loading.style.display = 'none'; // Esconde o círculo de carregamento em caso de erro
+            mensagemErro.textContent = error.message;
+        });
 
-        mensagemErro.textContent = error.message;
-    });
-    
 }
 
-function pass()
-{
-    if(a==1)
-    {
-        document.getElementById('senhaInput').type='password';
-        document.getElementById('pass-icon').src='https://FepEconomicsSociety.github.io/SemanaDoOE/images/hide-pass.png';
-        a=0;
+function pass() {
+    if (a == 1) {
+        document.getElementById('senhaInput').type = 'password';
+        document.getElementById('pass-icon').src = 'https://FepEconomicsSociety.github.io/SemanaDoOE/images/hide-pass.png';
+        a = 0;
     }
-    else
-    {
-        document.getElementById('senhaInput').type='text';
-        document.getElementById('pass-icon').src='https://FepEconomicsSociety.github.io/SemanaDoOE/images/show-pass.png';
-        a=1;
+    else {
+        document.getElementById('senhaInput').type = 'text';
+        document.getElementById('pass-icon').src = 'https://FepEconomicsSociety.github.io/SemanaDoOE/images/show-pass.png';
+        a = 1;
     }
 }
 
 // Função para verificar se os campos de nome e e-mail estão preenchidos
-function verificarCampos(event) 
-{
+function verificarCampos(event) {
     event.preventDefault(); // Evita o refresh da página
 
     const nome = document.getElementById('nome').value.trim();
 
-    if (nome === '') 
-    {
+    if (nome === '') {
         alert('Por favor, preencha todos os campos.');
         return;
     }
@@ -98,28 +90,26 @@ function verificarCampos(event)
 }
 
 // Função para validar o formato do e-mail - Sem uso, mas pode ser útil no futuro
-function validarEmail(email) 
-{
+function validarEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
 // Função para navegação entre as fases
-function navigateTo(faseId) 
-{ 
+function navigateTo(faseId) {
     // Esconder todas as fases
     const fases = document.querySelectorAll('.fase');
     fases.forEach(fase => fase.classList.add('hidden'));
 
     // Mostrar a fase selecionada
     document.getElementById(faseId).classList.remove('hidden');
-    
+
     // Armazena a fase atual no sessionStorage
-    sessionStorage.setItem('faseAtual', faseId);    
+    sessionStorage.setItem('faseAtual', faseId);
 
     const caixaValorInicial = document.getElementById('caixaValorInicial');
 
-    if (faseId === 'fase3' ) {
+    if (faseId === 'fase3') {
         caixaValorInicial.style.display = 'block'; // Exibe a caixa
         diferenca_anual("admint");
     }
@@ -127,21 +117,19 @@ function navigateTo(faseId)
         document.getElementById('caixaValorInicial4').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
         document.getElementById("btnpfase").style.display = "block";
         inicializarFase(4);
-        atualizarTitulo(4,false);  // Atualiza o valor inicial da fase 4
+        atualizarTitulo(4, false);  // Atualiza o valor inicial da fase 4
     }
-    else if (faseId === 'fase5')
-    {
+    else if (faseId === 'fase5') {
         document.getElementById('caixaValorInicial5').style.display = 'block';  // Exibe a caixa de valor inicial da fase 4
         document.getElementById("gerarPdfBtn").style.display = "block";
         inicializarFase(5);
-        atualizarTitulo(5,false);  // Atualiza o valor inicial da fase 4
+        atualizarTitulo(5, false);  // Atualiza o valor inicial da fase 4
     }
 
 }
 
 // Inicializa o estado da navegação
-function init() 
-{
+function init() {
     verificarExpiracao();  // Verifica se os dados devem ser expirados
     restaurarDadosInput();
     //inicializarFase4();
@@ -149,8 +137,8 @@ function init()
 
 
     // Verifica se o usuário já está autenticado
-    const autenticado = sessionStorage .getItem('autenticado');
-    
+    const autenticado = sessionStorage.getItem('autenticado');
+
     if (autenticado === 'true') {
         // Se já estiver autenticado, mostra o conteúdo do site
         document.getElementById('senhaPage').style.display = 'none';
@@ -158,20 +146,20 @@ function init()
         document.getElementById('footer').style.display = 'block';        // Exibir o footer após o login
         inicializarFase(4);  // Inicializa a fase 4 e garante que o valor inicial será exibido corretamente
         inicializarFase(5);
-        
+
         // Verifica se há uma fase armazenada no sessionStorage
         const faseAtual = sessionStorage.getItem('faseAtual') || 'fase0';  // Se não houver fase armazenada, comece na fase1
         navigateTo(faseAtual);// Navega para a fase armazenada
 
         diferenca_anual("admint");        // Chama a função para calcular a diferença dos orçamentos depois de inicializar as fases
-        
-         
+
+
     } else {
         // Caso contrário, exibe a página de senha
         document.getElementById('senhaPage').style.display = 'block';
         document.getElementById('conteudoSite').style.display = 'none';
     }
-    
+
     //restaurarValores();
 
 }
@@ -218,8 +206,8 @@ function diferenca_anual(id_atual) {
     const numeroInicialElemento = document.getElementById('numeroInicial');
     let totalOrcamentosFornecidos = 0;
 
-    const inputIds = ['admint', 'agral', 'ambal', 'tecs', 'cterr', 'cult', 'dn', 'ecm', 'educ', 'encge', 
-                      'fin', 'hab', 'infa', 'just', 'negest', 'precom', 'saude', 'tsss'];
+    const inputIds = ['admint', 'agral', 'ambal', 'tecs', 'cterr', 'cult', 'dn', 'ecm', 'educ', 'encge',
+        'fin', 'hab', 'infa', 'just', 'negest', 'precom', 'saude', 'tsss'];
 
     inputIds.forEach(id => {
         const inputElement = document.getElementById(id);
@@ -231,19 +219,19 @@ function diferenca_anual(id_atual) {
     // Verifica se a soma dos orçamentos é maior que 100
     if (diferenca > 100) {
         alert("A soma dos orçamentos não pode ser maior que 100%. O valor será definido como 0.");
-        
+
         // Define o valor de cada input como 0
-            const inputElement = document.getElementById(id_atual);
-            inputElement.value = '0'; // Define o valor do input como 0
-            totalOrcamentosFornecidos = 0;
-            inputIds.forEach(id => {
-                const inputElement = document.getElementById(id);
-                const valorInput = parseFloat(inputElement.value.replace(/\./g, '').replace(',', '.')) || 0;
-                totalOrcamentosFornecidos += valorInput;
-            });
-        
-            const resultado = totalOrcamentosFornecidos;
-            numeroInicialElemento.textContent = resultado.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        const inputElement = document.getElementById(id_atual);
+        inputElement.value = '0'; // Define o valor do input como 0
+        totalOrcamentosFornecidos = 0;
+        inputIds.forEach(id => {
+            const inputElement = document.getElementById(id);
+            const valorInput = parseFloat(inputElement.value.replace(/\./g, '').replace(',', '.')) || 0;
+            totalOrcamentosFornecidos += valorInput;
+        });
+
+        const resultado = totalOrcamentosFornecidos;
+        numeroInicialElemento.textContent = resultado.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     } else {
         // Atualiza o texto se não exceder 100%
         numeroInicialElemento.textContent = diferenca.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -264,8 +252,8 @@ function diferenca_anual(id_atual) {
 function formatarpercentagem(input) {
     // Pega a posição inicial do cursor
     const posicaoCursorInicial = input.selectionStart;
-    const valorAntigo = input.value.replace('.','');
-    input.value = input.value.replace('.','');
+    const valorAntigo = input.value.replace('.', '');
+    input.value = input.value.replace('.', '');
     // Remove qualquer caractere que não seja número, vírgula, ou ponto
     input.value = input.value.replace(/[^0-9.,]/g, '');
 
@@ -276,8 +264,8 @@ function formatarpercentagem(input) {
     if (valorNumerico - 100 > 0) {
         input.value = 100;
         mostrarAviso(input, "Valor máximo é 100%");
-        
-    }else {
+
+    } else {
         removerAviso(input);
     }
 
@@ -375,13 +363,13 @@ function formatarNumero(input) {
     input.setSelectionRange(novaPosicao, novaPosicao);
 }
 
-/*Verifica se todos os dados na fase 2 e 3 foram preenchidos antes de continuar*/ 
+/*Verifica se todos os dados na fase 2 e 3 foram preenchidos antes de continuar*/
 function finalizarFase(fase) {
     // Seleciona todos os inputs dentro da seção "fase3"
     const inputs = document.querySelectorAll(`#fase${fase} input[type="text"]`);
-    const percentagemtotal = parseFloat(document.getElementById('numeroInicial').textContent.replace(',','.'));
+    const percentagemtotal = parseFloat(document.getElementById('numeroInicial').textContent.replace(',', '.'));
     let orcamento_fase;
-    if(fase ===4 || fase ===5){ orcamento_fase = parseFloat(document.getElementById(`numeroInicial_${fase}`).textContent.replace('.','').replace(',','.'))}; 
+    if (fase === 4 || fase === 5) { orcamento_fase = parseFloat(document.getElementById(`numeroInicial_${fase}`).textContent.replace('.', '').replace(',', '.')) };
 
     // Verifica se todos os inputs têm um valor
     let todosPreenchidos = true; // Inicializa como verdadeiro
@@ -392,24 +380,20 @@ function finalizarFase(fase) {
             break; // Sai do loop se encontrar um campo vazio
         }
     }
-    if((fase === 4 && orcamento_fase <0 || fase === 5 && orcamento_fase < 0))
-    {
+    if ((fase === 4 && orcamento_fase < 0 || fase === 5 && orcamento_fase < 0)) {
         alert("O orçamento para o ministério nao pode ser negativo!");
-    } 
-    else if(fase === 4){navigateTo(`fase${fase+1}`);}
-    else if (fase ===5){formulario();}
-    
-    if (todosPreenchidos && fase === 2 || fase === 3 && todosPreenchidos && percentagemtotal === 100) 
-    {
+    }
+    else if (fase === 4) { navigateTo(`fase${fase + 1}`); }
+    else if (fase === 5) { formulario(); }
+
+    if (todosPreenchidos && fase === 2 || fase === 3 && todosPreenchidos && percentagemtotal === 100) {
         // Se todos os dados estiverem inseridos, permite a navegação
-        navigateTo(`fase${fase+1}`); 
-    }    
-    else if (todosPreenchidos && fase === 3 && percentagemtotal != 100)
-    {
+        navigateTo(`fase${fase + 1}`);
+    }
+    else if (todosPreenchidos && fase === 3 && percentagemtotal != 100) {
         alert("A percentagem total tem que ser 100%.");
     }
-    else if(fase === 2 || fase === 3)
-    {
+    else if (fase === 2 || fase === 3) {
         // Se não, exibe uma mensagem de aviso
         alert("Por favor, preencha todos os campos antes de prosseguir.");
     }
@@ -417,18 +401,15 @@ function finalizarFase(fase) {
 }
 
 // Função para atualizar o título do orçamento disponivel do ministerio
-function atualizarTitulo(fase, previsualizar = false) 
-{
+function atualizarTitulo(fase, previsualizar = false) {
     let orçamento = 0;
-    
-    if(fase == 4)
-    {
+
+    if (fase == 4) {
         percentagem = parseFloat(document.getElementById("saude").value.replace(/\./g, '').replace(',', '.')) / 100 || 0;
-        
+
         orçamento = 93646.9 * (1 + parseFloat(document.getElementById("pib").value.replace(/\./g, '').replace(',', '.')) / 100) * (percentagem) - 15656.3;
 
-    }else if(fase == 5)
-    {
+    } else if (fase == 5) {
         // Seleciona todos os inputs dentro da seção "fase3"
         const inputs = document.querySelectorAll('#fase3 input[type="text"]');
         let temp = Infinity;    // Inicia com o maior valor possível
@@ -436,13 +417,10 @@ function atualizarTitulo(fase, previsualizar = false)
         let Nomeministerio = "";  // Para armazenar o nome do ministério com o menor valor
         // Define os IDs que desejas incluir
         const ministeriosDesejados = ['cterr', 'cult', 'negest', 'hab'];
-        for (let input of inputs) 
-        {
-            if(ministeriosDesejados.includes(input.id))
-            {
+        for (let input of inputs) {
+            if (ministeriosDesejados.includes(input.id)) {
                 const valor = parseFloat(input.value.replace(/\./g, '').replace(',', '.')) / 100;
-                if (valor < temp && input.id != "saude") 
-                {
+                if (valor < temp && input.id != "saude") {
                     temp = valor;     // Atualiza o menor valor encontrado
                     idMenorValor = input.id;    // Armazena o id do input com o menor valor
                 }
@@ -450,8 +428,7 @@ function atualizarTitulo(fase, previsualizar = false)
         }
 
         // Se encontrou um id de menor valor, busca o ministério correspondente
-        if (idMenorValor) 
-        {
+        if (idMenorValor) {
             // Substitui o prefixo do input por "min_" para pegar o ID do ministério
             const ministerioId = `min_${idMenorValor}`;
             Nomeministerio = document.getElementById(ministerioId).textContent;
@@ -473,7 +450,7 @@ function atualizarTitulo(fase, previsualizar = false)
 
     // Recupera o valor inicial base 
     let valorInicial = parseFloat(document.getElementById(`numeroInicial_${fase}`).value) || orçamento;
-  
+
     // Soma a receita de todas as medidas já adicionadas
     fases[fase].medidas.forEach(medida => {
         valorInicial += parseFloat(medida.receita) || 0;
@@ -484,9 +461,8 @@ function atualizarTitulo(fase, previsualizar = false)
         valorInicial -= parseFloat(medida.orcamento) || 0;
     });
 
- // Durante a pré-visualização, adiciona de volta o valor antigo da medida antes de subtrair o novo
- if (previsualizar && document.getElementById(`atualizarmedidabtn_${fase}`).value >= 0) 
-    {
+    // Durante a pré-visualização, adiciona de volta o valor antigo da medida antes de subtrair o novo
+    if (previsualizar && document.getElementById(`atualizarmedidabtn_${fase}`).value >= 0) {
         let index = document.getElementById(`atualizarmedidabtn_${fase}`).value;
         const medidaAtual = fases[fase].medidas[index];
         if (medidaAtual && medidaAtual.orcamento) {  // Verifica se a medida existe
@@ -506,54 +482,47 @@ function atualizarTitulo(fase, previsualizar = false)
         valorInicial = 0;
     }
     // Atualiza o valor exibido na interface    
-    numeroInicialElemento.textContent = valorInicial.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    
+    numeroInicialElemento.textContent = valorInicial.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
 }
 
 // Função para salvar o valor de qualquer campo de input no sessionStorage 
-function salvarDadosInput() 
-{
+function salvarDadosInput() {
     // Seleciona todos os campos de input e textarea
     const inputs = document.querySelectorAll('input, textarea');
-    
+
     inputs.forEach(input => {
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function () {
             // Salva cada campo no sessionStorage  com a chave sendo o seu id
-            sessionStorage .setItem(input.id, input.value);
+            sessionStorage.setItem(input.id, input.value);
         });
     });
-    
+
 }
 
 // Função para restaurar o valor dos inputs ao carregar a página
-function restaurarDadosInput() 
-{
+function restaurarDadosInput() {
     const inputs = document.querySelectorAll('input, textarea');
-    
+
     inputs.forEach(input => {
-        const valorSalvo = sessionStorage .getItem(input.id);
-        if (valorSalvo) 
-        {
+        const valorSalvo = sessionStorage.getItem(input.id);
+        if (valorSalvo) {
             input.value = valorSalvo;  // Restaura o valor salvo
         }
     });
 }
 
-function verificarExpiracao() 
-{
-    const horaInicio = sessionStorage .getItem('horaInicio');
+function verificarExpiracao() {
+    const horaInicio = sessionStorage.getItem('horaInicio');
     const tresHoras = 3 * 60 * 60 * 1000; // 3 horas em milissegundos 
 
     // Se a hora de início não existir, significa que é a primeira visita, então definimos a hora de início
-    if (!horaInicio) 
-    {
+    if (!horaInicio) {
         sessionStorage.setItem('horaInicio', Date.now());
-    } 
-    else 
-    {
+    }
+    else {
         // Se já passaram 3 horas, limpar os dados e mostrar o alerta
-        if (Date.now() - parseInt(horaInicio) > tresHoras) 
-        {
+        if (Date.now() - parseInt(horaInicio) > tresHoras) {
             sessionStorage.clear();
             alert("Os dados expiraram.");
         }
@@ -575,22 +544,22 @@ function coletarDadosFases() {
         fase3: {
             diferencaAnual: document.getElementById('numeroInicial').innerText || 'Não inserido', // Adiciona a diferença anual
             orcamentos: [
-                { ministerio: 'Administração Interna', valor_2024:document.getElementById('vadmint').textContent, valor: document.getElementById('admint').value || 'Não inserido' },
-                { ministerio: 'Agricultura e Alimentação', valor_2024:document.getElementById('vagral').textContent, valor: document.getElementById('agral').value || 'Não inserido' },
-                { ministerio: 'Ambiente e Ação Climática', valor_2024:document.getElementById('vambal').textContent, valor: document.getElementById('ambal').value || 'Não inserido' },
-                { ministerio: 'Ciência Tecnologia e Ensino Superior', valor_2024:document.getElementById('vtecs').textContent, valor: document.getElementById('tecs').value || 'Não inserido' },
+                { ministerio: 'Administração Interna', valor_2024: document.getElementById('vadmint').textContent, valor: document.getElementById('admint').value || 'Não inserido' },
+                { ministerio: 'Agricultura e Alimentação', valor_2024: document.getElementById('vagral').textContent, valor: document.getElementById('agral').value || 'Não inserido' },
+                { ministerio: 'Ambiente e Ação Climática', valor_2024: document.getElementById('vambal').textContent, valor: document.getElementById('ambal').value || 'Não inserido' },
+                { ministerio: 'Ciência Tecnologia e Ensino Superior', valor_2024: document.getElementById('vtecs').textContent, valor: document.getElementById('tecs').value || 'Não inserido' },
                 { ministerio: 'Coesão Territorial', valor_2024: document.getElementById('vcterr').textContent, valor: document.getElementById('cterr').value || 'Não inserido' },
                 { ministerio: 'Cultura', valor_2024: document.getElementById('vcult').textContent, valor: document.getElementById('cult').value || 'Não inserido' },
-                { ministerio: 'Defesa Nacional', valor_2024:document.getElementById('vdn').textContent, valor: document.getElementById('dn').value || 'Não inserido' },
-                { ministerio: 'Economia e Mar', valor_2024:document.getElementById('vecm').textContent, valor: document.getElementById('ecm').value || 'Não inserido' },
+                { ministerio: 'Defesa Nacional', valor_2024: document.getElementById('vdn').textContent, valor: document.getElementById('dn').value || 'Não inserido' },
+                { ministerio: 'Economia e Mar', valor_2024: document.getElementById('vecm').textContent, valor: document.getElementById('ecm').value || 'Não inserido' },
                 { ministerio: 'Educação', valor_2024: document.getElementById('veduc').textContent, valor: document.getElementById('educ').value || 'Não inserido' },
-                { ministerio: 'Encargos Gerais do Estado', valor_2024:document.getElementById('venge').textContent, valor: document.getElementById('encge').value || 'Não inserido' },
+                { ministerio: 'Encargos Gerais do Estado', valor_2024: document.getElementById('venge').textContent, valor: document.getElementById('encge').value || 'Não inserido' },
                 { ministerio: 'Finanças', valor_2024: document.getElementById('vfin').textContent, valor: document.getElementById('fin').value || 'Não inserido' },
                 { ministerio: 'Habitação', valor_2024: document.getElementById('vhab').textContent, valor: document.getElementById('hab').value || 'Não inserido' },
                 { ministerio: 'Infraestruturas', valor_2024: document.getElementById('vinfa').textContent, valor: document.getElementById('infa').value || 'Não inserido' },
                 { ministerio: 'Justiça', valor_2024: document.getElementById('vjust').textContent, valor: document.getElementById('just').value || 'Não inserido' },
                 { ministerio: 'Negócios Estrangeiros', valor_2024: document.getElementById('vnegest').textContent, valor: document.getElementById('negest').value || 'Não inserido' },
-                { ministerio: 'Presidência do Conselho de Ministros', valor_2024:document.getElementById('vprecom').textContent, valor: document.getElementById('precom').value || 'Não inserido' },
+                { ministerio: 'Presidência do Conselho de Ministros', valor_2024: document.getElementById('vprecom').textContent, valor: document.getElementById('precom').value || 'Não inserido' },
                 { ministerio: 'Saúde', valor_2024: document.getElementById('vsaude').textContent, valor: document.getElementById('saude').value || 'Não inserido' },
                 { ministerio: 'Trabalho, Solidariedade e Segurança Social', valor_2024: document.getElementById('vtsss').textContent, valor: document.getElementById('tsss').value || 'Não inserido' }
             ]
@@ -601,7 +570,7 @@ function coletarDadosFases() {
                 titulo: medida.titulo,
                 receita: medida.receita,
                 orcamento: medida.orcamento,
-                explicacao: medida.explicacao 
+                explicacao: medida.explicacao
             })),
         },
         fase5: {
@@ -610,7 +579,7 @@ function coletarDadosFases() {
                 titulo: medida.titulo,
                 receita: medida.receita,
                 orcamento: medida.orcamento,
-                explicacao: medida.explicacao 
+                explicacao: medida.explicacao
             })),
             //comentarioExtra: document.getElementById('projecaoText').value,
         },
@@ -618,17 +587,14 @@ function coletarDadosFases() {
     return dados;
 }
 
-function formulario() 
-{
+function formulario() {
     gerarPDF()
         .then((pdfGerado) => {
-            if (pdfGerado) 
-            {
+            if (pdfGerado) {
                 // Mostra o botão de confirmação para o usuário
                 document.getElementById('confirmarBtn').style.display = 'block';
-            } 
-            else 
-            {
+            }
+            else {
                 alert("Erro: O PDF não foi gerado. Por favor, tente novamente.");
             }
         })
@@ -640,23 +606,23 @@ function formulario()
 
 function gerarPDF() {
     return new Promise((resolve, reject) => {
-        
-    const dados = coletarDadosFases(); // Coleta os dados de todas as fases
 
-    const nomeGrupo = document.getElementById('nome').value;  // Captura o nome do grupo
-    // Verifica se o nome do grupo está vazio
-    if (!nomeGrupo.trim()) {
-        alert("Por favor, insira o nome do grupo.");
-        resolve(false);  // Retorna false se o nome do grupo estiver vazio
-        navigateTo("fase0");
-        return;
-    }
+        const dados = coletarDadosFases(); // Coleta os dados de todas as fases
 
-    // Cria um elemento temporário para o conteúdo do PDF
-    const elementoTemporario = document.createElement('div');
-        
-    // Criação do conteúdo para o PDF
-    let conteudoPDF = `<div style="text-align: center; margin-bottom: 20px;">
+        const nomeGrupo = document.getElementById('nome').value;  // Captura o nome do grupo
+        // Verifica se o nome do grupo está vazio
+        if (!nomeGrupo.trim()) {
+            alert("Por favor, insira o nome do grupo.");
+            resolve(false);  // Retorna false se o nome do grupo estiver vazio
+            navigateTo("fase0");
+            return;
+        }
+
+        // Cria um elemento temporário para o conteúdo do PDF
+        const elementoTemporario = document.createElement('div');
+
+        // Criação do conteúdo para o PDF
+        let conteudoPDF = `<div style="text-align: center; margin-bottom: 20px;">
                             <h1 style="color: #333; font-size: 24px; font-weight: bold;">Semana do Orçamento de Estado</h1>
                             <p style="font-size: 18px; color: #555;">Grupo: ${nomeGrupo}</p>
                         </div>
@@ -675,19 +641,19 @@ function gerarPDF() {
                         </div>
                         <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">`;
 
-    // Configurar o número máximo de ministérios por linha para evitar corte na página
-    const maxColumns = 6; 
+        // Configurar o número máximo de ministérios por linha para evitar corte na página
+        const maxColumns = 6;
 
-    // Início do conteúdo PDF
-    conteudoPDF += `<div class="fase" style="page-break-inside: avoid;">
+        // Início do conteúdo PDF
+        conteudoPDF += `<div class="fase" style="page-break-inside: avoid;">
                         <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Fase 3 - Orçamentação dos Ministérios</h2>
                         <h4>Percentagem total: ${dados.fase3.diferencaAnual}%</h4>`;
 
-    for (let i = 0; i < dados.fase3.orcamentos.length; i += maxColumns) {
-        // Extrair um bloco de orçamentos para uma nova tabela
-        let orcamentoBloco = dados.fase3.orcamentos.slice(i, i + maxColumns);
+        for (let i = 0; i < dados.fase3.orcamentos.length; i += maxColumns) {
+            // Extrair um bloco de orçamentos para uma nova tabela
+            let orcamentoBloco = dados.fase3.orcamentos.slice(i, i + maxColumns);
 
-        conteudoPDF += `<table style="width: 100%; border-collapse: collapse; margin-top: 10px; page-break-inside: avoid;">
+            conteudoPDF += `<table style="width: 100%; border-collapse: collapse; margin-top: 10px; page-break-inside: avoid;">
                             <thead>
                                 <tr>
                                     <th style="border-bottom: 1px solid #ccc; padding: 10px; text-align: center; background-color: #f2f2f2; color: #333;">Ano</th>
@@ -699,93 +665,89 @@ function gerarPDF() {
                                     <td style="border-bottom: 1px solid #ccc; padding: 5px; text-align: center; background-color: #f2f2f2; color: #333;">Min.</td>`;
 
 
-        // Adicionar ministérios na linha
-        orcamentoBloco.forEach(orcamento => {
-            conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.ministerio}</td>`;
-        });
+            // Adicionar ministérios na linha
+            orcamentoBloco.forEach(orcamento => {
+                conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.ministerio}</td>`;
+            });
 
-        conteudoPDF += `</tr>
+            conteudoPDF += `</tr>
                         <tr>
                             <td style="border-bottom: 1px solid #ccc; padding: 5px; text-align: center; background-color: #f2f2f2; color: #333;">2024</td>`;
 
-        // Adicionar percentagens na segunda linha
-        orcamentoBloco.forEach(orcamento => {
-            conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.valor_2024}</td>`;
-        });
-        conteudoPDF += `</tr>
+            // Adicionar percentagens na segunda linha
+            orcamentoBloco.forEach(orcamento => {
+                conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.valor_2024}</td>`;
+            });
+            conteudoPDF += `</tr>
                         <tr>
                             <td style="border-bottom: 1px solid #ccc; padding: 5px; text-align: center; background-color: #f2f2f2; color: #333;">2025</td>`;
 
-        // Adicionar percentagens na segunda linha
-        orcamentoBloco.forEach(orcamento => {
-            conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.valor}%</td>`;
-        });
+            // Adicionar percentagens na segunda linha
+            orcamentoBloco.forEach(orcamento => {
+                conteudoPDF += `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${orcamento.valor}%</td>`;
+            });
 
-        conteudoPDF += `       </tr>
+            conteudoPDF += `       </tr>
                             </tbody>
                         </table>
                         <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">`;
-    }
+        }
 
-    // Fechar div da fase
-    conteudoPDF += `</div>
+        // Fechar div da fase
+        conteudoPDF += `</div>
                     <div class="fase">
                         <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Fase 4 - Medidas</h2>
                         <h4>Saldo disponível: ${dados.fase4.saldoDisponivel}M €</h4>`; // Adiciona saldo disponível da fase 4
-    if (dados.fase4.medidas.length === 0) 
-    {
-        conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>`;
-    } 
-    else 
-    {
-        
-        dados.fase4.medidas.forEach(medida => {
-            const receitaFormatada = medida.receita
-            .toString()
-            .replace('.', ',')
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            const orcamentoFormatado = medida.orcamento
-            .toString()
-            .replace('.', ',')
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            conteudoPDF += `<div class="medidas-container" style="border: 1px solid #ddd; padding: 10px; margin: 0 0; border-radius: 5px;"> 
+        if (dados.fase4.medidas.length === 0) {
+            conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>`;
+        }
+        else {
+
+            dados.fase4.medidas.forEach(medida => {
+                const receitaFormatada = medida.receita
+                    .toString()
+                    .replace('.', ',')
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                const orcamentoFormatado = medida.orcamento
+                    .toString()
+                    .replace('.', ',')
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                conteudoPDF += `<div class="medidas-container" style="border: 1px solid #ddd; padding: 10px; margin: 0 0; border-radius: 5px;"> 
                                 <h5 style="margin: 0 0; color: #555;">${medida.titulo}:</h4>
                                 <p style="margin: 0 0;">Receita: +${receitaFormatada}M €</p>
                                 <p style="margin: 0 0;">Despesa: -${orcamentoFormatado}M €</p>
                                 <p style="margin: 0 0;">Explicação: ${medida.explicacao}</p>
-                            </div>`;            
-        });
-    }
-    conteudoPDF += `</div>
+                            </div>`;
+            });
+        }
+        conteudoPDF += `</div>
                     <hr style="border: none; height: 1px; background-color: #ccc; margin: 20px 0;">
                     <div class="fase">
                         <h2 style="color: #444; font-size: 20px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Fase 5 - Medidas</h2>
                         <h4>Saldo disponível: ${dados.fase5.saldoDisponivel}M €</h4>`; // Adiciona saldo disponível da fase 4
 
-            if (dados.fase5.medidas.length === 0) 
-                {
-                    conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>
-                    </div>`; 
-                } 
-                else 
-                {
-                    dados.fase5.medidas.forEach(medida => {
-                        const receitaFormatada = medida.receita
-                        .toString()
-                        .replace('.', ',')
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                        const orcamentoFormatado = medida.orcamento
-                        .toString()
-                        .replace('.', ',')
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                        conteudoPDF += `<div class="medidas-container" style="border: 1px solid #ddd; padding: 10px; margin: 0 0; border-radius: 5px;"> 
+        if (dados.fase5.medidas.length === 0) {
+            conteudoPDF += `<p>Nenhuma medida foi adicionada!</p>
+                    </div>`;
+        }
+        else {
+            dados.fase5.medidas.forEach(medida => {
+                const receitaFormatada = medida.receita
+                    .toString()
+                    .replace('.', ',')
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                const orcamentoFormatado = medida.orcamento
+                    .toString()
+                    .replace('.', ',')
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                conteudoPDF += `<div class="medidas-container" style="border: 1px solid #ddd; padding: 10px; margin: 0 0; border-radius: 5px;"> 
                                             <h4 style="margin: 0 0; color: #555;">${medida.titulo}:</h4>
                                             <p style="margin: 0 0;">Receita: +${receitaFormatada}M €</p>
                                             <p style="margin: 0 0;">Despesa: -${orcamentoFormatado}M €</p>
                                             <p style="margin: 0 0;">Explicação: ${medida.explicacao}</p>
-                                        </div>`;           
-                    });
-                }
+                                        </div>`;
+            });
+        }
         //conteudoPDF += `<h3>Comentários adicionais</h3>`;         
         /*if(dados.fase5.comentarioExtra.length === 0)
         {
@@ -797,31 +759,31 @@ function gerarPDF() {
             conteudoPDF +=`<p>Comentário Extra: ${dados.fase5.comentarioExtra}</p>
                         </div>`; 
         }*/
-                        
-    elementoTemporario.innerHTML = conteudoPDF; // Define o conteúdo gerado no elemento temporário
-    // Configurações para o html2pdf
-    const opt = {
-        margin: 1,
-        filename: `SOE_2025_${nomeGrupo}.pdf`,  // Substitui "nomedogrupo" pelo valor inserido
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['css', 'legacy'] }
-    };
-    // Gera o PDF e retorna uma Promise
+
+        elementoTemporario.innerHTML = conteudoPDF; // Define o conteúdo gerado no elemento temporário
+        // Configurações para o html2pdf
+        const opt = {
+            margin: 1,
+            filename: `SOE_2025_${nomeGrupo}.pdf`,  // Substitui "nomedogrupo" pelo valor inserido
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['css', 'legacy'] }
+        };
+        // Gera o PDF e retorna uma Promise
         html2pdf().from(elementoTemporario).set(opt).save()
-        .then(() => {
-            resolve(true);
-        })
-        .catch((error) => {
-            reject(error);
-        });
+            .then(() => {
+                resolve(true);
+            })
+            .catch((error) => {
+                reject(error);
+            });
     });
 }
 // Função para confirmar o envio e limpar os dados após a confirmação do usuário
 function confirmarEnvio() {
     const confirmar = confirm("Tem a certeza que deseja terminar? Cetifique-se de que gerou o pdf corretamente antes de finalizar! Esta ação não poderá ser desfeita.");
-    
+
     if (confirmar) {
         sessionStorage.clear();
         alert("Formulário terminado com sucesso. Os dados foram limpos.");
